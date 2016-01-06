@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+
+<AddEntity sector_id="main" id="0-0-11.9509 on 8-19-1996ZZWnnBRA">
+	<type>2x Steel Block</type>
+	<x>118.892</x>
+	<y>-501.184</y>
+	<x_velocity>-3.51563e-007</x_velocity>
+	<y_velocity>-4.42673e-009</y_velocity>
+	<rotation>360</rotation>
+	<rotational_velocity>-4.54063e-008</rotational_velocity>
+	<slaved>false</slaved>
+</AddEntity>

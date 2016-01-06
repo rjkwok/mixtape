@@ -1,0 +1,1070 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ai",
+				"ai_client"
+			],
+			[
+				"scrol",
+				"menu_scroller"
+			],
+			[
+				"player",
+				"player_in_game"
+			],
+			[
+				"pla",
+				"player_in_game"
+			],
+			[
+				"play",
+				"player_main"
+			],
+			[
+				"server",
+				"server_thread"
+			],
+			[
+				"sp_text",
+				"sp_text_bounds"
+			],
+			[
+				"setC",
+				"setCharacterSize"
+			],
+			[
+				"setOutli",
+				"setOutlineColor"
+			],
+			[
+				"men",
+				"menu_scroller"
+			],
+			[
+				"scr",
+				"scroll_countdown"
+			],
+			[
+				"text",
+				"text_bounds"
+			],
+			[
+				"menu",
+				"menu_id"
+			],
+			[
+				"win",
+				"win_lose_tie"
+			],
+			[
+				"final",
+				"final_update"
+			],
+			[
+				"match",
+				"match_finished"
+			],
+			[
+				"upd",
+				"updateNumbers"
+			],
+			[
+				"time",
+				"time_display"
+			],
+			[
+				"frame",
+				"frame_colour"
+			],
+			[
+				"sprite",
+				"sprite_colour"
+			],
+			[
+				"main",
+				"main_sprite"
+			],
+			[
+				"tiles",
+				"tiles_for_sale"
+			],
+			[
+				"tile",
+				"tiles_for_sale"
+			],
+			[
+				"cool",
+				"cooldown_2"
+			],
+			[
+				"coold",
+				"cooldown_2"
+			],
+			[
+				"hidde",
+				"hidden_mode"
+			],
+			[
+				"null",
+				"nullify_strength"
+			],
+			[
+				"other",
+				"other_ship"
+			],
+			[
+				"Stre",
+				"StreamNode"
+			],
+			[
+				"end",
+				"end_nodes"
+			],
+			[
+				"ships",
+				"ships_that_transmit"
+			],
+			[
+				"other_",
+				"other_ship_0"
+			],
+			[
+				"sh",
+				"ships_that_transmit"
+			],
+			[
+				"number",
+				"number_of_intel_hubs"
+			],
+			[
+				"place",
+				"placeShip"
+			],
+			[
+				"sele",
+				"selected_for_sale"
+			],
+			[
+				"selec",
+				"selected_for_sale"
+			],
+			[
+				"curren",
+				"current_round"
+			],
+			[
+				"selected",
+				"selected_hand"
+			],
+			[
+				"change",
+				"changeTurn"
+			],
+			[
+				"rand",
+				"random_index"
+			],
+			[
+				"bottom",
+				"bottom_left_hand"
+			],
+			[
+				"strengt",
+				"strength_text"
+			],
+			[
+				"new",
+				"new_graphic"
+			],
+			[
+				"streng",
+				"strength_colour"
+			],
+			[
+				"card",
+				"card_colour"
+			],
+			[
+				"name",
+				"name_colour"
+			],
+			[
+				"ship",
+				"ship_id"
+			],
+			[
+				"Mat",
+				"MatchServer"
+			],
+			[
+				"shi",
+				"ship_id"
+			],
+			[
+				"flanke",
+				"flanked_friends"
+			],
+			[
+				"fl",
+				"flanked_friends"
+			],
+			[
+				"base",
+				"base_per_enemy"
+			],
+			[
+				"does",
+				"doesSocketExist"
+			],
+			[
+				"anchor",
+				"anchor_sprite"
+			],
+			[
+				"setTe",
+				"setTexture"
+			],
+			[
+				"socket",
+				"socket_spacing"
+			],
+			[
+				"read",
+				"read_ip"
+			],
+			[
+				"calculat",
+				"calculateStrengths"
+			],
+			[
+				"update",
+				"updateStrengths"
+			],
+			[
+				"mat",
+				"MatchServer"
+			],
+			[
+				"should",
+				"should_notify"
+			],
+			[
+				"listen",
+				"listenForServerCommand"
+			],
+			[
+				"Matc",
+				"MatchServer"
+			],
+			[
+				"client",
+				"client_1"
+			],
+			[
+				"score",
+				"score_update"
+			],
+			[
+				"getSt",
+				"getStrengthA"
+			],
+			[
+				"Match",
+				"MatchClient"
+			],
+			[
+				"liste",
+				"listenForClientCommand"
+			],
+			[
+				"in_",
+				"match_in_progress"
+			],
+			[
+				"initi",
+				"initialize_1"
+			],
+			[
+				"core",
+				"core_ship_2_tx"
+			],
+			[
+				"user",
+				"username_1"
+			],
+			[
+				"command",
+				"command_str"
+			],
+			[
+				"remove",
+				"removeShip"
+			],
+			[
+				"synch",
+				"synchronizeMap"
+			],
+			[
+				"board",
+				"board_height"
+			],
+			[
+				"ret",
+				"return_map"
+			],
+			[
+				"back",
+				"background_tx"
+			],
+			[
+				"init",
+				"initalizeMatch"
+			],
+			[
+				"typ",
+				"type_id"
+			],
+			[
+				"turn",
+				"turn_packet"
+			],
+			[
+				"first",
+				"firstRowOnly"
+			],
+			[
+				"setText",
+				"setTextureRect"
+			],
+			[
+				"core_",
+				"core_sprite_b"
+			],
+			[
+				"curre",
+				"current_round"
+			],
+			[
+				"is_",
+				"is_dead_open"
+			],
+			[
+				"discard",
+				"discarded_a"
+			],
+			[
+				"total",
+				"total_score_b"
+			],
+			[
+				"current",
+				"current_score_b"
+			],
+			[
+				"curr",
+				"current_round"
+			],
+			[
+				"att",
+				"attack_button"
+			],
+			[
+				"col",
+				"column_index"
+			],
+			[
+				"add",
+				"addOneToColumn"
+			],
+			[
+				"double",
+				"doubleSameType"
+			],
+			[
+				"type",
+				"type_id"
+			],
+			[
+				"types",
+				"types_to_get"
+			],
+			[
+				"mod",
+				"modifiers"
+			],
+			[
+				"return",
+				"return_vector"
+			],
+			[
+				"is",
+				"is_deck_open"
+			],
+			[
+				"dead",
+				"dead_bounds"
+			],
+			[
+				"score_",
+				"score_text_a"
+			],
+			[
+				"setOutline",
+				"setOutlineThickness"
+			],
+			[
+				"setF",
+				"setFillColor"
+			],
+			[
+				"getText",
+				"getTextureRect"
+			],
+			[
+				"key",
+				"keyWasReleased"
+			],
+			[
+				"deck",
+				"deck_bounds"
+			],
+			[
+				"getTe",
+				"getTexture"
+			],
+			[
+				"side",
+				"side_length_other"
+			],
+			[
+				"bott",
+				"bottom_left_deck"
+			],
+			[
+				"side_",
+				"side_length_other"
+			],
+			[
+				"side_length_",
+				"side_length_hand"
+			],
+			[
+				"icon",
+				"icon_tex"
+			],
+			[
+				"font",
+				"font_id"
+			],
+			[
+				"window",
+				"window_bounds"
+			],
+			[
+				"getTex",
+				"getTextureRect"
+			],
+			[
+				"hand",
+				"hand_gui_shadow"
+			],
+			[
+				"hand_gui",
+				"hand_gui_shadow"
+			],
+			[
+				"se",
+				"selected_ship"
+			],
+			[
+				"temp",
+				"temp_rect"
+			],
+			[
+				"scro",
+				"scrollers"
+			],
+			[
+				"frame_1",
+				"frame_1_rect"
+			],
+			[
+				"keys",
+				"keyWasReleased"
+			],
+			[
+				"angle",
+				"angle_spacing"
+			],
+			[
+				"radi",
+				"radians_from_vertical"
+			],
+			[
+				"ra",
+				"radians_from_vertical"
+			],
+			[
+				"angl",
+				"angle_from_vertical"
+			],
+			[
+				"subject",
+				"subject_name"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "main.cpp",
+			"settings":
+			{
+				"buffer_size": 11586,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "round.cpp",
+			"settings":
+			{
+				"buffer_size": 40389,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "util.cpp",
+			"settings":
+			{
+				"buffer_size": 14625,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "round.h",
+			"settings":
+			{
+				"buffer_size": 4944,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ui.h",
+			"settings":
+			{
+				"buffer_size": 1923,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "util.h",
+			"settings":
+			{
+				"buffer_size": 2371,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ui.cpp",
+			"settings":
+			{
+				"buffer_size": 22173,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "types.xml",
+			"settings":
+			{
+				"buffer_size": 15306,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "textures.xml",
+			"settings":
+			{
+				"buffer_size": 695,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Richard/Desktop/Fleet/ui.cpp",
+		"/C/Users/Richard/Desktop/Fleet/main.h",
+		"/C/Users/Richard/Desktop/Fleet/main.cpp",
+		"/C/Users/Richard/Desktop/Fleet/ui.h",
+		"/C/Users/Richard/Desktop/Fleet/textures.xml",
+		"/C/Users/Richard/Desktop/Fleet/util.h",
+		"/C/Users/Richard/Desktop/Fleet/util.cpp",
+		"/C/Users/Richard/Desktop/Fleet/types.xml",
+		"/C/Users/Richard/Desktop/Fleet/makefile",
+		"/C/Users/Richard/Desktop/Fleet/round.cpp",
+		"/C/Users/Richard/Desktop/Fleet/round.h",
+		"/C/Users/Richard/Desktop/Fleet/fonts.xml",
+		"/C/Users/Richard/AppData/Roaming/Sublime Text 2/Packages/User/XML.sublime-settings",
+		"/C/Users/Richard/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Richard/Desktop/TestFleet/types.xml",
+		"/C/Users/Richard/Desktop/TestFleet/textures.xml",
+		"/C/Users/Richard/Documents/DeepRp/saves/World1/a.xml",
+		"/C/Users/Richard/Documents/DeepRp/entity.h",
+		"/C/Users/Richard/Documents/DeepRp/main.h",
+		"/C/Users/Richard/Documents/DeepRp/tile.cpp",
+		"/C/Users/Richard/Documents/DeepRp/entity.cpp",
+		"/C/Users/Richard/Documents/DeepRp/types.xml",
+		"/C/Users/Richard/Documents/DeepRp/util.h"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"background",
+			"place",
+			"view",
+			"window.getSize()",
+			"sp",
+			"cout <<",
+			"true",
+			"update",
+			"cooldown",
+			"update numbers",
+			"cooldown",
+			"update",
+			"turn",
+			"sprite",
+			"cout",
+			"}\n",
+			"CardGraphic",
+			"> ",
+			"randomN",
+			"int i ",
+			"deck",
+			"client",
+			"linked",
+			"calcul",
+			"strength",
+			"doesSocket",
+			"linked.insert",
+			"j",
+			"a",
+			"placeShip",
+			"addSocket",
+			"calculateSock",
+			"2",
+			"cout",
+			"updateStrengths",
+			"send(",
+			"cout",
+			"send(",
+			"calculate",
+			"turn",
+			"Corvette",
+			"score",
+			"bbck",
+			"a",
+			"placed_ships",
+			"placed_s",
+			"10",
+			"hand",
+			"setText",
+			"Texture",
+			"0",
+			"window_y=\"512\"",
+			"type_index=\"1\"",
+			"FTile",
+			"Tile",
+			"getProperties",
+			"Tile",
+			"getTileAt",
+			">",
+			"if(doesTileExistAt(e,s)){",
+			"}\n",
+			":\n",
+			");\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"mp",
+			"mp_host",
+			"mp",
+			"b",
+			"back",
+			"b",
+			"20",
+			"dead",
+			"deck",
+			"setString",
+			"Font",
+			"window_y=\"1024\"",
+			"type_index=\"0\" floor_type_index=\"1\"",
+			"Tile",
+			"FTile",
+			"getTileProperties",
+			"Entity",
+			"/>"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "main.cpp",
+					"settings":
+					{
+						"buffer_size": 11586,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1976,
+								1976
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1008.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "round.cpp",
+					"settings":
+					{
+						"buffer_size": 40389,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9432,
+								9432
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4992.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "util.cpp",
+					"settings":
+					{
+						"buffer_size": 14625,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8194,
+								8194
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5034.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "round.h",
+					"settings":
+					{
+						"buffer_size": 4944,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2223,
+								2223
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 504.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "ui.h",
+					"settings":
+					{
+						"buffer_size": 1923,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1826,
+								1826
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 420.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "util.h",
+					"settings":
+					{
+						"buffer_size": 2371,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1938,
+								1938
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1131.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "ui.cpp",
+					"settings":
+					{
+						"buffer_size": 22173,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17245,
+								17380
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5696.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "types.xml",
+					"settings":
+					{
+						"buffer_size": 15306,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "textures.xml",
+					"settings":
+					{
+						"buffer_size": 695,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 208.0,
+	"status_bar_visible": true
+}

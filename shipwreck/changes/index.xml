@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<Change id="setup_1">
+	<year>2003</year>
+	<month>0</month>
+	<day>0</day>
+	<hour>0</hour>
+	<minute>0</minute>
+	<second>0</second>
+</Change>
+
+<Change id="setup_2">
+	<year>0</year>
+	<month>0</month>
+	<day>0</day>
+	<hour>0</hour>
+	<minute>0</minute>
+	<second>0</second>
+	<relative_year>0</relative_year>
+	<relative_month>0</relative_month>
+	<relative_day>0</relative_day>
+	<relative_hour>0</relative_hour>
+	<relative_minute>0</relative_minute>
+	<relative_second>5</relative_second>
+	<prereq>setup_1</prereq>
+</Change>

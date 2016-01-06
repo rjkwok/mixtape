@@ -1,0 +1,2518 @@
+<?xml version="1.0" ?>
+<Sector id="0_0" radius="10000" ambient="155" tile="backdrops\space_default.png" planetside="false">
+    <Entity id="0-0-17.8363 on 8-19-1996dcJOKkaO">
+        <type>Steel Block</type>
+        <x>-407.611</x>
+        <y>-398.73</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-0-22.3975 on 8-19-1996Rb^OEJNd">
+        <type>3x Steel Block</type>
+        <x>-307.411</x>
+        <y>-398.73</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-0-30.4122 on 8-19-1996XIoGAjAP">
+        <type>3x Steel Block</type>
+        <x>-156.619</x>
+        <y>-394.96</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-0-55.7511 on 8-19-1996qpbXqDnV">
+        <type>Glass Block</type>
+        <x>-56.4187</x>
+        <y>-412.854</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-1-0.982341 on 8-19-1996gMFY`Cqt">
+        <type>Glass Block</type>
+        <x>-6.21869</x>
+        <y>-412.696</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-1-12.0183 on 8-19-1996Nn]eWFVT">
+        <type>3x Steel Block</type>
+        <x>244.181</x>
+        <y>-396.811</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-1-29.6824 on 8-19-1996MfGkJjeU">
+        <type>2x Steel Block</type>
+        <x>369.381</x>
+        <y>-397.206</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-1-37.0232 on 8-19-1996dLbCktOC">
+        <type>3x Steel Block</type>
+        <x>-157.366</x>
+        <y>-445.16</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-1-4.11181 on 8-19-1996SF_ffVEM">
+        <type>3x Steel Block</type>
+        <x>93.9813</x>
+        <y>-396.403</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-1-46.8146 on 8-19-1996MfSmpoKQ">
+        <type>3x Steel Block</type>
+        <x>94.4329</x>
+        <y>-446.988</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-1-53.4045 on 8-19-1996W_\ZbS`X">
+        <type>2x Steel Block</type>
+        <x>-282.566</x>
+        <y>-449.153</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-10-1.61189 on 8-19-1996AAIbG\RG">
+        <type>3x Steel Block</type>
+        <x>-1261.33</x>
+        <y>303.665</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-10-32.5613 on 8-19-1996kLIFDYhj">
+        <type>2x Steel Block</type>
+        <x>-332.303</x>
+        <y>-120.719</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-10-43.8848 on 8-19-1996lcGtLhmd">
+        <type>2x Steel Block</type>
+        <x>-81.9027</x>
+        <y>-122.146</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-10-59.3616 on 8-19-1996^LVKJ\\V">
+        <type>2x Steel Block</type>
+        <x>168.497</x>
+        <y>-121.53</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Machine id="0-11-45.011 on 8-19-1996HPQtROis">
+        <type>240V Battery</type>
+        <x>297.325</x>
+        <y>318.731</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <cell_var cell_id="Stored Power" var_id="max milliamp hours">70000</cell_var>
+        <cell_var cell_id="Stored Power" var_id="milliamp hours">69996.5</cell_var>
+        <cell_var cell_id="Stored Power" var_id="running average">69996.3</cell_var>
+        <cell_var cell_id="mAh Data Output" var_id="value">69996.3</cell_var>
+        <port_connection port_id="240V Rail 1">0-12-38.7547 on 8-19-1996JEKcVgnC</port_connection>
+        <port_connection port_id="240V Rail 2">0-12-41.8355 on 8-19-1996snONhWZn</port_connection>
+    </Machine>
+    <Machine id="0-11-51.6147 on 8-19-1996gpKi_mFC">
+        <type>240V Battery</type>
+        <x>169.125</x>
+        <y>318.044</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <cell_var cell_id="Stored Power" var_id="max milliamp hours">70000</cell_var>
+        <cell_var cell_id="Stored Power" var_id="milliamp hours">69996</cell_var>
+        <cell_var cell_id="Stored Power" var_id="running average">69996.3</cell_var>
+        <cell_var cell_id="mAh Data Output" var_id="value">69996.3</cell_var>
+        <port_connection port_id="240V Rail 2">0-12-38.7547 on 8-19-1996JEKcVgnC</port_connection>
+    </Machine>
+    <Machine id="0-12-12.0244 on 8-19-1996SjrZFBTA">
+        <type>Transformer</type>
+        <x>185.127</x>
+        <y>189.527</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <cell_var cell_id="Buffered Power" var_id="max milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="running average">0.25</cell_var>
+        <port_connection port_id="High Voltage Rail">0-12-31.2013 on 8-19-1996lZefHLQs</port_connection>
+        <port_connection port_id="Low Voltage Rail">0-12-34.0007 on 8-19-1996tmpSMtSD</port_connection>
+    </Machine>
+    <Machine id="0-12-14.9435 on 8-19-1996AFqdTS]t">
+        <type>Transformer</type>
+        <x>112.927</x>
+        <y>189.14</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <cell_var cell_id="Buffered Power" var_id="max milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="running average">0.25</cell_var>
+        <port_connection port_id="High Voltage Rail">0-12-34.0007 on 8-19-1996tmpSMtSD</port_connection>
+        <port_connection port_id="Low Voltage Rail">0-1-19.0762 on 8-19-1996d\qRmVb\</port_connection>
+    </Machine>
+    <Machine id="0-12-5.99312 on 8-19-1996l_sAIdDl">
+        <type>Transformer</type>
+        <x>329.527</x>
+        <y>190.6</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <cell_var cell_id="Buffered Power" var_id="max milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="running average">0.25</cell_var>
+        <port_connection port_id="High Voltage Rail">0-12-41.8355 on 8-19-1996snONhWZn</port_connection>
+        <port_connection port_id="Low Voltage Rail">0-12-28.4459 on 8-19-1996IVf[jWVj</port_connection>
+    </Machine>
+    <Machine id="0-12-9.42267 on 8-19-1996_c[g\fH\">
+        <type>Transformer</type>
+        <x>257.327</x>
+        <y>189.591</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <cell_var cell_id="Buffered Power" var_id="max milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="running average">0.25</cell_var>
+        <port_connection port_id="High Voltage Rail">0-12-28.4459 on 8-19-1996IVf[jWVj</port_connection>
+        <port_connection port_id="Low Voltage Rail">0-12-31.2013 on 8-19-1996lZefHLQs</port_connection>
+    </Machine>
+    <Machine id="0-13-16.191 on 8-19-1996GfBMD]nL">
+        <type>Beacon</type>
+        <x>-291.302</x>
+        <y>209.77</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <cell_var cell_id="Buffered Power" var_id="max milliamp hours">10</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="milliamp hours">0.0494826</cell_var>
+        <cell_var cell_id="Buffered Power" var_id="running average">0.04</cell_var>
+        <port_connection port_id="Neutral Rail">0-1-23.8783 on 8-19-1996ckF^qtB\</port_connection>
+    </Machine>
+    <Machine id="0-13-33.1251 on 8-19-1996HcZWYWVC">
+        <type>Switch</type>
+        <x>-187.038</x>
+        <y>98.2802</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270.697</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <cell_var cell_id="Buffered Power 1" var_id="max milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power 1" var_id="milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power 1" var_id="running average">0.25</cell_var>
+        <cell_var cell_id="Buffered Power 2" var_id="max milliamp hours">0.25</cell_var>
+        <cell_var cell_id="Buffered Power 2" var_id="milliamp hours">0</cell_var>
+        <cell_var cell_id="Buffered Power 2" var_id="running average">0</cell_var>
+        <cell_var cell_id="Switch State Input" var_id="value">0</cell_var>
+        <port_connection port_id="GPI Switch State">0-14-1.49028 on 8-19-1996RmaIQQsg</port_connection>
+        <port_connection port_id="Rail 1">0-1-19.0762 on 8-19-1996d\qRmVb\</port_connection>
+        <port_connection port_id="Rail 2">0-1-23.8783 on 8-19-1996ckF^qtB\</port_connection>
+    </Machine>
+    <Machine id="0-13-56.6842 on 8-19-1996VlA_KMQ^">
+        <type>Lever</type>
+        <x>-180.568</x>
+        <y>147.289</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270.697</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <cell_var cell_id="Lever State Output" var_id="value">0</cell_var>
+        <port_connection port_id="GPO Lever State">0-14-1.49028 on 8-19-1996RmaIQQsg</port_connection>
+    </Machine>
+    <Entity id="0-2-0.170372 on 8-19-1996EqUVhILg">
+        <type>2x Steel Block</type>
+        <x>220.019</x>
+        <y>-447.011</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-2-16.0018 on 8-19-1996BoNVKf^P">
+        <type>3x Steel Block</type>
+        <x>-407.503</x>
+        <y>-148.33</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-2-55.1706 on 8-19-1996FLRgiMFc">
+        <type>3x Steel Block</type>
+        <x>-507.703</x>
+        <y>-98.5242</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-2-9.84381 on 8-19-1996MEs`XnCX">
+        <type>3x Steel Block</type>
+        <x>-407.386</x>
+        <y>-298.53</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-3-12.4197 on 8-19-1996VA\VCtER">
+        <type>3x Steel Block</type>
+        <x>-758.303</x>
+        <y>-94.7712</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-3-2.95429 on 8-19-1996m^d`aQl[">
+        <type>Glass Block</type>
+        <x>-607.903</x>
+        <y>-105.853</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-3-20.4403 on 8-19-1996S[DJUkd`">
+        <type>3x Steel Block</type>
+        <x>-908.503</x>
+        <y>-93.9187</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-3-27.3702 on 8-19-1996_[GLpNIn">
+        <type>Steel Block</type>
+        <x>-1008.7</x>
+        <y>-93.3374</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-3-45.992 on 8-19-1996KoDBrHkB">
+        <type>3x Steel Block</type>
+        <x>-983.236</x>
+        <y>-194.273</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90.1088</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-3-52.8998 on 8-19-1996sPEYgUPU">
+        <type>Steel Block</type>
+        <x>-981.832</x>
+        <y>-294.47</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90.1088</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-3-8.29347 on 8-19-1996ps^baEaf">
+        <type>Glass Block</type>
+        <x>-658.103</x>
+        <y>-104.144</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-13.3233 on 8-19-1996rG]TSdCS">
+        <type>3x Steel Block</type>
+        <x>393.182</x>
+        <y>-297.006</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-16.1939 on 8-19-1996cMXbBrOi">
+        <type>3x Steel Block</type>
+        <x>392.885</x>
+        <y>-146.806</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-19.4914 on 8-19-1996DHBNGJ]C">
+        <type>3x Steel Block</type>
+        <x>391.505</x>
+        <y>3.39444</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-22.4099 on 8-19-1996ZlcgKpsb">
+        <type>3x Steel Block</type>
+        <x>390.727</x>
+        <y>153.594</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-24.9104 on 8-19-1996jjXk[RMV">
+        <type>3x Steel Block</type>
+        <x>390.673</x>
+        <y>303.794</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-28.4178 on 8-19-1996mAsbTE]r">
+        <type>Steel Block</type>
+        <x>392.157</x>
+        <y>403.994</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-32.0602 on 8-19-1996DsabKrXm">
+        <type>3x Steel Block</type>
+        <x>291.957</x>
+        <y>403.931</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>180</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-35.3057 on 8-19-1996_cZLqNWJ">
+        <type>3x Steel Block</type>
+        <x>141.757</x>
+        <y>404.753</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>180</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-39.1292 on 8-19-1996tJotCYVD">
+        <type>3x Steel Block</type>
+        <x>-8.4429</x>
+        <y>404.145</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>180</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-52.6947 on 8-19-1996\COmXkoj">
+        <type>3x Steel Block</type>
+        <x>-407.502</x>
+        <y>152.07</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-4-56.5501 on 8-19-1996MeUGeXrX">
+        <type>3x Steel Block</type>
+        <x>-408.505</x>
+        <y>302.27</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-5-0.652392 on 8-19-1996Q`BaJcR\">
+        <type>Steel Block</type>
+        <x>-407.82</x>
+        <y>402.47</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-5-4.46478 on 8-19-1996llP]ijTK">
+        <type>3x Steel Block</type>
+        <x>-307.62</x>
+        <y>402.078</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-5-44.0682 on 8-19-1996[pBR]]aW">
+        <type>3x Steel Block</type>
+        <x>-507.702</x>
+        <y>102.545</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-5-47.4133 on 8-19-1996KYn^qZIg">
+        <type>3x Steel Block</type>
+        <x>-657.902</x>
+        <y>103.872</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-5-55.1829 on 8-19-1996jrT_bVSN">
+        <type>3x Steel Block</type>
+        <x>-808.102</x>
+        <y>103.812</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-5-59.7872 on 8-19-1996ZCimlcmt">
+        <type>2x Steel Block</type>
+        <x>-933.302</x>
+        <y>104.581</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-6-12.9587 on 8-19-1996oSQTGMC`">
+        <type>Wood Crate</type>
+        <x>-285.456</x>
+        <y>-286.183</y>
+        <x_velocity>0.000164492</x_velocity>
+        <y_velocity>5.25508e-006</y_velocity>
+        <rotation>354.303</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <slot>0-7-30.8042 on 8-19-1996isor_r]D</slot>
+        <slot>0-7-32.3749 on 8-19-1996WtJsoCGM</slot>
+        <slot>0-7-22.5742 on 8-19-1996DCdYhbOg</slot>
+        <slot>0-7-23.8549 on 8-19-1996o`MnVkU\</slot>
+        <slot>0-7-29.1487 on 8-19-1996GjkjSTLN</slot>
+        <slot>0-7-21.2324 on 8-19-1996qoCWAQQ]</slot>
+        <slot>0-7-25.2147 on 8-19-1996f^MkmlOL</slot>
+        <slot>0-7-27.4751 on 8-19-1996OGcTD`JU</slot>
+    </Entity>
+    <Entity id="0-6-15.7392 on 8-19-1996bF\gKrTN">
+        <type>Wood Crate</type>
+        <x>-218.041</x>
+        <y>-321.499</y>
+        <x_velocity>0.000164409</x_velocity>
+        <y_velocity>5.25244e-006</y_velocity>
+        <rotation>2.76882</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <slot>0-7-3.94996 on 8-19-1996IJWTTUaj</slot>
+        <slot>0-7-5.05983 on 8-19-1996]`skGUBQ</slot>
+        <slot>0-7-12.8587 on 8-19-1996ZToWf]tq</slot>
+        <slot>0-7-2.87613 on 8-19-1996QgeQoHBH</slot>
+        <slot>0-7-6.62558 on 8-19-1996HSFDe\ZS</slot>
+        <slot>0-7-11.4776 on 8-19-1996qsmJRBlg</slot>
+        <slot>0-7-1.57633 on 8-19-1996[q\Mnkhg</slot>
+        <slot>0-7-8.03041 on 8-19-1996c`UMBabM</slot>
+        <slot>0-7-9.30029 on 8-19-1996ZqJHcM\a</slot>
+    </Entity>
+    <Entity id="0-6-17.9797 on 8-19-1996KUHNmLlh">
+        <type>Wood Crate</type>
+        <x>-223.546</x>
+        <y>-263.602</y>
+        <x_velocity>0.000164326</x_velocity>
+        <y_velocity>5.24979e-006</y_velocity>
+        <rotation>2.76882</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <slot>0-6-39.6427 on 8-19-1996[`DLMKKK</slot>
+        <slot>0-6-41.3005 on 8-19-1996iB[nTZDH</slot>
+        <slot>0-6-34.2815 on 8-19-1996XIYMdQiU</slot>
+        <slot>0-6-36.1433 on 8-19-1996UMPdJDC[</slot>
+        <slot>0-6-38.282 on 8-19-1996GG]`iliH</slot>
+    </Entity>
+    <Entity id="0-6-19.9114 on 8-19-1996dpkJtHFA">
+        <type>Wood Crate</type>
+        <x>-283.521</x>
+        <y>-219.401</y>
+        <x_velocity>0.000164243</x_velocity>
+        <y_velocity>5.24713e-006</y_velocity>
+        <rotation>351.907</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <slot>0-6-54.4875 on 8-19-1996F\sSqGmo</slot>
+        <slot>0-6-57.7589 on 8-19-1996UOgXCkBW</slot>
+        <slot>0-8-18.3564 on 8-19-1996QoCIMSdd</slot>
+        <slot>0-6-51.7529 on 8-19-1996mQX_`cqi</slot>
+        <slot>0-6-53.2167 on 8-19-1996kdJWjDtY</slot>
+        <slot>0-6-55.8492 on 8-19-1996ZTTACNcH</slot>
+    </Entity>
+    <Entity id="0-6-23.1389 on 8-19-1996YjatOFTW">
+        <type>Wood Crate</type>
+        <x>-142.309</x>
+        <y>-286.545</y>
+        <x_velocity>0.000164159</x_velocity>
+        <y_velocity>5.24447e-006</y_velocity>
+        <rotation>5.68015</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <slot>0-8-8.09028 on 8-19-1996so`j_gbK</slot>
+        <slot>0-7-51.4517 on 8-19-1996OVIXp^WL</slot>
+        <slot>0-7-52.8934 on 8-19-1996GYUSA_QR</slot>
+        <slot>0-7-57.098 on 8-19-1996aYl`GhPs</slot>
+        <slot>0-6-46.1067 on 8-19-1996fhjX_D_M</slot>
+        <slot>0-6-47.9324 on 8-19-1996pALredqC</slot>
+        <slot>0-7-54.6103 on 8-19-1996FPfHSm\p</slot>
+    </Entity>
+    <Entity id="0-8-30.5867 on 8-19-1996E_mAYias">
+        <type>Wood Crate</type>
+        <x>79.5221</x>
+        <y>-319.32</y>
+        <x_velocity>0.000164076</x_velocity>
+        <y_velocity>5.2418e-006</y_velocity>
+        <rotation>359.011</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <slot>0-8-39.9899 on 8-19-1996MUoCpF^e</slot>
+        <slot>0-8-36.6912 on 8-19-1996RafOFPdX</slot>
+        <slot>0-8-41.6846 on 8-19-1996UcPAg_Qf</slot>
+        <slot>0-8-38.1136 on 8-19-1996DXQfDKi[</slot>
+        <slot>0-8-32.1635 on 8-19-1996FcfC[chI</slot>
+        <slot>0-8-33.655 on 8-19-1996AnmthXCl</slot>
+        <slot>0-8-35.3012 on 8-19-1996bhSKfgZO</slot>
+    </Entity>
+    <Entity id="0-9-28.2396 on 8-19-1996pdWYQVOt">
+        <type>Steel Block</type>
+        <x>-1008.5</x>
+        <y>103.977</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-9-38.0314 on 8-19-1996OeOqqF\o">
+        <type>3x Steel Block</type>
+        <x>-1009.95</x>
+        <y>204.177</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>90</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-9-44.4972 on 8-19-1996oBphXHLQ">
+        <type>Steel Block</type>
+        <x>-1010.93</x>
+        <y>304.377</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Entity id="0-9-50.9814 on 8-19-1996FOJRjD\I">
+        <type>3x Steel Block</type>
+        <x>-1111.13</x>
+        <y>303.96</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+    </Entity>
+    <Player id="player_1">
+        <type>Human</type>
+        <x>-175.881</x>
+        <y>3.74</y>
+        <x_velocity>0.221263</x_velocity>
+        <y_velocity>0.00706877</y_velocity>
+        <rotation>1.82983</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <slaved>false</slaved>
+        <prop>false</prop>
+        <slot>0-4-53.2426 on 8-19-1996PcAj]OKX</slot>
+        <slot>0-11-9.88631 on 8-19-1996KlbFaHMl</slot>
+        <slot>0-11-10.643 on 8-19-1996DUSQUfeq</slot>
+    </Player>
+    <Floor id="0-0-19.5891 on 8-19-1996orLYiRVY">
+        <type>Ship Decking</type>
+        <x>-9</x>
+        <y>1</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <x_tiles>4</x_tiles>
+        <y_tiles>4</y_tiles>
+        <prop>true</prop>
+    </Floor>
+    <Floor id="0-2-26.6047 on 8-19-1996^lMUq]Jj">
+        <type>Ship Decking</type>
+        <x>-609.2</x>
+        <y>4.48891</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <x_tiles>1</x_tiles>
+        <y_tiles>2</y_tiles>
+        <prop>false</prop>
+    </Floor>
+    <Floor id="0-2-33.0351 on 8-19-1996fbtkHRiX">
+        <type>Ship Decking</type>
+        <x>-1009.4</x>
+        <y>5.22313</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <x_tiles>1</x_tiles>
+        <y_tiles>2</y_tiles>
+        <prop>false</prop>
+    </Floor>
+    <Floor id="0-2-42.4295 on 8-19-1996iXIRX[RR">
+        <type>Ship Decking</type>
+        <x>-1108.34</x>
+        <y>-194.977</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>270</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <x_tiles>1</x_tiles>
+        <y_tiles>1</y_tiles>
+        <prop>false</prop>
+    </Floor>
+    <Floor id="0-9-18.0063 on 8-19-1996bcmtIYEI">
+        <type>Ship Decking</type>
+        <x>-1212.07</x>
+        <y>205.423</y>
+        <x_velocity>0</x_velocity>
+        <y_velocity>0</y_velocity>
+        <rotation>0</rotation>
+        <rotational_velocity>0</rotational_velocity>
+        <x_tiles>2</x_tiles>
+        <y_tiles>1</y_tiles>
+        <prop>false</prop>
+    </Floor>
+    <Transfer id="0-1-19.0762 on 8-19-1996d\qRmVb\">
+        <type>Power Cable</type>
+        <machine_id_a>0-13-33.1251 on 8-19-1996HcZWYWVC</machine_id_a>
+        <port_id_a>Rail 1</port_id_a>
+        <machine_id_b>0-12-14.9435 on 8-19-1996AFqdTS]t</machine_id_b>
+        <port_id_b>Low Voltage Rail</port_id_b>
+    </Transfer>
+    <Transfer id="0-1-23.8783 on 8-19-1996ckF^qtB\">
+        <type>Power Cable</type>
+        <machine_id_a>0-13-33.1251 on 8-19-1996HcZWYWVC</machine_id_a>
+        <port_id_a>Rail 2</port_id_a>
+        <machine_id_b>0-13-16.191 on 8-19-1996GfBMD]nL</machine_id_b>
+        <port_id_b>Neutral Rail</port_id_b>
+    </Transfer>
+    <Transfer id="0-12-28.4459 on 8-19-1996IVf[jWVj">
+        <type>Power Cable</type>
+        <machine_id_a>0-12-5.99312 on 8-19-1996l_sAIdDl</machine_id_a>
+        <port_id_a>Low Voltage Rail</port_id_a>
+        <machine_id_b>0-12-9.42267 on 8-19-1996_c[g\fH\</machine_id_b>
+        <port_id_b>High Voltage Rail</port_id_b>
+    </Transfer>
+    <Transfer id="0-12-31.2013 on 8-19-1996lZefHLQs">
+        <type>Power Cable</type>
+        <machine_id_a>0-12-9.42267 on 8-19-1996_c[g\fH\</machine_id_a>
+        <port_id_a>Low Voltage Rail</port_id_a>
+        <machine_id_b>0-12-12.0244 on 8-19-1996SjrZFBTA</machine_id_b>
+        <port_id_b>High Voltage Rail</port_id_b>
+    </Transfer>
+    <Transfer id="0-12-34.0007 on 8-19-1996tmpSMtSD">
+        <type>Power Cable</type>
+        <machine_id_a>0-12-12.0244 on 8-19-1996SjrZFBTA</machine_id_a>
+        <port_id_a>Low Voltage Rail</port_id_a>
+        <machine_id_b>0-12-14.9435 on 8-19-1996AFqdTS]t</machine_id_b>
+        <port_id_b>High Voltage Rail</port_id_b>
+    </Transfer>
+    <Transfer id="0-12-38.7547 on 8-19-1996JEKcVgnC">
+        <type>Power Cable</type>
+        <machine_id_a>0-11-51.6147 on 8-19-1996gpKi_mFC</machine_id_a>
+        <port_id_a>240V Rail 2</port_id_a>
+        <machine_id_b>0-11-45.011 on 8-19-1996HPQtROis</machine_id_b>
+        <port_id_b>240V Rail 1</port_id_b>
+    </Transfer>
+    <Transfer id="0-12-41.8355 on 8-19-1996snONhWZn">
+        <type>Power Cable</type>
+        <machine_id_a>0-12-5.99312 on 8-19-1996l_sAIdDl</machine_id_a>
+        <port_id_a>High Voltage Rail</port_id_a>
+        <machine_id_b>0-11-45.011 on 8-19-1996HPQtROis</machine_id_b>
+        <port_id_b>240V Rail 2</port_id_b>
+    </Transfer>
+    <Transfer id="0-14-1.49028 on 8-19-1996RmaIQQsg">
+        <type>GPIO Cable</type>
+        <machine_id_a>0-13-56.6842 on 8-19-1996VlA_KMQ^</machine_id_a>
+        <port_id_a>GPO Lever State</port_id_a>
+        <machine_id_b>0-13-33.1251 on 8-19-1996HcZWYWVC</machine_id_b>
+        <port_id_b>GPI Switch State</port_id_b>
+    </Transfer>
+    <Item id="0-11-10.643 on 8-19-1996DUSQUfeq">
+        <type>3x Steel Block</type>
+    </Item>
+    <Item id="0-11-9.88631 on 8-19-1996KlbFaHMl">
+        <type>3x Steel Block</type>
+    </Item>
+    <Item id="0-4-53.2426 on 8-19-1996PcAj]OKX">
+        <type>3x Steel Block</type>
+    </Item>
+    <Item id="0-6-34.2815 on 8-19-1996XIYMdQiU">
+        <type>Power Cable</type>
+    </Item>
+    <Item id="0-6-36.1433 on 8-19-1996UMPdJDC[">
+        <type>Power Cable</type>
+    </Item>
+    <Item id="0-6-38.282 on 8-19-1996GG]`iliH">
+        <type>Power Cable</type>
+    </Item>
+    <Item id="0-6-39.6427 on 8-19-1996[`DLMKKK">
+        <type>Power Cable</type>
+    </Item>
+    <Item id="0-6-41.3005 on 8-19-1996iB[nTZDH">
+        <type>Power Cable</type>
+    </Item>
+    <Item id="0-6-46.1067 on 8-19-1996fhjX_D_M">
+        <type>GPIO Cable</type>
+    </Item>
+    <Item id="0-6-47.9324 on 8-19-1996pALredqC">
+        <type>GPIO Cable</type>
+    </Item>
+    <Item id="0-6-51.7529 on 8-19-1996mQX_`cqi">
+        <type>Steel Pipe</type>
+    </Item>
+    <Item id="0-6-53.2167 on 8-19-1996kdJWjDtY">
+        <type>Hazard Pipe</type>
+    </Item>
+    <Item id="0-6-54.4875 on 8-19-1996F\sSqGmo">
+        <type>Steel Pipe</type>
+    </Item>
+    <Item id="0-6-55.8492 on 8-19-1996ZTTACNcH">
+        <type>Hazard Pipe</type>
+    </Item>
+    <Item id="0-6-57.7589 on 8-19-1996UOgXCkBW">
+        <type>Steel Pipe</type>
+    </Item>
+    <Item id="0-7-1.57633 on 8-19-1996[q\Mnkhg">
+        <type>Steel Mount</type>
+    </Item>
+    <Item id="0-7-11.4776 on 8-19-1996qsmJRBlg">
+        <type>Steel Mount</type>
+    </Item>
+    <Item id="0-7-12.8587 on 8-19-1996ZToWf]tq">
+        <type>Steel Mount</type>
+    </Item>
+    <Item id="0-7-2.87613 on 8-19-1996QgeQoHBH">
+        <type>Steel Mount</type>
+    </Item>
+    <Item id="0-7-21.2324 on 8-19-1996qoCWAQQ]">
+        <type>Steel Bracket</type>
+    </Item>
+    <Item id="0-7-22.5742 on 8-19-1996DCdYhbOg">
+        <type>Steel Bracket</type>
+    </Item>
+    <Item id="0-7-23.8549 on 8-19-1996o`MnVkU\">
+        <type>Steel Bracket</type>
+    </Item>
+    <Item id="0-7-25.2147 on 8-19-1996f^MkmlOL">
+        <type>Steel Bracket</type>
+    </Item>
+    <Item id="0-7-27.4751 on 8-19-1996OGcTD`JU">
+        <type>Steel Block</type>
+    </Item>
+    <Item id="0-7-29.1487 on 8-19-1996GjkjSTLN">
+        <type>Steel Block</type>
+    </Item>
+    <Item id="0-7-3.94996 on 8-19-1996IJWTTUaj">
+        <type>Steel Mount</type>
+    </Item>
+    <Item id="0-7-30.8042 on 8-19-1996isor_r]D">
+        <type>Steel Block</type>
+    </Item>
+    <Item id="0-7-32.3749 on 8-19-1996WtJsoCGM">
+        <type>Steel Bracket</type>
+    </Item>
+    <Item id="0-7-5.05983 on 8-19-1996]`skGUBQ">
+        <type>Steel Mount</type>
+    </Item>
+    <Item id="0-7-51.4517 on 8-19-1996OVIXp^WL">
+        <type>Lever</type>
+    </Item>
+    <Item id="0-7-52.8934 on 8-19-1996GYUSA_QR">
+        <type>Lever</type>
+    </Item>
+    <Item id="0-7-54.6103 on 8-19-1996FPfHSm\p">
+        <type>Lever</type>
+    </Item>
+    <Item id="0-7-57.098 on 8-19-1996aYl`GhPs">
+        <type>GPIO Cable</type>
+    </Item>
+    <Item id="0-7-6.62558 on 8-19-1996HSFDe\ZS">
+        <type>Steel Mount</type>
+    </Item>
+    <Item id="0-7-8.03041 on 8-19-1996c`UMBabM">
+        <type>Steel Mount</type>
+    </Item>
+    <Item id="0-7-9.30029 on 8-19-1996ZqJHcM\a">
+        <type>Steel Mount</type>
+    </Item>
+    <Item id="0-8-18.3564 on 8-19-1996QoCIMSdd">
+        <type>Pressure Gauge</type>
+    </Item>
+    <Item id="0-8-32.1635 on 8-19-1996FcfC[chI">
+        <type>PCOC Ad 1</type>
+    </Item>
+    <Item id="0-8-33.655 on 8-19-1996AnmthXCl">
+        <type>PCOC Ad 1</type>
+    </Item>
+    <Item id="0-8-35.3012 on 8-19-1996bhSKfgZO">
+        <type>PCOC Ad 1</type>
+    </Item>
+    <Item id="0-8-36.6912 on 8-19-1996RafOFPdX">
+        <type>PCOC Ad 1</type>
+    </Item>
+    <Item id="0-8-38.1136 on 8-19-1996DXQfDKi[">
+        <type>PCOC Ad 1</type>
+    </Item>
+    <Item id="0-8-39.9899 on 8-19-1996MUoCpF^e">
+        <type>PCOC Ad 1</type>
+    </Item>
+    <Item id="0-8-41.6846 on 8-19-1996UcPAg_Qf">
+        <type>PCOC Ad 1</type>
+    </Item>
+    <Item id="0-8-8.09028 on 8-19-1996so`j_gbK">
+        <type>Terminal</type>
+    </Item>
+    <Connector id="0-0-40.4453 on 8-19-1996aGcrcZFd">
+        <type>Steel Mount</type>
+        <A>0-3-45.992 on 8-19-1996KoDBrHkB</A>
+        <B>0-2-42.4295 on 8-19-1996iXIRX[RR</B>
+        <relative_x>7.08182</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-0-50.7529 on 8-19-1996^Y][JB^U">
+        <type>Steel Mount</type>
+        <A>0-3-12.4197 on 8-19-1996VA\VCtER</A>
+        <B>0-2-26.6047 on 8-19-1996^lMUq]Jj</B>
+        <relative_x>2.67572</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-0-58.2078 on 8-19-1996sEL\JoFt">
+        <type>Steel Bracket</type>
+        <A>0-0-30.4122 on 8-19-1996XIoGAjAP</A>
+        <B>0-0-55.7511 on 8-19-1996qpbXqDnV</B>
+        <relative_x>73.2744</relative_x>
+        <relative_y>-8.93292</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-15.3447 on 8-19-1996SZ_jK_Pq">
+        <type>Steel Mount</type>
+        <A>0-1-4.11181 on 8-19-1996SF_ffVEM</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>9.27539</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-17.2864 on 8-19-1996thRacWAl">
+        <type>Steel Mount</type>
+        <A>0-1-12.0183 on 8-19-1996Nn]eWFVT</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>12.6314</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-19.708 on 8-19-1996NCFGAAjM">
+        <type>Steel Mount</type>
+        <A>0-0-30.4122 on 8-19-1996XIoGAjAP</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>8.71185</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-21.8876 on 8-19-1996F_THBX[o">
+        <type>Steel Mount</type>
+        <A>0-0-22.3975 on 8-19-1996Rb^OEJNd</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>3.52997</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-24.1372 on 8-19-1996J`jDiQ[O">
+        <type>Steel Bracket</type>
+        <A>0-0-17.8363 on 8-19-1996dcJOKkaO</A>
+        <B>0-0-22.3975 on 8-19-1996Rb^OEJNd</B>
+        <relative_x>23.8971</relative_x>
+        <relative_y>0.697296</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-31.5181 on 8-19-1996HWfWA]sP">
+        <type>Steel Mount</type>
+        <A>0-1-29.6824 on 8-19-1996MfGkJjeU</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>5.80576</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-38.7949 on 8-19-1996`mDKsPDI">
+        <type>Steel Bracket</type>
+        <A>0-0-30.4122 on 8-19-1996XIoGAjAP</A>
+        <B>0-1-37.0232 on 8-19-1996dLbCktOC</B>
+        <relative_x>7.91029</relative_x>
+        <relative_y>-24.6115</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-48.7513 on 8-19-1996ptoI^_be">
+        <type>Steel Bracket</type>
+        <A>0-1-4.11181 on 8-19-1996SF_ffVEM</A>
+        <B>0-1-46.8146 on 8-19-1996MfSmpoKQ</B>
+        <relative_x>-19.0285</relative_x>
+        <relative_y>-27.4973</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-55.6342 on 8-19-1996jj`tZ]aH">
+        <type>Steel Bracket</type>
+        <A>0-0-22.3975 on 8-19-1996Rb^OEJNd</A>
+        <B>0-1-53.4045 on 8-19-1996W_\ZbS`X</B>
+        <relative_x>24.9992</relative_x>
+        <relative_y>-23.7278</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-1-6.12945 on 8-19-1996nKmhVZWp">
+        <type>Steel Bracket</type>
+        <A>0-1-0.982341 on 8-19-1996gMFY`Cqt</A>
+        <B>0-1-4.11181 on 8-19-1996SF_ffVEM</B>
+        <relative_x>24.8179</relative_x>
+        <relative_y>7.73889</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-10-3.82703 on 8-19-1996arFVcNUA">
+        <type>Steel Mount</type>
+        <A>0-10-1.61189 on 8-19-1996AAIbG\RG</A>
+        <B>0-9-18.0063 on 8-19-1996bcmtIYEI</B>
+        <relative_x>-12.3208</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-10-35.4205 on 8-19-1996FQrXap\t">
+        <type>Steel Bracket</type>
+        <A>0-10-32.5613 on 8-19-1996kLIFDYhj</A>
+        <B>0-2-16.0018 on 8-19-1996BoNVKf^P</B>
+        <relative_x>-51.8532</relative_x>
+        <relative_y>-1.48701</relative_y>
+        <relative_r>355.546</relative_r>
+    </Connector>
+    <Connector id="0-10-49.493 on 8-19-1996PRZRQURK">
+        <type>Steel Mount</type>
+        <A>0-10-43.8848 on 8-19-1996lcGtLhmd</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-1.99295</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-10-53.8587 on 8-19-1996LA`DlHED">
+        <type>Steel Mount</type>
+        <A>0-10-43.8848 on 8-19-1996lcGtLhmd</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-1.15942</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-11-0.96749 on 8-19-1996DPE\_gac">
+        <type>Steel Mount</type>
+        <A>0-10-59.3616 on 8-19-1996^LVKJ\\V</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-1.38712</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-11-2.70787 on 8-19-1996kThi_cOW">
+        <type>Steel Mount</type>
+        <A>0-10-59.3616 on 8-19-1996^LVKJ\\V</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>13.1518</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-12-0.41892 on 8-19-1996_XCLlAUi">
+        <type>Steel Mount</type>
+        <A>0-11-45.011 on 8-19-1996HPQtROis</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-69</relative_x>
+        <relative_y>21.8849</relative_y>
+        <relative_r>90</relative_r>
+    </Connector>
+    <Connector id="0-12-17.6547 on 8-19-1996RNfmSdSU">
+        <type>Steel Mount</type>
+        <A>0-12-5.99312 on 8-19-1996l_sAIdDl</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-63</relative_x>
+        <relative_y>6.92667</relative_y>
+        <relative_r>90</relative_r>
+    </Connector>
+    <Connector id="0-12-19.3616 on 8-19-1996XYMOXDlQ">
+        <type>Steel Mount</type>
+        <A>0-12-9.42267 on 8-19-1996_c[g\fH\</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-63</relative_x>
+        <relative_y>6.79321</relative_y>
+        <relative_r>90</relative_r>
+    </Connector>
+    <Connector id="0-12-2.42365 on 8-19-1996Hrf[eAOG">
+        <type>Steel Mount</type>
+        <A>0-11-51.6147 on 8-19-1996gpKi_mFC</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-69</relative_x>
+        <relative_y>9.32124</relative_y>
+        <relative_r>90</relative_r>
+    </Connector>
+    <Connector id="0-12-20.9089 on 8-19-1996I^ASjGqL">
+        <type>Steel Mount</type>
+        <A>0-12-12.0244 on 8-19-1996SjrZFBTA</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-63</relative_x>
+        <relative_y>-1.69264</relative_y>
+        <relative_r>90</relative_r>
+    </Connector>
+    <Connector id="0-12-22.9769 on 8-19-1996AiSZLrLk">
+        <type>Steel Mount</type>
+        <A>0-12-14.9435 on 8-19-1996AFqdTS]t</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-63</relative_x>
+        <relative_y>8.06493</relative_y>
+        <relative_r>90</relative_r>
+    </Connector>
+    <Connector id="0-13-22.2123 on 8-19-1996cS^[fdEL">
+        <type>Steel Mount</type>
+        <A>0-13-16.191 on 8-19-1996GfBMD]nL</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-17.5662</relative_x>
+        <relative_y>100</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-13-51.561 on 8-19-1996INOkh]eP">
+        <type>Steel Mount</type>
+        <A>0-13-33.1251 on 8-19-1996HcZWYWVC</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>29</relative_x>
+        <relative_y>-4.66635</relative_y>
+        <relative_r>270</relative_r>
+    </Connector>
+    <Connector id="0-13-59.4389 on 8-19-1996kgT_bJTp">
+        <type>Steel Mount</type>
+        <A>0-13-56.6842 on 8-19-1996VlA_KMQ^</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-23</relative_x>
+        <relative_y>0.339388</relative_y>
+        <relative_r>90</relative_r>
+    </Connector>
+    <Connector id="0-2-12.1254 on 8-19-1996MRlA`moO">
+        <type>Steel Bracket</type>
+        <A>0-0-17.8363 on 8-19-1996dcJOKkaO</A>
+        <B>0-2-9.84381 on 8-19-1996MEs`XnCX</B>
+        <relative_x>0.194489</relative_x>
+        <relative_y>26.6864</relative_y>
+        <relative_r>273.728</relative_r>
+    </Connector>
+    <Connector id="0-2-18.3675 on 8-19-1996UmnIgNAM">
+        <type>Steel Mount</type>
+        <A>0-2-16.0018 on 8-19-1996BoNVKf^P</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>13.8794</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-2-19.9582 on 8-19-1996XakjkjQJ">
+        <type>Steel Mount</type>
+        <A>0-2-9.84381 on 8-19-1996MEs`XnCX</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-3.69376</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-2-2.32102 on 8-19-1996WsXg[qEk">
+        <type>Steel Bracket</type>
+        <A>0-1-12.0183 on 8-19-1996Nn]eWFVT</A>
+        <B>0-2-0.170372 on 8-19-1996EqUVhILg</B>
+        <relative_x>-26.3269</relative_x>
+        <relative_y>-29.2545</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-2-50.1833 on 8-19-1996DRtIVOjS">
+        <type>Steel Mount</type>
+        <A>0-2-16.0018 on 8-19-1996BoNVKf^P</A>
+        <B>0-2-26.6047 on 8-19-1996^lMUq]Jj</B>
+        <relative_x>-62.4601</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-2-56.8352 on 8-19-1996YNlPCMiL">
+        <type>Steel Mount</type>
+        <A>0-2-55.1706 on 8-19-1996FLRgiMFc</A>
+        <B>0-2-26.6047 on 8-19-1996^lMUq]Jj</B>
+        <relative_x>-24.5003</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-3-14.6323 on 8-19-1996]NqOUPAJ">
+        <type>Steel Bracket</type>
+        <A>0-3-12.4197 on 8-19-1996VA\VCtER</A>
+        <B>0-3-8.29347 on 8-19-1996ps^baEaf</B>
+        <relative_x>75.069</relative_x>
+        <relative_y>-3.84071</relative_y>
+        <relative_r>6.66535</relative_r>
+    </Connector>
+    <Connector id="0-3-22.043 on 8-19-1996jBrqe`Zo">
+        <type>Steel Mount</type>
+        <A>0-3-20.4403 on 8-19-1996S[DJUkd`</A>
+        <B>0-2-33.0351 on 8-19-1996fbtkHRiX</B>
+        <relative_x>11.5851</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-3-24.0567 on 8-19-1996VBlThEss">
+        <type>Steel Bracket</type>
+        <A>0-3-12.4197 on 8-19-1996VA\VCtER</A>
+        <B>0-3-20.4403 on 8-19-1996S[DJUkd`</B>
+        <relative_x>-74.4373</relative_x>
+        <relative_y>1.7486</relative_y>
+        <relative_r>6.66535</relative_r>
+    </Connector>
+    <Connector id="0-3-29.9238 on 8-19-1996QYoQ\MRC">
+        <type>Steel Mount</type>
+        <A>0-3-27.3702 on 8-19-1996_[GLpNIn</A>
+        <B>0-2-33.0351 on 8-19-1996fbtkHRiX</B>
+        <relative_x>2.25238</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-3-32.3223 on 8-19-1996lcZrOqa_">
+        <type>Steel Mount</type>
+        <A>0-3-27.3702 on 8-19-1996_[GLpNIn</A>
+        <B>0-2-33.0351 on 8-19-1996fbtkHRiX</B>
+        <relative_x>-34</relative_x>
+        <relative_y>-9.77616</relative_y>
+        <relative_r>90</relative_r>
+    </Connector>
+    <Connector id="0-3-4.92192 on 8-19-1996YIXNsV^s">
+        <type>Steel Bracket</type>
+        <A>0-2-55.1706 on 8-19-1996FLRgiMFc</A>
+        <B>0-3-2.95429 on 8-19-1996m^d`aQl[</B>
+        <relative_x>-69.6942</relative_x>
+        <relative_y>0.75</relative_y>
+        <relative_r>6.66535</relative_r>
+    </Connector>
+    <Connector id="0-3-49.6963 on 8-19-1996Bjn\beDP">
+        <type>Steel Bracket</type>
+        <A>0-3-20.4403 on 8-19-1996S[DJUkd`</A>
+        <B>0-3-45.992 on 8-19-1996KoDBrHkB</B>
+        <relative_x>-53.0319</relative_x>
+        <relative_y>-25.0699</relative_y>
+        <relative_r>90.1088</relative_r>
+    </Connector>
+    <Connector id="0-3-56.5301 on 8-19-1996EILG`kOQ">
+        <type>Steel Bracket</type>
+        <A>0-3-45.992 on 8-19-1996KoDBrHkB</A>
+        <B>0-3-52.8998 on 8-19-1996sPEYgUPU</B>
+        <relative_x>-77.0629</relative_x>
+        <relative_y>-0.606815</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-5-10.6127 on 8-19-1996gYJmTREK">
+        <type>Steel Mount</type>
+        <A>0-4-56.5501 on 8-19-1996MeUGeXrX</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>8.75348</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-5-12.2244 on 8-19-1996]BnmtQ^H">
+        <type>Steel Bracket</type>
+        <A>0-4-56.5501 on 8-19-1996MeUGeXrX</A>
+        <B>0-5-0.652392 on 8-19-1996Q`BaJcR\</B>
+        <relative_x>68.6173</relative_x>
+        <relative_y>4.71808</relative_y>
+        <relative_r>271.947</relative_r>
+    </Connector>
+    <Connector id="0-5-14.37 on 8-19-1996YXLpXrmt">
+        <type>Steel Bracket</type>
+        <A>0-5-0.652392 on 8-19-1996Q`BaJcR\</A>
+        <B>0-5-4.46478 on 8-19-1996llP]ijTK</B>
+        <relative_x>3.43262</relative_x>
+        <relative_y>-22.8596</relative_y>
+        <relative_r>271.947</relative_r>
+    </Connector>
+    <Connector id="0-5-16.0686 on 8-19-1996Fl_Q^AFk">
+        <type>Steel Mount</type>
+        <A>0-5-4.46478 on 8-19-1996llP]ijTK</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>26.1565</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-5-17.4704 on 8-19-1996i`mOkqmK">
+        <type>Steel Mount</type>
+        <A>0-4-39.1292 on 8-19-1996tJotCYVD</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-35.1879</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-5-19.0332 on 8-19-1996Qh_iORPU">
+        <type>Steel Mount</type>
+        <A>0-4-35.3057 on 8-19-1996_cZLqNWJ</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>7.03006</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-5-20.5351 on 8-19-1996[`EPqHqh">
+        <type>Steel Mount</type>
+        <A>0-4-32.0602 on 8-19-1996DsabKrXm</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-1.45377</relative_x>
+        <relative_y>34</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-5-22.5776 on 8-19-1996NdGoFWfI">
+        <type>Steel Bracket</type>
+        <A>0-4-28.4178 on 8-19-1996mAsbTE]r</A>
+        <B>0-4-32.0602 on 8-19-1996DsabKrXm</B>
+        <relative_x>-0.693054</relative_x>
+        <relative_y>-27.5175</relative_y>
+        <relative_r>91.9465</relative_r>
+    </Connector>
+    <Connector id="0-5-25.7191 on 8-19-1996AfPggitr">
+        <type>Steel Bracket</type>
+        <A>0-4-24.9104 on 8-19-1996jjXk[RMV</A>
+        <B>0-4-28.4178 on 8-19-1996mAsbTE]r</B>
+        <relative_x>-75.0209</relative_x>
+        <relative_y>4.08875</relative_y>
+        <relative_r>355.734</relative_r>
+    </Connector>
+    <Connector id="0-5-27.4799 on 8-19-1996_tYMEnDE">
+        <type>Steel Mount</type>
+        <A>0-4-24.9104 on 8-19-1996jjXk[RMV</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>29.0745</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-5-29.2345 on 8-19-1996UbcCh\Ej">
+        <type>Steel Mount</type>
+        <A>0-4-22.4099 on 8-19-1996ZlcgKpsb</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>13.1859</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-5-31.2731 on 8-19-1996ASAJbK[Q">
+        <type>Steel Mount</type>
+        <A>0-4-19.4914 on 8-19-1996DHBNGJ]C</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-18.8299</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-5-33.104 on 8-19-1996jU[mZFIa">
+        <type>Steel Mount</type>
+        <A>0-4-16.1939 on 8-19-1996cMXbBrOi</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>14.3415</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-5-34.9886 on 8-19-1996LghYqcas">
+        <type>Steel Mount</type>
+        <A>0-4-13.3233 on 8-19-1996rG]TSdCS</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>27.8071</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-5-49.3999 on 8-19-1996Hnc[AQR`">
+        <type>Steel Mount</type>
+        <A>0-5-47.4133 on 8-19-1996KYn^qZIg</A>
+        <B>0-2-26.6047 on 8-19-1996^lMUq]Jj</B>
+        <relative_x>-5.76611</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-5-51.8166 on 8-19-1996KHdUni`N">
+        <type>Steel Mount</type>
+        <A>0-5-44.0682 on 8-19-1996[pBR]]aW</A>
+        <B>0-2-26.6047 on 8-19-1996^lMUq]Jj</B>
+        <relative_x>-0.723358</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-5-8.91399 on 8-19-1996XPNdRh]G">
+        <type>Steel Mount</type>
+        <A>0-4-52.6947 on 8-19-1996\COmXkoj</A>
+        <B>0-0-19.5891 on 8-19-1996orLYiRVY</B>
+        <relative_x>-4.51903</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-6-2.91444 on 8-19-1996KPmBXTSX">
+        <type>Steel Mount</type>
+        <A>0-5-59.7872 on 8-19-1996ZCimlcmt</A>
+        <B>0-2-33.0351 on 8-19-1996fbtkHRiX</B>
+        <relative_x>-4.05231</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-6-6.18997 on 8-19-1996oRCoNYPO">
+        <type>Steel Mount</type>
+        <A>0-5-55.1829 on 8-19-1996jrT_bVSN</A>
+        <B>0-2-33.0351 on 8-19-1996fbtkHRiX</B>
+        <relative_x>-31.1121</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Connector id="0-9-30.4685 on 8-19-1996[TXYBZWJ">
+        <type>Steel Mount</type>
+        <A>0-9-28.2396 on 8-19-1996pdWYQVOt</A>
+        <B>0-2-33.0351 on 8-19-1996fbtkHRiX</B>
+        <relative_x>34</relative_x>
+        <relative_y>-3.23743</relative_y>
+        <relative_r>270</relative_r>
+    </Connector>
+    <Connector id="0-9-33.864 on 8-19-1996lhQd_oPB">
+        <type>Steel Mount</type>
+        <A>0-9-28.2396 on 8-19-1996pdWYQVOt</A>
+        <B>0-9-18.0063 on 8-19-1996bcmtIYEI</B>
+        <relative_x>-34</relative_x>
+        <relative_y>-14.0771</relative_y>
+        <relative_r>90</relative_r>
+    </Connector>
+    <Connector id="0-9-39.6156 on 8-19-1996gDReA`^e">
+        <type>Steel Mount</type>
+        <A>0-9-38.0314 on 8-19-1996OeOqqF\o</A>
+        <B>0-9-18.0063 on 8-19-1996bcmtIYEI</B>
+        <relative_x>26.8566</relative_x>
+        <relative_y>34.0001</relative_y>
+        <relative_r>0</relative_r>
+    </Connector>
+    <Connector id="0-9-46.6068 on 8-19-1996inYPaFqj">
+        <type>Steel Bracket</type>
+        <A>0-9-38.0314 on 8-19-1996OeOqqF\o</A>
+        <B>0-9-44.4972 on 8-19-1996oBphXHLQ</B>
+        <relative_x>70.0692</relative_x>
+        <relative_y>-12.4611</relative_y>
+        <relative_r>261.456</relative_r>
+    </Connector>
+    <Connector id="0-9-54.0337 on 8-19-1996TknsbtL_">
+        <type>Steel Mount</type>
+        <A>0-9-50.9814 on 8-19-1996FOJRjD\I</A>
+        <B>0-9-18.0063 on 8-19-1996bcmtIYEI</B>
+        <relative_x>2.29846</relative_x>
+        <relative_y>-34</relative_y>
+        <relative_r>180</relative_r>
+    </Connector>
+    <Rope id="0-1-19.0762 on 8-19-1996d\qRmVb\">
+        <type>Insulated Cable</type>
+        <node>
+            <x>100.883</x>
+            <y>151.133</y>
+            <x_velocity>0.000368267</x_velocity>
+            <y_velocity>0.00046533</y_velocity>
+            <attached>0-12-14.9435 on 8-19-1996AFqdTS]t</attached>
+            <attachment_x>-38</attachment_x>
+            <attachment_y>12</attachment_y>
+        </node>
+        <node>
+            <x>90.952</x>
+            <y>149.621</y>
+            <x_velocity>8.32826e-005</x_velocity>
+            <y_velocity>8.18409e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>81.0215</x>
+            <y>148.109</y>
+            <x_velocity>0.000127539</x_velocity>
+            <y_velocity>0.000239521</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>71.091</x>
+            <y>146.597</y>
+            <x_velocity>-0.000133038</x_velocity>
+            <y_velocity>-5.14649e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>61.1605</x>
+            <y>145.085</y>
+            <x_velocity>-0.000144303</x_velocity>
+            <y_velocity>0.000135317</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>51.2299</x>
+            <y>143.573</y>
+            <x_velocity>-0.000194997</x_velocity>
+            <y_velocity>0.000379298</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>41.2993</x>
+            <y>142.061</y>
+            <x_velocity>0.000275865</x_velocity>
+            <y_velocity>0.000136189</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>31.3688</x>
+            <y>140.55</y>
+            <x_velocity>0.000154361</x_velocity>
+            <y_velocity>-0.000102594</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>21.4382</x>
+            <y>139.038</y>
+            <x_velocity>-0.000419363</x_velocity>
+            <y_velocity>-0.000440821</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>11.5077</x>
+            <y>137.526</y>
+            <x_velocity>0.000159189</x_velocity>
+            <y_velocity>-3.8892e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>1.57711</x>
+            <y>136.014</y>
+            <x_velocity>-0.000211358</x_velocity>
+            <y_velocity>-0.000126299</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-8.35342</x>
+            <y>134.502</y>
+            <x_velocity>0.000237778</x_velocity>
+            <y_velocity>4.4927e-006</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-18.2839</x>
+            <y>132.99</y>
+            <x_velocity>0.00025548</x_velocity>
+            <y_velocity>0.000101622</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-28.2145</x>
+            <y>131.478</y>
+            <x_velocity>-0.000485614</x_velocity>
+            <y_velocity>-4.19766e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-38.145</x>
+            <y>129.966</y>
+            <x_velocity>-0.000167102</x_velocity>
+            <y_velocity>-8.82447e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-48.0755</x>
+            <y>128.454</y>
+            <x_velocity>0.000652313</x_velocity>
+            <y_velocity>8.31485e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-58.0061</x>
+            <y>126.942</y>
+            <x_velocity>-0.000612617</x_velocity>
+            <y_velocity>-6.14896e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-67.9366</x>
+            <y>125.43</y>
+            <x_velocity>0.000121772</x_velocity>
+            <y_velocity>3.42317e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-77.8671</x>
+            <y>123.918</y>
+            <x_velocity>-0.00015074</x_velocity>
+            <y_velocity>-2.28658e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-87.7977</x>
+            <y>122.406</y>
+            <x_velocity>0.000625223</x_velocity>
+            <y_velocity>9.47826e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-97.7282</x>
+            <y>120.894</y>
+            <x_velocity>0.00045383</x_velocity>
+            <y_velocity>8.45902e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-107.659</x>
+            <y>119.382</y>
+            <x_velocity>-0.000882715</x_velocity>
+            <y_velocity>-0.000149634</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-117.589</x>
+            <y>117.87</y>
+            <x_velocity>-0.00022088</x_velocity>
+            <y_velocity>-8.04998e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-127.52</x>
+            <y>116.358</y>
+            <x_velocity>0.000265539</x_velocity>
+            <y_velocity>7.1615e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-137.45</x>
+            <y>114.846</y>
+            <x_velocity>-7.49677e-005</x_velocity>
+            <y_velocity>-2.07871e-006</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-147.381</x>
+            <y>113.334</y>
+            <x_velocity>0.000977129</x_velocity>
+            <y_velocity>0.000192348</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-157.311</x>
+            <y>111.822</y>
+            <x_velocity>-0.00173311</x_velocity>
+            <y_velocity>-0.000190303</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-167.242</x>
+            <y>110.31</y>
+            <x_velocity>0.00210245</x_velocity>
+            <y_velocity>0.000380136</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-177.172</x>
+            <y>108.798</y>
+            <x_velocity>-0.00104955</x_velocity>
+            <y_velocity>-8.9854e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-187.103</x>
+            <y>107.286</y>
+            <x_velocity>-0.000228524</x_velocity>
+            <y_velocity>0.000273753</y_velocity>
+            <attached>0-13-33.1251 on 8-19-1996HcZWYWVC</attached>
+            <attachment_x>-9</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+    </Rope>
+    <Rope id="0-1-23.8783 on 8-19-1996ckF^qtB\">
+        <type>Insulated Cable</type>
+        <node>
+            <x>-306.131</x>
+            <y>257.529</y>
+            <x_velocity>-0.00220853</x_velocity>
+            <y_velocity>0.000941992</y_velocity>
+            <attached>0-13-16.191 on 8-19-1996GfBMD]nL</attached>
+            <attachment_x>-48</attachment_x>
+            <attachment_y>-15</attachment_y>
+        </node>
+        <node>
+            <x>-300.18</x>
+            <y>249.129</y>
+            <x_velocity>0.0011158</x_velocity>
+            <y_velocity>-0.00191188</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-294.228</x>
+            <y>240.729</y>
+            <x_velocity>-0.000409305</x_velocity>
+            <y_velocity>0.000752091</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-288.277</x>
+            <y>232.328</y>
+            <x_velocity>0.000713468</x_velocity>
+            <y_velocity>-0.000977397</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-282.325</x>
+            <y>223.928</y>
+            <x_velocity>-0.00114959</x_velocity>
+            <y_velocity>0.00187862</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-276.373</x>
+            <y>215.527</y>
+            <x_velocity>-7.34925e-005</x_velocity>
+            <y_velocity>-0.000817537</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-270.422</x>
+            <y>207.127</y>
+            <x_velocity>0.000198483</x_velocity>
+            <y_velocity>0.000152349</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-264.47</x>
+            <y>198.727</y>
+            <x_velocity>0.00114369</x_velocity>
+            <y_velocity>-0.0011909</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-258.518</x>
+            <y>190.326</y>
+            <x_velocity>-0.00088191</x_velocity>
+            <y_velocity>0.000808954</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-252.567</x>
+            <y>181.926</y>
+            <x_velocity>-0.000464559</x_velocity>
+            <y_velocity>0.000900149</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-246.615</x>
+            <y>173.525</y>
+            <x_velocity>0.00108361</x_velocity>
+            <y_velocity>-0.00159645</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-240.664</x>
+            <y>165.125</y>
+            <x_velocity>-0.00109595</x_velocity>
+            <y_velocity>0.00175631</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-234.712</x>
+            <y>156.725</y>
+            <x_velocity>0.000560582</x_velocity>
+            <y_velocity>-0.00118017</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-228.76</x>
+            <y>148.324</y>
+            <x_velocity>6.97374e-006</x_velocity>
+            <y_velocity>0.000282168</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-222.809</x>
+            <y>139.924</y>
+            <x_velocity>0.000105679</x_velocity>
+            <y_velocity>-0.000207067</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-216.857</x>
+            <y>131.524</y>
+            <x_velocity>-0.000408769</x_velocity>
+            <y_velocity>0.000526786</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-210.906</x>
+            <y>123.123</y>
+            <x_velocity>0.000824511</x_velocity>
+            <y_velocity>-0.00109649</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-204.954</x>
+            <y>114.723</y>
+            <x_velocity>-0.000180781</x_velocity>
+            <y_velocity>0.000128746</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-199.002</x>
+            <y>106.322</y>
+            <x_velocity>-0.000173807</x_velocity>
+            <y_velocity>0.000484943</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-193.051</x>
+            <y>97.922</y>
+            <x_velocity>-0.000609398</x_velocity>
+            <y_velocity>0.000697374</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-187.099</x>
+            <y>89.5216</y>
+            <x_velocity>0.0018695</x_velocity>
+            <y_velocity>-0.000214577</y_velocity>
+            <attached>0-13-33.1251 on 8-19-1996HcZWYWVC</attached>
+            <attachment_x>9</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+    </Rope>
+    <Rope id="0-12-28.4459 on 8-19-1996IVf[jWVj">
+        <type>Insulated Cable</type>
+        <node>
+            <x>270.695</x>
+            <y>151.62</y>
+            <x_velocity>0.00163937</x_velocity>
+            <y_velocity>-0.000361964</y_velocity>
+            <attached>0-12-9.42267 on 8-19-1996_c[g\fH\</attached>
+            <attachment_x>-38</attachment_x>
+            <attachment_y>-12</attachment_y>
+        </node>
+        <node>
+            <x>282.061</x>
+            <y>151.858</y>
+            <x_velocity>0.000836849</x_velocity>
+            <y_velocity>1.55568e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>293.427</x>
+            <y>152.096</y>
+            <x_velocity>-0.00171661</x_velocity>
+            <y_velocity>-3.1516e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>304.793</x>
+            <y>152.333</y>
+            <x_velocity>-0.00279379</x_velocity>
+            <y_velocity>-5.13643e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>316.159</x>
+            <y>152.571</y>
+            <x_velocity>0.00243759</x_velocity>
+            <y_velocity>0.000429422</y_velocity>
+            <attached>0-12-5.99312 on 8-19-1996l_sAIdDl</attached>
+            <attachment_x>-38</attachment_x>
+            <attachment_y>12</attachment_y>
+        </node>
+    </Rope>
+    <Rope id="0-12-31.2013 on 8-19-1996lZefHLQs">
+        <type>Insulated Cable</type>
+        <node>
+            <x>198.494</x>
+            <y>151.529</y>
+            <x_velocity>-0.000905514</x_velocity>
+            <y_velocity>-0.000529627</y_velocity>
+            <attached>0-12-12.0244 on 8-19-1996SjrZFBTA</attached>
+            <attachment_x>-38</attachment_x>
+            <attachment_y>-12</attachment_y>
+        </node>
+        <node>
+            <x>209.86</x>
+            <y>151.544</y>
+            <x_velocity>-0.00102568</x_velocity>
+            <y_velocity>2.47015e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>221.227</x>
+            <y>151.559</y>
+            <x_velocity>0.000416279</x_velocity>
+            <y_velocity>2.6294e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>232.594</x>
+            <y>151.574</y>
+            <x_velocity>-0.00154495</x_velocity>
+            <y_velocity>-2.89343e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>243.96</x>
+            <y>151.589</y>
+            <x_velocity>0.00191832</x_velocity>
+            <y_velocity>0.000601544</y_velocity>
+            <attached>0-12-9.42267 on 8-19-1996_c[g\fH\</attached>
+            <attachment_x>-38</attachment_x>
+            <attachment_y>12</attachment_y>
+        </node>
+    </Rope>
+    <Rope id="0-12-34.0007 on 8-19-1996tmpSMtSD">
+        <type>Insulated Cable</type>
+        <node>
+            <x>126.294</x>
+            <y>151.151</y>
+            <x_velocity>0.00022316</x_velocity>
+            <y_velocity>-0.0003797</y_velocity>
+            <attached>0-12-14.9435 on 8-19-1996AFqdTS]t</attached>
+            <attachment_x>-38</attachment_x>
+            <attachment_y>-12</attachment_y>
+        </node>
+        <node>
+            <x>137.66</x>
+            <y>151.242</y>
+            <x_velocity>0.000193119</x_velocity>
+            <y_velocity>5.74999e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>149.027</x>
+            <y>151.334</y>
+            <x_velocity>6.4373e-005</x_velocity>
+            <y_velocity>4.48264e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>160.394</x>
+            <y>151.425</y>
+            <x_velocity>-2.14577e-005</x_velocity>
+            <y_velocity>0.000323273</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>171.76</x>
+            <y>151.516</y>
+            <x_velocity>-0.00075531</x_velocity>
+            <y_velocity>-0.000819616</y_velocity>
+            <attached>0-12-12.0244 on 8-19-1996SjrZFBTA</attached>
+            <attachment_x>-38</attachment_x>
+            <attachment_y>12</attachment_y>
+        </node>
+    </Rope>
+    <Rope id="0-12-38.7547 on 8-19-1996JEKcVgnC">
+        <type>Insulated Cable</type>
+        <node>
+            <x>336.676</x>
+            <y>298.652</y>
+            <x_velocity>-0.00259638</x_velocity>
+            <y_velocity>0.00137383</y_velocity>
+            <attached>0-11-45.011 on 8-19-1996HPQtROis</attached>
+            <attachment_x>-20</attachment_x>
+            <attachment_y>-40</attachment_y>
+        </node>
+        <node>
+            <x>326.101</x>
+            <y>297.358</y>
+            <x_velocity>0.00219941</x_velocity>
+            <y_velocity>-0.000463486</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>315.526</x>
+            <y>296.064</y>
+            <x_velocity>-0.00221443</x_velocity>
+            <y_velocity>-0.000254273</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>304.95</x>
+            <y>294.77</y>
+            <x_velocity>-0.000725269</x_velocity>
+            <y_velocity>-0.000936359</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>294.375</x>
+            <y>293.476</y>
+            <x_velocity>0.000931263</x_velocity>
+            <y_velocity>-0.000748605</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>283.8</x>
+            <y>292.182</y>
+            <x_velocity>0.00101495</x_velocity>
+            <y_velocity>0.00011614</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>273.225</x>
+            <y>290.888</y>
+            <x_velocity>-0.000540733</x_velocity>
+            <y_velocity>-6.27637e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>262.65</x>
+            <y>289.594</y>
+            <x_velocity>0.000388384</x_velocity>
+            <y_velocity>4.45247e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>252.075</x>
+            <y>288.3</y>
+            <x_velocity>-0.00275517</x_velocity>
+            <y_velocity>-0.00117078</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>241.5</x>
+            <y>287.006</y>
+            <x_velocity>0.00336242</x_velocity>
+            <y_velocity>-0.000469387</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>230.924</x>
+            <y>285.712</y>
+            <x_velocity>-0.00103211</x_velocity>
+            <y_velocity>-0.000973105</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>220.349</x>
+            <y>284.418</y>
+            <x_velocity>8.79765e-005</x_velocity>
+            <y_velocity>0.000190169</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>209.774</x>
+            <y>283.123</y>
+            <x_velocity>-0.00136256</x_velocity>
+            <y_velocity>-0.00176516</y_velocity>
+            <attached>0-11-51.6147 on 8-19-1996gpKi_mFC</attached>
+            <attachment_x>-35</attachment_x>
+            <attachment_y>-40</attachment_y>
+        </node>
+    </Rope>
+    <Rope id="0-12-41.8355 on 8-19-1996snONhWZn">
+        <type>Insulated Cable</type>
+        <node>
+            <x>337.328</x>
+            <y>283.651</y>
+            <x_velocity>0.00108212</x_velocity>
+            <y_velocity>0.00316286</y_velocity>
+            <attached>0-11-45.011 on 8-19-1996HPQtROis</attached>
+            <attachment_x>-35</attachment_x>
+            <attachment_y>-40</attachment_y>
+        </node>
+        <node>
+            <x>337.648</x>
+            <y>273.576</y>
+            <x_velocity>0.00142357</x_velocity>
+            <y_velocity>-0.00305369</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>337.968</x>
+            <y>263.502</y>
+            <x_velocity>0.00144952</x_velocity>
+            <y_velocity>0.00148916</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>338.289</x>
+            <y>253.427</y>
+            <x_velocity>0.00156924</x_velocity>
+            <y_velocity>0.000108629</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>338.61</x>
+            <y>243.352</y>
+            <x_velocity>0.00165771</x_velocity>
+            <y_velocity>-0.00283858</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>338.932</x>
+            <y>233.277</y>
+            <x_velocity>0.00149609</x_velocity>
+            <y_velocity>0.00286621</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>339.254</x>
+            <y>223.203</y>
+            <x_velocity>0.00259338</x_velocity>
+            <y_velocity>-9.79006e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>339.576</x>
+            <y>213.128</y>
+            <x_velocity>0.0029697</x_velocity>
+            <y_velocity>0.00044176</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>339.9</x>
+            <y>203.053</y>
+            <x_velocity>0.00172542</x_velocity>
+            <y_velocity>-0.00173968</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>340.224</x>
+            <y>192.978</y>
+            <x_velocity>0.00150594</x_velocity>
+            <y_velocity>0.00019151</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>340.549</x>
+            <y>182.904</y>
+            <x_velocity>0.00148646</x_velocity>
+            <y_velocity>0.000153959</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>340.873</x>
+            <y>172.829</y>
+            <x_velocity>0.00159207</x_velocity>
+            <y_velocity>0.000681818</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>341.199</x>
+            <y>162.754</y>
+            <x_velocity>0.00126642</x_velocity>
+            <y_velocity>0.00163534</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>341.524</x>
+            <y>152.68</y>
+            <x_velocity>0.00181108</x_velocity>
+            <y_velocity>-0.00180325</y_velocity>
+            <attached>0-12-5.99312 on 8-19-1996l_sAIdDl</attached>
+            <attachment_x>-38</attachment_x>
+            <attachment_y>-12</attachment_y>
+        </node>
+    </Rope>
+    <Rope id="0-14-1.49028 on 8-19-1996RmaIQQsg">
+        <type>Data Cable</type>
+        <node>
+            <x>-169.202</x>
+            <y>98.7576</y>
+            <x_velocity>0.000630319</x_velocity>
+            <y_velocity>-0.000439882</y_velocity>
+            <attached>0-13-33.1251 on 8-19-1996HcZWYWVC</attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>18</attachment_y>
+        </node>
+        <node>
+            <x>-172.558</x>
+            <y>104.096</y>
+            <x_velocity>-0.000259101</x_velocity>
+            <y_velocity>0.000711322</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-175.913</x>
+            <y>109.434</y>
+            <x_velocity>-0.000240862</x_velocity>
+            <y_velocity>9.54866e-005</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-179.269</x>
+            <y>114.772</y>
+            <x_velocity>0.000366926</x_velocity>
+            <y_velocity>-0.000606179</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-182.625</x>
+            <y>120.11</y>
+            <x_velocity>0.00022316</x_velocity>
+            <y_velocity>-0.000348687</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-185.981</x>
+            <y>125.448</y>
+            <x_velocity>-0.000439346</x_velocity>
+            <y_velocity>0.000541806</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-189.337</x>
+            <y>130.786</y>
+            <x_velocity>0.000303626</x_velocity>
+            <y_velocity>-0.000260711</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-192.693</x>
+            <y>136.124</y>
+            <x_velocity>-0.000393212</x_velocity>
+            <y_velocity>0.00102246</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-196.048</x>
+            <y>141.462</y>
+            <x_velocity>-0.000323474</x_velocity>
+            <y_velocity>-0.000140548</y_velocity>
+            <attached></attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>0</attachment_y>
+        </node>
+        <node>
+            <x>-199.404</x>
+            <y>146.799</y>
+            <x_velocity>0.00162756</x_velocity>
+            <y_velocity>-0.00105464</y_velocity>
+            <attached>0-13-56.6842 on 8-19-1996VlA_KMQ^</attached>
+            <attachment_x>0</attachment_x>
+            <attachment_y>-19</attachment_y>
+        </node>
+    </Rope>
+</Sector>

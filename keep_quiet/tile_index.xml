@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<Tile name="Dirt" id="14" collidable="true">
+	<index>14</index>
+</Tile>
+<Tile name="Grass" id="2" collidable="true">
+	<index>2</index>
+</Tile>
+<Tile name="Stone" id="28" collidable="true">
+	<index>28</index>
+	<index>29</index>
+	<index>30</index>
+</Tile>
+<Tile name="Air" id="0" collidable="false">
+	<index>0</index>
+</Tile>
+<Tile name="Restart" id="1" collidable="true">
+	<index>1</index>
+</Tile>
+<Tile name="Bedrock" id="32" collidable="true">
+	<index>32</index>
+</Tile>

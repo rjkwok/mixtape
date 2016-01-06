@@ -1,0 +1,15 @@
+<?xml version="1.0" ?/>
+
+<Tx id="end_of_reel" path="sheets/end_of_reel.png"/>
+<Tx id="blank" path="sheets/blank_thumb.png"/>
+<Tx id="hand_gui" path="sheets/hand_gui.png"/>
+<Tx id="hand_gui_shadow" path="sheets/hand_gui_shadow.png"/>
+<Tx id="core_junker" path="sheets/core_junker.png"/>
+<Tx id="space_tile" path="sheets/space_tile.png"/>
+<Tx id="frame" path="sheets/frame.png"/>
+<Tx id="anchor" path="sheets/anchor.png"/>
+<Tx id="pirate_logo" path="sheets/pirate_logo.png"/>
+<Tx id="military_logo" path="sheets/military_logo.png"/>
+<Tx id="merchant_logo" path="sheets/merchant_logo.png"/>
+<Tx id="derelict_logo" path="sheets/derelict_logo.png"/>
+<Tx id="robot_logo" path="sheets/robot_logo.png"/>

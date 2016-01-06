@@ -1,0 +1,428 @@
+<?xml version="1.0" ?/>
+
+<Type name="BMBL-3 'Bumblebee' Drone" class="Robot" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>1</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Collective Computing</ability>
+
+</Type>
+<Type name="GIT-4 Depository Host" class="Robot" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>2</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Software Update</ability>
+
+</Type>
+<Type name="CC-26a Cyber Controller" class="Robot" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>4</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Software Update</ability>
+
+</Type>
+<Type name="YLO-9 'Yellowjacket' Drone" class="Robot" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>2</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Collective Computing</ability>
+
+</Type>
+<Type name="Condor Clan 'Roach'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>4</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Heavy Armour I</ability>
+	<ability>Big and Slow</ability>
+
+</Type>
+<Type name="Condor Clan 'Ox'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>5</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Heavy Armour II</ability>
+	<ability>Big and Slow</ability>
+
+</Type>
+<Type name="Condor Clan 'Rhino'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>6</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Heavy Armour III</ability>
+	<ability>Big and Slow</ability>
+
+</Type>
+<Type name="Vulture Clan 'Roach'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>3</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Heavy Armour I</ability>
+
+</Type>
+<Type name="Vulture Clan 'Ox'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>4</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Heavy Armour II</ability>
+
+</Type>
+<Type name="Vulture Clan 'Rhino'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>6</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Heavy Armour III</ability>
+
+</Type>
+<Type name="Crow Clan 'Roach'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>2</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Heavy Armour I</ability>
+	<ability>Catch Me If You Can</ability>
+
+</Type>
+<Type name="Crow Clan 'Ox'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>3</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Heavy Armour II</ability>
+	<ability>Catch Me If You Can</ability>
+
+</Type>
+<Type name="Crow Clan 'Rhino'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>4</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Heavy Armour III</ability>
+	<ability>Catch Me If You Can</ability>
+
+</Type>
+<Type name="Crow Clan 'Jackrabbit'" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>2</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Decoy Flares</ability>
+	<ability>Catch Me If You Can</ability>
+
+</Type>
+<Type name="Vulture Clan Replicant" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>2</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Replicate Parts</ability>
+
+</Type>
+<Type name="Vulture Clan Mimic" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>2</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Reverse-Engineer</ability>
+
+</Type>
+<Type name="Derelict Colony Ship" class="Derelict" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>6</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Amorphous Structure</ability>
+	<ability>Blind Spot</ability>
+	<ability>Big and Slow</ability>
+
+</Type>
+<Type name="Blockade Runner" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>2</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Catch Me If You Can</ability>
+
+</Type>
+<Type name="Merchant Dinghy" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>0</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Essential Supplies</ability>
+
+</Type>
+<Type name="Merchant Cog" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>2</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Essential Supplies</ability>
+
+</Type>
+<Type name="Armoured Merchant Cog" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>3</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+
+</Type>
+<Type name="Hospital Tub" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>0</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Quality Healthcare</ability>
+
+</Type>
+<Type name="Triage Vessel" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>1</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Quality Healthcare</ability>
+
+</Type>
+<Type name="Trade Freighter" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>1</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Spare Equipment</ability>
+
+</Type>
+<Type name="Coalition Auditor" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>3</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Unpopular</ability>
+
+</Type>
+<Type name="Coalition Shop Steward" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>2</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+
+</Type>
+<Type name="Interference Generator" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>0</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Jam Communications</ability>
+
+</Type>
+<Type name="Modified Radio Relay" class="Merchant" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>0</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Electromagnetic Pulse</ability>
+
+</Type>
+<Type name="UGA Ironclad" class="Military" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>3</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Battle Formation</ability>
+	<ability>Flanking</ability>
+
+</Type>
+<Type name="UGA Battleship" class="Military" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>9</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Battle Formation</ability>
+	<ability>Flanking</ability>
+	<ability>Blind Spot</ability>
+
+</Type>
+<Type name="UGA Cruiser" class="Military" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>5</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Battle Formation</ability>
+	<ability>Flanking</ability>
+
+</Type>
+<Type name="UGA Command Vessel" class="Military" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>3</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Battle Formation</ability>
+	<ability>Field Commander</ability>
+	<ability>Flanking</ability>
+
+</Type>
+<Type name="UGA Intel Hub" class="Military" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>0</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Battlefield Intelligence</ability>
+	<ability>Flanking</ability>
+
+</Type>
+<Type name="UGA Dreadnought" class="Military" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>5</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Shock and Awe</ability>
+	<ability>Battle Formation</ability>
+	<ability>Flanking</ability>
+
+</Type>
+<Type name="UGA Destroyer" class="Military" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>6</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Battle Formation</ability>
+	<ability>Flanking</ability>
+
+</Type>
+<Type name="UGA Heavy Gunner" class="Military" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>3</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Battle Formation</ability>
+	<ability>Big and Slow</ability>
+	<ability>Flanking</ability>
+
+</Type>
+<Type name="Io Mercenary Gunboat" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>6</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Lifelong Thieves</ability>
+	<ability>Underworld Contacts</ability>
+
+</Type>
+<Type name="Io Mercenary Warship" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>9</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Lifelong Thieves</ability>
+	<ability>Underworld Contacts</ability>
+
+</Type>
+<Type name="Smuggler Frigate" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>10</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Underworld Contacts</ability>
+	<ability>Big and Slow</ability>
+
+</Type>
+<Type name="Smuggler Galleon" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>8</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Underworld Contacts</ability>
+
+</Type>
+<Type name="Smuggler Caravel" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>7</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Underworld Contacts</ability>
+
+</Type>
+<Type name="Smuggler Slave Transport" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>6</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Underworld Contacts</ability>
+
+</Type>
+<Type name="Smuggler Drekkar" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>5</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Underworld Contacts</ability>
+
+</Type>
+<Type name="Cannibal Dirigible" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>7</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Food Chain</ability>
+	<ability>Big and Slow</ability>
+
+</Type>
+<Type name="Cannibal War Balloon" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>6</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Non-Apex Predator</ability>
+
+</Type>
+<Type name="Cannibal Gunship" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>8</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Food Chain</ability>
+
+</Type>
+<Type name="Cannibal Trireme" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>4</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Food Chain</ability>
+
+</Type>
+<Type name="Cannibal Behemoth" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>9</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Food Chain</ability>
+
+</Type>
+<Type name="Deserter Battleship" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>10</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Traitor</ability>
+	<ability>Flanking</ability>
+	<ability>Blind Spot</ability>
+
+</Type>
+<Type name="Deserter Destroyer" class="Pirate" main_tex="sheets/freight_transport.png" thumb_tex="sheets/freight_transport_thumb.png">
+
+	<base_strength>7</base_strength>
+	<main_window_x>500</main_window_x>
+	<main_window_y>500</main_window_y>
+	<ability>Traitor</ability>
+	<ability>Flanking</ability>
+
+</Type>

@@ -1,0 +1,528 @@
+<?xml version="1.0" ?>
+
+<!-- 
+	Entity Types
+-->
+
+<Type name="Human" class="PLAYER" sheet="human_default.png">
+	
+	<property name="width">44</property>
+	<property name="height">29</property>
+	<property name="mass">70</property>
+	<property name="max_health">250</property>
+	<property name="durability">1000000</property>
+	<property name="range">10</property>
+	
+</Type>
+<Type name="Ship Decking" class="FLOOR" sheet="steel_floor_default.png" icon="steel_floor_icon.png">
+	
+	<property name="width">200</property>
+	<property name="height">200</property>
+	<property name="mass">1000</property>
+	<property name="max_health">100</property>
+	<property name="durability">400000000</property>
+
+</Type>
+<Type name="Concrete Flooring" class="FLOOR" sheet="concrete_floor_default.png" icon="concrete_floor_icon.png">
+	
+	<property name="width">200</property>
+	<property name="height">200</property>
+	<property name="mass">1000</property>
+	<property name="max_health">100</property>
+	<property name="durability">400000000</property>
+
+</Type>
+<Type name="Steel Block" class="ENTITY" sheet="steel_block_default.png" icon="steel_block_icon.png">
+	
+	<property name="width">50</property>
+	<property name="height">50</property>
+	<property name="mass">100</property>
+	<property name="max_health">200</property>
+	<property name="durability">100000000</property>
+
+</Type>
+<Type name="Huge Asteroid 1" class="ENTITY" sheet="huge_asteroid_1.png" icon="huge_asteroid_1.png">
+	
+	<property name="width">500</property>
+	<property name="height">486</property>
+	<property name="mass">10000</property>
+	<property name="max_health">100</property>
+	<property name="durability">400000000</property>
+
+</Type>
+<Type name="Big Asteroid 1" class="ENTITY" sheet="big_asteroid_1.png" icon="big_asteroid_1.png">
+	
+	<property name="width">280</property>
+	<property name="height">280</property>
+	<property name="mass">10000</property>
+	<property name="max_health">1</property>
+	<property name="durability">1000000000</property>
+
+</Type>
+<Type name="Medium Asteroid 1" class="ENTITY" sheet="medium_asteroid_1.png" icon="medium_asteroid_1.png">
+	
+	<property name="width">176</property>
+	<property name="height">130</property>
+	<property name="mass">500</property>
+	<property name="max_health">1</property>
+	<property name="durability">1000000000</property>
+
+</Type>
+<Type name="2x Steel Block" class="ENTITY" sheet="2x_steel_block_default.png" icon="2x_steel_block_icon.png">
+	
+	<property name="width">100</property>
+	<property name="height">50</property>
+	<property name="mass">200</property>
+	<property name="max_health">300</property>
+	<property name="durability">1000000000</property>
+
+</Type>
+<Type name="3x Steel Block" class="ENTITY" sheet="3x_steel_block_default.png" icon="3x_steel_block_icon.png">
+	
+	<property name="width">150</property>
+	<property name="height">50</property>
+	<property name="mass">300</property>
+	<property name="max_health">600</property>
+	<property name="durability">1000000000</property>
+
+</Type>
+<Type name="3x Concrete Wall" class="ENTITY" sheet="3x_concrete_wall_default.png" icon="3x_steel_block_icon.png">
+	
+	<property name="width">150</property>
+	<property name="height">50</property>
+	<property name="mass">300</property>
+	<property name="max_health">100</property>
+	<property name="durability">40000000</property>
+
+</Type>
+<Type name="Glass Block" class="ENTITY" sheet="glass_block_default.png" icon="glass_block_icon.png">
+	
+	<property name="width">50</property>
+	<property name="height">50</property>
+	<property name="mass">50</property>
+	<property name="max_health">1</property>
+	<property name="durability">1250000</property>
+
+</Type>
+<Type name="Space Rock" class="ENTITY" sheet="space_rock_default.png" icon="space_rock_icon.png">
+	
+	<property name="width">40</property>
+	<property name="height">40</property>
+	<property name="mass">120</property>
+	<property name="max_health">200000</property>
+	<property name="durability">2500000</property>
+
+</Type>
+<Type name="Package" class="ENTITY" sheet="wood_crate_default.png" icon="wood_crate_icon.png">
+	
+	<property name="width">50</property>
+	<property name="height">50</property>
+	<property name="mass">80</property>
+	<property name="max_health">2000</property>
+	<property name="durability">2500000</property>
+
+</Type>
+<Type name="Wood Crate" class="CONTAINER" sheet="wood_crate_default.png" icon="wood_crate_icon.png">
+	
+	<property name="width">50</property>
+	<property name="height">50</property>
+	<property name="mass">80</property>
+	<property name="slots">9</property>
+	<property name="max_health">2000</property>
+	<property name="durability">2500000</property>
+
+</Type>
+<Type name="LED Bar" class="MACHINE" sheet="halogen_bar_default.png" icon="halogen_bar_icon.png">
+	
+	<property name="width">90</property>
+	<property name="height">10</property>
+	<property name="mass">30</property>
+	<property name="max_health">10000</property>
+	<property name="durability">1000000</property>
+	
+</Type>
+<Type name="Gas Tank" class="MACHINE" sheet="gas_tank_default.png" icon = "gas_tank_icon.png">
+	
+	<property name="width">93</property>
+	<property name="height">154</property>
+	<property name="mass">250</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Gas Vent" class="MACHINE" sheet="gas_vent_default.png" icon = "gas_vent_icon.png">
+	
+	<property name="width">72</property>
+	<property name="height">72</property>
+	<property name="mass">200</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Pipe Joint" class="MACHINE" sheet="pipe_joint_default.png" icon="pipe_joint_icon.png">
+	
+	<property name="width">38</property>
+	<property name="height">38</property>
+	<property name="mass">40</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+</Type>
+<Type name="Gas Valve" class="MACHINE" sheet="gas_valve_default.png" icon="gas_valve_icon.png">
+	
+	<property name="width">38</property>
+	<property name="height">38</property>
+	<property name="mass">40</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+</Type>
+<Type name="Piston" class="MACHINE" sheet="piston_default.png" icon = "piston_icon.png">
+	
+	<property name="width">64</property>
+	<property name="height">50</property>
+	<property name="mass">150</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Piston Head" class="MACHINE" sheet="piston_head_default.png" icon = "piston_icon.png">
+	
+	<property name="width">64</property>
+	<property name="height">12</property>
+	<property name="mass">50</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Switch" class="MACHINE" sheet="switch_default.png" icon = "switch_icon.png">
+	
+	<property name="width">40</property>
+	<property name="height">26</property>
+	<property name="mass">20</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Junction Box" class="MACHINE" sheet="junction_box_default.png" icon = "junction_box_icon.png">
+	
+	<property name="width">60</property>
+	<property name="height">100</property>
+	<property name="mass">35</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="12V Battery" class="MACHINE" sheet="12v_battery_default.png" icon = "12v_battery_icon.png">
+	
+	<property name="width">70</property>
+	<property name="height">70</property>
+	<property name="mass">80</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="240V Battery" class="MACHINE" sheet="240v_battery_default.png" icon = "240v_battery_icon.png">
+	
+	<property name="width">120</property>
+	<property name="height">128</property>
+	<property name="mass">350</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Transformer" class="MACHINE" sheet="transformer_default.png" icon = "transformer_icon.png">
+	
+	<property name="width">108</property>
+	<property name="height">72</property>
+	<property name="mass">220</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Terminal" class="TERMINAL" sheet="display_default.png" icon = "display_icon.png">
+	
+	<property name="width">58</property>
+	<property name="height">58</property>
+	<property name="mass">50</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Control Board" class="MACHINE" sheet="control_board_default.png" icon = "control_board_icon.png">
+	
+	<property name="width">136</property>
+	<property name="height">82</property>
+	<property name="mass">240</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Beacon" class="MACHINE" sheet="warp_drive_default.png" icon = "warp_drive_icon.png">
+	
+	<property name="width">257</property>
+	<property name="height">182</property>
+	<property name="mass">240</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Warp Drive" class="MACHINE" sheet="warp_drive_default.png" icon = "warp_drive_icon.png">
+	
+	<property name="width">257</property>
+	<property name="height">182</property>
+	<property name="mass">240</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Ironworker" class="MACHINE" sheet="ironworker_treads_default.png" icon = "control_board_icon.png">
+	
+	<property name="width">54</property>
+	<property name="height">60</property>
+	<property name="mass">300</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Lever" class="MACHINE" sheet="lever_default.png" icon="lever_icon.png">
+
+	<property name="width">28</property>
+	<property name="height">28</property>
+	<property name="mass">20</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Pressure Gauge" class="MACHINE" sheet="pressure_gauge_default.png" icon="pressure_gauge_icon.png">
+	
+	<property name="width">32</property>
+	<property name="height">32</property>
+	<property name="mass">20</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Gas Pump" class="MACHINE" sheet="gas_pump_default.png" icon="gas_pump_icon.png">
+	
+	<property name="width">82</property>
+	<property name="height">72</property>
+	<property name="mass">160</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Combustion Thruster" class="MACHINE" sheet="combustion_thruster_default.png" icon="combustion_thruster_icon.png">
+	
+	<property name="width">58</property>
+	<property name="height">96</property>
+	<property name="mass">160</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Plasma Thruster" class="MACHINE" sheet="plasma_thruster_default.png" icon="plasma_thruster_icon.png">
+	
+	<property name="width">80</property>
+	<property name="height">134</property>
+	<property name="mass">160</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+<Type name="Data Duplicator" class="MACHINE" sheet="data_duplicator_default.png" icon="data_duplicator_icon.png">
+	
+	<property name="width">23</property>
+	<property name="height">34</property>
+	<property name="mass">20</property>
+	<property name="max_health">10000000</property>
+	<property name="durability">40000000</property>
+	
+</Type>
+
+<!--
+	Posters
+-->
+
+<Type name="PHYSICAL POSTER" class="SHEET ONLY" sheet="poster_default.png"/>
+<Type name="SCISSOR BAR" class="SHEET ONLY" sheet="scissor_default.png"/>
+<Type name="IRONWORKER TOP" class="SHEET ONLY" sheet="ironworker_default.png"/>
+<Type name="PCOC Ad 1" class="POSTER" sheet="pcoc_ad_1_default.png" icon="pcoc_ad_1_icon.png"/>
+
+<!--
+	Chips
+-->
+
+<Type name="Switch v1.0 (Chip)" class="CHIP" icon="switchv1_default.png"/>
+<Type name="Battery v1.0 (Chip)" class="CHIP" icon="switchv1_default.png"/>
+ 
+<!--
+	Connecting Items
+-->
+
+<Type name="Steel Bracket" class="CONNECTOR" sheet="steel_bracket_default.png" icon="steel_bracket_icon.png"/>
+<Type name="Steel Mount" class="MOUNTER" sheet="steel_mount_default.png" icon="steel_mount_icon.png"/>
+
+<!-- 
+	Ports
+-->
+
+<Type name="Power Port" class="PORT_TYPE" sheet="power_port_default.png">
+
+	<property name="port_type">0</property>
+	
+</Type>
+
+<Type name="GPO Port" class="PORT_TYPE" sheet="gpo_port_default.png">
+
+	<property name="port_type">2</property>
+
+</Type>
+
+<Type name="GPI Port" class="PORT_TYPE" sheet="gpi_port_default.png">
+
+	<property name="port_type">2</property>
+
+</Type>
+
+<Type name="Hose Fitting" class="PORT_TYPE" sheet="hose_fitting_default.png">
+
+	<property name="port_type">1</property>
+	
+</Type>
+
+<!--
+	Ropes
+-->
+
+<Type name="Insulated Cable" class="ROPE" sheet="insulated_cable_segment_default.png"> 
+	
+	<property name="node_gap">10</property>
+	<property name="mass">0.05</property>
+	<property name="k">10000</property>
+	
+</Type>
+
+<Type name="Data Cable" class="ROPE" sheet="data_cable_segment_default.png"> 
+	
+	<property name="node_gap">6</property>
+	<property name="mass">0.05</property>
+	<property name="k">10000</property>
+	
+</Type>
+
+<!--
+	Interfaces
+-->
+
+
+
+<!--
+	Transfers
+-->
+
+<Type name="Power Cable" class="TRANSFER" icon="power_cable_icon.png">
+	
+	<property name="port_type">0</property>
+	
+</Type>
+
+<Type name="GPIO Cable" class="TRANSFER" icon="GPIO_cable_icon.png">
+	
+	<property name="port_type">2</property>
+	
+</Type>
+
+<Type name="Steel Pipe" class="TRANSFER" sheet="steel_pipe_segment_default.png" icon="steel_pipe_icon.png">
+
+	<property name="port_type">1</property>
+	<property name="width">17</property>
+	<property name="height">17</property>
+	
+</Type>
+
+<Type name="Hazard Pipe" class="TRANSFER" sheet="hazard_pipe_segment_default.png" icon="hazard_pipe_icon.png">
+
+	<property name="port_type">1</property>
+	<property name="width">17</property>
+	<property name="height">17</property>
+	
+</Type>
+
+<!--
+	Projectiles
+-->
+
+
+
+<!-- 
+	Gases
+-->
+
+<Type name="Hydrogen" class="GAS" sheet="gas_cloud_default.png">
+
+	<property name="molar_mass">0.002</property>
+	<property name="width">75</property>
+	<property name="height">75</property>
+	<property name="r">25</property>
+	<property name="g">255</property>
+	<property name="b">25</property>
+	<property name="a">25</property>
+	
+</Type>
+
+<Type name="Nitrous Oxide" class="GAS" sheet="gas_cloud_default.png">
+
+	<property name="molar_mass">0.044</property>
+	<property name="width">75</property>
+	<property name="height">75</property>
+	<property name="r">25</property>
+	<property name="g">255</property>
+	<property name="b">25</property>
+	<property name="a">25</property>
+	
+</Type>
+
+<!-- 
+	Non-Entity Animations
+-->
+
+<Type name="Light Bloom" class="BLOOM" sheet="light_bloom_default.png">
+
+	<property name="width">139</property>
+	<property name="height">139</property>
+	
+</Type>
+
+<Type name="Embers" class="EFFECT" sheet="embers_default.png">
+	
+	<property name="width">8</property>
+	<property name="height">8</property>
+	
+</Type>
+
+<Type name="Sparks" class="EFFECT" sheet="sparks_default.png">
+	
+	<property name="width">8</property>
+	<property name="height">8</property>
+	
+</Type>
+
+<Type name="Smoke" class="EFFECT" sheet="smoke_default.png">
+	
+	<property name="width">40</property>
+	<property name="height">40</property>
+	
+</Type>
+
+<Type name="Warp" class="EFFECT" sheet="warp_default.png">
+	
+	<property name="width">1000</property>
+	<property name="height">1000</property>
+	
+</Type>
+
+<Type name="Heartbeat" class="ANIMATION" sheet="heartbeat_default.png">
+	
+	<property name="width">149</property>
+	<property name="height">124</property>
+	
+</Type>

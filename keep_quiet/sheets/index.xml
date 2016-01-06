@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<Tx id="sky" width="15000" height="15000" tiled="yes" file_path="sky.png"/>
+<Tx id="tree" width="122" height="125" tiled="no" file_path="tree.png"/>
+<Tx id="cloud" width="256" height="256" tiled="no" file_path="cloud.png"/>
+<Tx id="fern" width="37" height="50" tiled="no" file_path="fern.png"/>
+<Tx id="terrain" width="256" height="64" tiled="no" file_path="terrain.png"/>
+<Tx id="dot" width="2" height="2" tiled="no" file_path="dot.png"/>

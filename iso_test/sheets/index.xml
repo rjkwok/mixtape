@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+
+<Sqr id="L" width="512" height="512" isoheight="300" file_path="l_test"/>
+<Sqr id="Import Shop" width="256" height="512" isoheight="356" file_path="import_shop"/>
+<Sqr id="Mini Market" width="256" height="512" isoheight="216" file_path="mini_market"/>
+<Sqr id="Road" width="512" height="256" isoheight="256" file_path="road"/>
+<Background id="Urban" file_path="urban"/>
