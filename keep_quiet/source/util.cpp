@@ -5,14 +5,92 @@ using namespace sf;
 
 extern map<string, Texture*> textures;
 extern map<string, IntRect> texture_rects;
-extern map<int,map<int,int> > terrain;
-extern int terrain_max_x;
-extern int terrain_max_y;
-extern Vector2f grid_ref;
 extern set<int> collidable_terrain_types;
 extern map<int, TileProperties> tile_properties;
 
 TileProperties::TileProperties(){}
+
+
+Worker::Worker(){
+
+    tasked_structure_id = "";
+}
+
+Structure::Structure(){
+
+    contributing = false;
+}
+
+void Structure::update(double dt, int total_construction, int surplus_power){
+
+    
+
+    //if construction of the structure has not been completed:
+    if(construction_progress < construction_cost){
+        
+        //display tasked/max workers above structure
+        int max_construction_workers = 4;
+        for(int index = 0; index < max_construction_workers; index++){
+
+            if(index < tasked_workers.size()){
+                //display stick-man as filled instead of hollow to indicate the tasked worker
+            }
+        }
+        //
+
+        double construction_rate = total_construction * tasked_workers.size();
+        construction_progress += (construction_rate*dt);
+        //determine texture to use
+        if(construction_progress >= construction_cost){
+            //if progress is completed set texture to complete texture
+
+            //also dismiss all construction workers
+            for(vector<Worker*>::iterator i = tasked_workers.begin(); i != tasked_workers.end(); i++){
+                Worker* w = *i;
+                w->tasked_structure_id = "";
+            }
+            tasked_workers.clear();
+            //
+        }
+        return; //don't bother displaying any other info if still in construction
+    }
+    //
+
+    //display tasked/max workers above structure
+    for(int index = 0; index < max_workers; index++){
+
+        if(index < tasked_workers.size()){
+            //display stick-man as filled instead of hollow to indicate the tasked worker
+        }
+    }
+    //
+
+    //display power, construction and food contributions if non-zero. If power is required but not provided (power_contribution < 0, base power < required) or max_workers > 0 and no workers are tasked or fuel_consumption*dt > fuel, then display contributions in grey
+    contributing = !(power_contribution < 0 && surplus_power < 0) && !(max_workers > 0 && tasked_workers.size() == 0) && !(fuel_consumption*dt > fuel);
+    if(contributing){
+        int index = 0; //this tracks which contributions were displayed so that the subsequent one can shift over to make room
+        if(power_contribution != 0){
+            index++;
+        }
+        if(construction_contribution != 0){
+            index++;
+        }
+        if(supply_contribution != 0){
+
+        }
+    }
+    //
+
+    //randomly animate
+
+    //  
+    
+}
+
+void Structure::draw(RenderWindow &window){
+
+    window.draw(sprite);
+}
 
 char randChar()
 {
@@ -201,7 +279,7 @@ double returnLower(double a, double b){
 	return b;
 }
 
-Vector2f wrapPoint(Vector2f point){
+Vector2f wrapPoint(Vector2f point, int terrain_max_x){
 
 	Vector2f return_point = point;
 	if(point.x < 0){ return_point.x = (terrain_max_x*64.0) + point.x; }
@@ -444,7 +522,7 @@ void untangleSprites(Sprite &a, Sprite &b){
     b.move(b_displacement.x,b_displacement.y);
 }
 
-void untangleSprite(Sprite &sprite, FloatRect rect){
+void untangleSprite(Sprite &sprite, FloatRect rect, int terrain_max_x){
 
 	//determine how much the sprites are overlapping on each of the 4 axises defined by their rotations
 	//move the sprites apart along the axis with the least
@@ -457,14 +535,14 @@ void untangleSprite(Sprite &sprite, FloatRect rect){
     Vector2f a_br = Vector2f(rect_a.width/2,rect_a.height/2);
     Vector2f a_bl = Vector2f(-rect_a.width/2,rect_a.height/2);
 
-    Vector2f a_ctr = wrapPoint(Vector2f(sprite.getPosition().x, sprite.getPosition().y));
+    Vector2f a_ctr = wrapPoint(Vector2f(sprite.getPosition().x, sprite.getPosition().y), terrain_max_x);
 
     Vector2f b_tr = Vector2f(rect_b.width/2,-rect_b.height/2);
     Vector2f b_tl = Vector2f(-rect_b.width/2,-rect_b.height/2);
     Vector2f b_br = Vector2f(rect_b.width/2,rect_b.height/2);
     Vector2f b_bl = Vector2f(-rect_b.width/2,rect_b.height/2);
 
-    Vector2f b_ctr = wrapPoint(Vector2f(rect.left + (rect.width/2.0), rect.top + (rect.height/2.0)));
+    Vector2f b_ctr = wrapPoint(Vector2f(rect.left + (rect.width/2.0), rect.top + (rect.height/2.0)), terrain_max_x);
 
     Vector2f axis_1 = normalize(a_bl - a_tl);
     Vector2f axis_2 = normalize(a_tr - a_tl);
@@ -480,15 +558,15 @@ void untangleSprite(Sprite &sprite, FloatRect rect){
 	bool a_before_b_3 = dot(axis_3, a_ctr) < dot(axis_3, b_ctr);
 	bool a_before_b_4 = dot(axis_4, a_ctr) < dot(axis_4, b_ctr);
 
-	a_tr = wrapPoint(a_ctr + rotateAboutOrigin(a_tr,sprite.getRotation()));
-	a_tl = wrapPoint(a_ctr + rotateAboutOrigin(a_tl,sprite.getRotation()));
-	a_br = wrapPoint(a_ctr + rotateAboutOrigin(a_br,sprite.getRotation()));
-	a_bl = wrapPoint(a_ctr + rotateAboutOrigin(a_bl,sprite.getRotation()));
+	a_tr = wrapPoint(a_ctr + rotateAboutOrigin(a_tr,sprite.getRotation()), terrain_max_x);
+	a_tl = wrapPoint(a_ctr + rotateAboutOrigin(a_tl,sprite.getRotation()), terrain_max_x);
+	a_br = wrapPoint(a_ctr + rotateAboutOrigin(a_br,sprite.getRotation()), terrain_max_x);
+	a_bl = wrapPoint(a_ctr + rotateAboutOrigin(a_bl,sprite.getRotation()), terrain_max_x);
 
-	b_tr = wrapPoint(b_ctr + b_tr);
-	b_tl = wrapPoint(b_ctr + b_tl);
-	b_br = wrapPoint(b_ctr + b_br);
-	b_bl = wrapPoint(b_ctr + b_bl);
+	b_tr = wrapPoint(b_ctr + b_tr, terrain_max_x);
+	b_tl = wrapPoint(b_ctr + b_tl, terrain_max_x);
+	b_br = wrapPoint(b_ctr + b_br, terrain_max_x);
+	b_bl = wrapPoint(b_ctr + b_bl, terrain_max_x);
 
     if(a_before_b_1){
     	//if a is before b when projected on the axis, then get the max corner of a and the min corner of b
@@ -679,7 +757,7 @@ void untangleSprite(Sprite &sprite, FloatRect rect){
 
 }
 
-void keepSpriteOutOfTerrain(Sprite &sprite){
+void keepSpriteOutOfTerrain(Sprite &sprite, Vector2f grid_ref, map<int,map<int,int> > &terrain, int terrain_max_x, int terrain_max_y){
 
 	FloatRect rect = sprite.getLocalBounds();
 	vector<Vector2f> checkpoints;
@@ -709,7 +787,7 @@ void keepSpriteOutOfTerrain(Sprite &sprite){
 
 	for(int index = 0; index < checkpoints.size(); index++){
 
-		checkpoints[index] = wrapPoint(sprite.getPosition() + rotateAboutOrigin(checkpoints[index], sprite.getRotation()) - grid_ref);
+		checkpoints[index] = wrapPoint(sprite.getPosition() + rotateAboutOrigin(checkpoints[index], sprite.getRotation()) - grid_ref, terrain_max_x);
 
 		int terrain_index_x = floor(checkpoints[index].x/64.0);
 		int terrain_index_y = floor(checkpoints[index].y/-64.0);
@@ -721,7 +799,7 @@ void keepSpriteOutOfTerrain(Sprite &sprite){
 		tile_rect.left = (terrain_index_x*64.0) + grid_ref.x;
 		tile_rect.top = (terrain_index_y*-64.0) - 64.0 + grid_ref.y;
 		
-		untangleSprite(sprite, tile_rect);
+		untangleSprite(sprite, tile_rect, terrain_max_x);
 	}
 
 	//

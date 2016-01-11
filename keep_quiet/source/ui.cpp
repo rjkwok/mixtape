@@ -3,13 +3,6 @@
 using namespace std;
 using namespace sf;
 
-extern RenderWindow window;
-extern View view;
-extern View window_view;
-extern View back_view_1;
-extern View back_view_2;
-extern View back_view_3;
-
 InputStruct::InputStruct(){
 
 	view_mouse = Vector2f(0,0);
@@ -22,7 +15,7 @@ InputStruct::InputStruct(){
 	rmb_held = false;
 }
 
-void InputStruct::collect(){
+void InputStruct::collect(RenderWindow &window, View &view, View &window_view){
 
 	view_mouse = window.mapPixelToCoords(Mouse::getPosition(window),view);
 	window_mouse = window.mapPixelToCoords(Mouse::getPosition(window),window_view);
@@ -94,9 +87,9 @@ void InputStruct::collect(){
 
 VisualsStruct::VisualsStruct(){}
 void VisualsStruct::update(InputStruct input){}
-void VisualsStruct::draw(){}
+void VisualsStruct::draw(RenderWindow &window){}
 
-void scaleView(double delta){
+void scaleView(View &view, View &window_view, double delta){
 
 	double current_scale = window_view.getSize().x/view.getSize().x; //returns fraction of full size objects will appear as
 	current_scale += delta;
@@ -105,14 +98,10 @@ void scaleView(double delta){
 	double new_size_x = window_view.getSize().x/current_scale;
 	double new_size_y = window_view.getSize().y/current_scale;
 	view.setSize(new_size_x,new_size_y);
-	back_view_1.setSize(new_size_x,new_size_y);
-	back_view_2.setSize(new_size_x,new_size_y);
-	back_view_3.setSize(new_size_x,new_size_y);
-
 
 }
 
-void translateView(double x, double y){
+void translateView(View &view, View &window_view, double x, double y){
 
 	double current_scale = window_view.getSize().x/view.getSize().x;
 	view.move(x/current_scale,y/current_scale);
