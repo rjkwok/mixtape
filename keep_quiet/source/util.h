@@ -65,6 +65,20 @@ struct Structure{
 char rndChar();
 int randInt(int ubound); //returns a random integer between 1 and ubound (randInt(1) will always return 1, randInt(2) will either return 1 or 2, etc.)
 string createUniqueId();
+struct Caption{
+
+    Caption();
+    Caption(string contents, string font, Vector2f coords, int char_size, Color color = Color(255,255,255,200), string bias = "middle");
+
+    Text text;
+
+    void draw(RenderWindow &window);
+};
+
+RectangleShape createBoundingRectangle(Sprite sprite, Color color);
+CircleShape createBoundingCircle(Sprite sprite, Color color, double margin = 0);
+RectangleShape createRectangle(Vector2f new_position, Vector2f new_size, int outline_width, Color fill_color, Color outline_color);
+RectangleShape createLine(Vector2f start_position, Vector2f axis, double length, Color color);
 //
 
 //useful transformations/conversions
@@ -77,6 +91,7 @@ Sprite* formatSprite(Sprite* sprite, double x, double y);
 Sprite* formatSprite(Sprite* sprite, double x, double y, double width, double height);
 Vector2f wrapPoint(Vector2f point, int terrain_max_x);
 double dot(Vector2f a, Vector2f b);
+double getRotationFromAxis(Vector2f axis);
 void untangleSprite(Sprite &sprite, FloatRect rect, int terrain_max_x);
 void untangleSprites(Sprite &a, Sprite &b);
 void keepSpriteOutOfTerrain(Sprite &sprite, Vector2f grid_ref, map<int,map<int,int> > &terrain, int terrain_max_x, int terrain_max_y);

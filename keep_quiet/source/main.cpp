@@ -9,6 +9,7 @@ map<string, Texture*> textures;
 map<string, IntRect> texture_rects;
 map<int, TileProperties> tile_properties;
 set<int> collidable_terrain_types;
+map<string, Font> fonts;
 //
 
 
@@ -20,6 +21,11 @@ int main(){
 
 	//load textures, iso heights, rects from index file
 	loadConfigs();
+    fonts["arial"] = Font();
+    fonts["arial"].loadFromFile("fonts/arial.ttf");
+
+    fonts["font1"] = Font();
+    fonts["font1"].loadFromFile("fonts/font1.ttf");
 	//
 
 	//open a window and initialize the starting views
@@ -193,6 +199,13 @@ int main(){
     	}
    		//
 
+        //update structures
+        for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+
+            i->second->update(dt, total_construction, total_power - used_power);
+        }
+        //
+
         //update base statistics dependent on structures
         used_power = 0;
         used_workers = 0;
@@ -252,9 +265,9 @@ int main(){
         //
 
         //update HUD
-    	ui_visuals.update(ui_input);
+    	ui_visuals.update(window, ui_input, total_ammunition, total_fuel, total_cash, total_power, total_supply, total_construction, workers.size(), used_power, used_workers, used_supply);
         //
-        
+
     	//draw layers
     	window.setView(back_view_3);
     	for(vector<Sprite*>::iterator i = back_3.begin(); i != back_3.end(); i++){
@@ -292,6 +305,28 @@ int main(){
     		window.setView(view);
     	}
     	window.draw(terrain_tiles, textures["terrain"]);
+
+        if(window_left < 0){
+            view.move(terrain_max_x*64.0,0);
+            window.setView(view);
+            for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+                i->second->draw(window);
+            }
+            view.move(terrain_max_x*-64.0,0);
+            window.setView(view);
+        }
+        if(window_right > terrain_max_x*64.0){
+            view.move(terrain_max_x*-64.0,0);
+            window.setView(view);
+            for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+                i->second->draw(window);
+            }
+            view.move(terrain_max_x*64.0,0);
+            window.setView(view);
+        }
+        for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+            i->second->draw(window);
+        }
     	
     	if(window_left < 0){
     		view.move(terrain_max_x*64.0,0);
@@ -314,6 +349,7 @@ int main(){
     	for(map<string,Sprite*>::iterator i = character_sprites.begin(); i != character_sprites.end(); i++){
     		window.draw(*i->second);
     	}
+
     	window.setView(window_view);
     	//draw ui
     	ui_visuals.draw(window);

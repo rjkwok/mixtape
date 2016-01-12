@@ -7,6 +7,7 @@ extern map<string, Texture*> textures;
 extern map<string, IntRect> texture_rects;
 extern set<int> collidable_terrain_types;
 extern map<int, TileProperties> tile_properties;
+extern map<string, Font> fonts;
 
 TileProperties::TileProperties(){}
 
@@ -135,6 +136,88 @@ string createUniqueId()
     return newid;
 }
 
+
+Caption::Caption(){}
+Caption::Caption(string contents, string font, Vector2f coords, int char_size, Color color, string bias){
+
+    text.setString(contents);
+    text.setFont(fonts[font]);
+    text.setCharacterSize(char_size);
+
+    FloatRect rect = text.getGlobalBounds();
+
+    if(bias == "left"){
+        text.setOrigin(0,rect.height/2);
+    }
+    else if(bias == "middle"){
+        text.setOrigin(rect.width/2,rect.height/2);
+    }
+    else if(bias == "right"){
+        text.setOrigin(rect.width,rect.height/2);
+    }
+
+    text.setColor(color);
+    text.setScale(0.5,0.5);
+    text.setPosition(coords);
+}
+void Caption::draw(RenderWindow &window){
+
+    window.draw(text);
+}
+
+
+RectangleShape createBoundingRectangle(Sprite sprite, Color color){
+
+    RectangleShape new_rectangle(Vector2f(sprite.getTextureRect().width, sprite.getTextureRect().height));
+    new_rectangle.setOrigin(sprite.getTextureRect().width/2, sprite.getTextureRect().height/2);
+    new_rectangle.setRotation(sprite.getRotation());
+    new_rectangle.setPosition(sprite.getPosition());
+    new_rectangle.setFillColor(Color(0,0,0,0));
+    new_rectangle.setOutlineColor(color);
+    new_rectangle.setOutlineThickness(2.5);
+
+    return new_rectangle;
+}
+
+CircleShape createBoundingCircle(Sprite sprite, Color color, double margin){
+
+    double radius = (hypot(sprite.getLocalBounds().width, sprite.getLocalBounds().height)/2) + margin;
+    CircleShape new_circle(radius);
+    new_circle.setOrigin(radius, radius);
+    new_circle.setPosition(sprite.getPosition());
+    new_circle.setFillColor(Color(0,0,0,0));
+    new_circle.setOutlineColor(color);
+    new_circle.setOutlineThickness(2.5);
+
+    return new_circle;
+}
+
+RectangleShape createRectangle(Vector2f new_position, Vector2f new_size, int outline_width, Color fill_color, Color outline_color){
+
+    RectangleShape new_rectangle(new_size);
+    new_rectangle.setOrigin(new_size.x/2.0, new_size.y/2.0);
+    new_rectangle.setOutlineThickness(outline_width);
+    new_rectangle.setPosition(new_position);
+    new_rectangle.setFillColor(fill_color);
+    new_rectangle.setOutlineColor(outline_color);
+
+
+    return new_rectangle;
+}
+
+RectangleShape createLine(Vector2f start_position, Vector2f axis, double length, Color color){
+
+    RectangleShape new_rectangle;
+    new_rectangle.setSize(Vector2f(3, length));
+    new_rectangle.setOrigin(1.5,0);
+    new_rectangle.setPosition(start_position);
+    new_rectangle.setOutlineThickness(0);
+    new_rectangle.setFillColor(color);
+    new_rectangle.setRotation(getRotationFromAxis(axis));
+
+    return new_rectangle;
+}
+
 string asString(int number)
 {
     stringstream converter;
@@ -260,6 +343,31 @@ Texture* getTexture(string key){
 IntRect getTextureRect(string key){
 
 	return texture_rects[key];
+}
+
+double getRotationFromAxis(Vector2f axis)
+{
+    double theta = 0;
+    double h = hypot(axis.x,axis.y);
+
+    if(axis.x>=0 and axis.y < 0)//quad 1
+    {
+        theta = 180/M_PI*asin(abs(axis.x)/h)+0;
+    }
+    else if(axis.x>=0 and axis.y >= 0)//quad 2
+    {
+        theta = 180/M_PI*asin(abs(axis.y)/h)+90;
+    }
+    else if(axis.x<0 and axis.y >= 0)//quad 3
+    {
+        theta = 180/M_PI*asin(abs(axis.x)/h)+180;
+    }
+    else if(axis.x<0 and axis.y <0)//quad 4
+    {
+        theta = 180/M_PI*asin(abs(axis.y)/h)+270;
+    }
+
+    return theta;
 }
 
 double dot(Vector2f a, Vector2f b){

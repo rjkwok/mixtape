@@ -86,8 +86,31 @@ void InputStruct::collect(RenderWindow &window, View &view, View &window_view){
 }
 
 VisualsStruct::VisualsStruct(){}
-void VisualsStruct::update(InputStruct input){}
-void VisualsStruct::draw(RenderWindow &window){}
+void VisualsStruct::update(RenderWindow &window, InputStruct input, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply){
+
+    //reset the visuals
+    captions.clear();
+    //
+
+    Vector2f top_left_anchor = Vector2f(20,20);
+    captions.push_back(Caption("Ammunition: " + asString(total_ammunition), "font1", top_left_anchor + Vector2f(0,0), 40, Color(225,255,225,200), "left"));
+
+    captions.push_back(Caption("Fuel: " + asString(total_fuel), "font1", top_left_anchor + Vector2f(captions[captions.size()-1].text.getGlobalBounds().width + 40,0), 40, Color(225,255,225,200), "left"));
+    captions.push_back(Caption("Credits: " + asString(total_cash), "font1", top_left_anchor + Vector2f(captions[captions.size()-1].text.getGlobalBounds().width + captions[captions.size()-2].text.getGlobalBounds().width + 80,0), 40, Color(225,255,225,200), "left"));
+
+    Vector2f top_right_anchor = Vector2f(window.getSize().x - 20, 20);
+    captions.push_back(Caption("Construction Speed: " + asString(total_construction) + "/s", "font1", top_right_anchor + Vector2f(0,0), 40, Color(225,255,225,200), "right"));
+    captions.push_back(Caption("Power Used: " + asString(used_power) + "/" + asString(total_power), "font1", top_right_anchor + Vector2f(0,captions[captions.size()-1].text.getGlobalBounds().height + 20), 40, Color(225,255,225,200), "right"));
+    captions.push_back(Caption("Supply Used: " + asString(used_supply) + "/" + asString(total_supply), "font1", top_right_anchor + Vector2f(0,captions[captions.size()-1].text.getGlobalBounds().height + captions[captions.size()-2].text.getGlobalBounds().height + 40), 40, Color(225,255,225,200), "right"));
+    captions.push_back(Caption("Idle Workers: " + asString(total_workers-used_workers) + "/" + asString(total_workers), "font1", top_right_anchor + Vector2f(0,captions[captions.size()-1].text.getGlobalBounds().height + captions[captions.size()-2].text.getGlobalBounds().height + captions[captions.size()-3].text.getGlobalBounds().height + 60), 40, Color(225,255,225,200), "right"));
+
+}
+void VisualsStruct::draw(RenderWindow &window){
+
+    for(vector<Caption>::iterator i = captions.begin(); i != captions.end(); i++){
+        i->draw(window);
+    }
+}
 
 void scaleView(View &view, View &window_view, double delta){
 

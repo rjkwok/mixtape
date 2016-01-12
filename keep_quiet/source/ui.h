@@ -35,7 +35,9 @@ struct VisualsStruct{
 	//handles all processing and display of UI graphics such as highlights, text, etc.
 	VisualsStruct();
 
-	void update(InputStruct input);
+	vector<Caption> captions;
+
+	void update(RenderWindow &window, InputStruct input, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply);
 	void draw(RenderWindow &window);
 };
 
