@@ -7,10 +7,32 @@ extern map<string, Texture*> textures;
 extern map<string, IntRect> texture_rects;
 extern set<int> collidable_terrain_types;
 extern map<int, TileProperties> tile_properties;
+extern map<string, StructureProperties> structure_properties;
 extern map<string, Font> fonts;
 
 TileProperties::TileProperties(){}
 
+StructureProperties::StructureProperties(){
+
+    max_workers = 0;
+    max_ammunition = 0;
+    max_fuel = 0;
+    power_contribution = 0;
+    construction_contribution = 0;
+    supply_contribution = 0;
+    fuel_consumption = 0;
+    construction_cost = 0;
+}
+
+int StructureProperties::getStartFrame(string anim_name){
+
+    return anim_starts[anim_name];
+}
+
+int StructureProperties::getEndFrame(string anim_name){
+
+    return anim_ends[anim_name];
+}
 
 Worker::Worker(){
 
@@ -27,7 +49,7 @@ void Structure::update(double dt, int total_construction, int surplus_power){
     
 
     //if construction of the structure has not been completed:
-    if(construction_progress < construction_cost){
+    if(construction_progress < structure_properties[type_name].construction_cost){
         
         //display tasked/max workers above structure
         int max_construction_workers = 4;
@@ -42,7 +64,7 @@ void Structure::update(double dt, int total_construction, int surplus_power){
         double construction_rate = total_construction * tasked_workers.size();
         construction_progress += (construction_rate*dt);
         //determine texture to use
-        if(construction_progress >= construction_cost){
+        if(construction_progress >= structure_properties[type_name].construction_cost){
             //if progress is completed set texture to complete texture
 
             //also dismiss all construction workers
@@ -58,7 +80,7 @@ void Structure::update(double dt, int total_construction, int surplus_power){
     //
 
     //display tasked/max workers above structure
-    for(int index = 0; index < max_workers; index++){
+    for(int index = 0; index < structure_properties[type_name].max_workers; index++){
 
         if(index < tasked_workers.size()){
             //display stick-man as filled instead of hollow to indicate the tasked worker
@@ -67,16 +89,16 @@ void Structure::update(double dt, int total_construction, int surplus_power){
     //
 
     //display power, construction and food contributions if non-zero. If power is required but not provided (power_contribution < 0, base power < required) or max_workers > 0 and no workers are tasked or fuel_consumption*dt > fuel, then display contributions in grey
-    contributing = !(power_contribution < 0 && surplus_power < 0) && !(max_workers > 0 && tasked_workers.size() == 0) && !(fuel_consumption*dt > fuel);
+    contributing = !(structure_properties[type_name].power_contribution < 0 && surplus_power < 0) && !(structure_properties[type_name].max_workers > 0 && tasked_workers.size() == 0) && !(structure_properties[type_name].fuel_consumption*dt > fuel);
     if(contributing){
         int index = 0; //this tracks which contributions were displayed so that the subsequent one can shift over to make room
-        if(power_contribution != 0){
+        if(structure_properties[type_name].power_contribution != 0){
             index++;
         }
-        if(construction_contribution != 0){
+        if(structure_properties[type_name].construction_contribution != 0){
             index++;
         }
-        if(supply_contribution != 0){
+        if(structure_properties[type_name].supply_contribution != 0){
 
         }
     }
@@ -324,6 +346,51 @@ void loadConfigs(){
         string collidable = parser->Attribute("collidable");
         if(collidable == "true"){ collidable_terrain_types.insert(new_properties.type_id); }
         tile_properties[new_properties.type_id] = new_properties;
+    }
+
+    TiXmlDocument doc3("structures.xml");
+    doc3.LoadFile();
+
+    for(TiXmlElement* parser = doc3.FirstChildElement("Structure"); parser!=NULL; parser = parser->NextSiblingElement("Structure"))
+    {
+        StructureProperties new_properties = StructureProperties();
+
+        new_properties.type_name = parser->Attribute("name");
+        new_properties.texture_id = parser->Attribute("texture_id");
+        new_properties.icon_id = parser->Attribute("icon_id");
+
+        if(parser->FirstChildElement("max_workers") != NULL){
+            new_properties.max_workers = int(strtod(parser->FirstChildElement("max_workers")->GetText(),NULL));
+        }
+        if(parser->FirstChildElement("max_ammunition") != NULL){
+            new_properties.max_ammunition = int(strtod(parser->FirstChildElement("max_ammunition")->GetText(),NULL));
+        }
+        if(parser->FirstChildElement("max_fuel") != NULL){
+            new_properties.max_fuel = int(strtod(parser->FirstChildElement("max_fuel")->GetText(),NULL));
+        }
+        if(parser->FirstChildElement("power_contribution") != NULL){
+            new_properties.power_contribution = int(strtod(parser->FirstChildElement("power_contribution")->GetText(),NULL));
+        }
+        if(parser->FirstChildElement("construction_contribution") != NULL){
+            new_properties.power_contribution = int(strtod(parser->FirstChildElement("construction_contribution")->GetText(),NULL));
+        }
+        if(parser->FirstChildElement("supply_contribution") != NULL){
+            new_properties.supply_contribution = int(strtod(parser->FirstChildElement("supply_contribution")->GetText(),NULL));
+        }
+        if(parser->FirstChildElement("fuel_consumption") != NULL){
+            new_properties.fuel_consumption = strtod(parser->FirstChildElement("fuel_consumption")->GetText(),NULL);
+        }
+        if(parser->FirstChildElement("construction_cost") != NULL){
+            new_properties.construction_cost = strtod(parser->FirstChildElement("construction_cost")->GetText(),NULL);
+        }
+
+        for(TiXmlElement* i = parser->FirstChildElement("anim"); i != NULL; i = i->NextSiblingElement("anim")){
+
+            new_properties.anim_starts[i->GetText()] = int(strtod(i->Attribute("start"),NULL));
+            new_properties.anim_ends[i->GetText()] = int(strtod(i->Attribute("end"),NULL));
+        }
+
+        structure_properties[new_properties.type_name] = new_properties;
     }
 }
 

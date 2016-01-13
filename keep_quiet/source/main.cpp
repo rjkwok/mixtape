@@ -8,6 +8,7 @@ using namespace sf;
 map<string, Texture*> textures; 
 map<string, IntRect> texture_rects;
 map<int, TileProperties> tile_properties;
+map<string, StructureProperties> structure_properties;
 set<int> collidable_terrain_types;
 map<string, Font> fonts;
 //
@@ -217,19 +218,19 @@ int main(){
 
             if(i->second->contributing){
                 //add contributions to total
-                if(i->second->power_contribution > 0){
-                    total_power += i->second->power_contribution;
+                if(structure_properties[i->second->type_name].power_contribution > 0){
+                    total_power += structure_properties[i->second->type_name].power_contribution;
                 }
                 else{
-                    used_power += abs(i->second->power_contribution);
+                    used_power += abs(structure_properties[i->second->type_name].power_contribution);
                 }
-                if(i->second->supply_contribution > 0){
-                    total_supply += i->second->supply_contribution;
+                if(structure_properties[i->second->type_name].supply_contribution > 0){
+                    total_supply += structure_properties[i->second->type_name].supply_contribution;
                 }
                 else{
-                    used_supply += abs(i->second->supply_contribution);
+                    used_supply += abs(structure_properties[i->second->type_name].supply_contribution);
                 }
-                total_construction += i->second->power_contribution;
+                total_construction += structure_properties[i->second->type_name].power_contribution;
             }
             used_workers += i->second->tasked_workers.size();
         }

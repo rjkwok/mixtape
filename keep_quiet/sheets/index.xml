@@ -5,3 +5,4 @@
 <Tx id="fern" width="37" height="50" tiled="no" file_path="fern.png"/>
 <Tx id="terrain" width="256" height="64" tiled="no" file_path="terrain.png"/>
 <Tx id="dot" width="2" height="2" tiled="no" file_path="dot.png"/>
+<Tx id="toolbench" width="2344" height="140" tiled="no" file_path="toolbench.png"/>

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+
+<Structure name="Toolbench" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>

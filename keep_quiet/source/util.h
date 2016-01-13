@@ -15,6 +15,32 @@ struct TileProperties{
 	vector<int> texture_indexes;
 };
 
+struct StructureProperties{
+
+	StructureProperties();
+
+	string type_name;
+
+	int max_workers; //a constant is used instead of this value when the structure is in "construction" state
+	int max_ammunition;
+	int max_fuel;
+	int power_contribution;
+	int construction_contribution;
+	int supply_contribution;
+	double fuel_consumption;
+	double construction_cost;
+
+	string texture_id;
+	string icon_id;
+
+	map<string, int> anim_starts;
+	map<string, int> anim_ends;
+
+	int getStartFrame(string anim_name);
+	int getEndFrame(string anim_name);
+
+};
+
 struct Worker{
 
 	//entity that can fill production slots in structures
@@ -35,13 +61,8 @@ struct Structure{
 
 	Structure();
 
-	//defined by structure properties
-	int max_workers; //a constant is used instead of this value when the structure is in "construction" state
-	int power_contribution;
-	int construction_contribution;
-	int supply_contribution;
-	double fuel_consumption;
-	double construction_cost;
+	//defines structure properties
+	string type_name;
 	//
 
 	//variables that track the state of the structure
