@@ -6,3 +6,6 @@
 <Tx id="terrain" width="256" height="64" tiled="no" file_path="terrain.png"/>
 <Tx id="dot" width="2" height="2" tiled="no" file_path="dot.png"/>
 <Tx id="toolbench" width="2344" height="140" tiled="no" file_path="toolbench.png"/>
+<Tx id="money_icon" width="32" height="32" tiled="no" file_path="icon_money.png"/>
+<Tx id="ammunition_icon" width="32" height="32" tiled="no" file_path="icon_ammunition.png"/>
+<Tx id="fuel_icon" width="32" height="32" tiled="no" file_path="icon_fuel.png"/>

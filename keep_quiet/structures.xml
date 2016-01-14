@@ -9,3 +9,271 @@
 	<anim start="1" end="1">construction</anim>
 
 </Structure>
+
+<Structure name="Ion Cannon" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Z-29 Bumblebee Bomber" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="UGA Hauler Transport" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Relay" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Stockpile" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Infantryman's Tent" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Fusion Welder" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Machine Shop" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Transmitter" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Fuelled Generator" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Solar Generator" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Wind Turbine" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Sawmill" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Clay Pit" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Mining Rig" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Casting Burner" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Laser Artillery Core" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+
+<Structure name="Cantina" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Moisture Farm" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Wampa Corral" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Jjabra Bark Distillery" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Rebel Hololink" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Plasma Boiler" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Droid Assembly" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Cloning Vats" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Toolbench" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Manned Laser Artillery" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>
+<Structure name="Z-5 Yellowjacket" texture_id="toolbench" icon_id="">
+
+	<construction_contribution>1</construction_contribution>
+	<construction_cost>30</construction_cost>
+
+	<anim start="0" end="0">default</anim>
+	<anim start="1" end="1">construction</anim>
+
+</Structure>

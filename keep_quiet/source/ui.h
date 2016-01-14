@@ -36,7 +36,14 @@ struct VisualsStruct{
 	VisualsStruct();
 
 	vector<Caption> captions;
+	vector<RectangleShape> rectangles;
+	vector<Sprite> sprites;
 
+	bool show_build_menu;
+	bool show_stats_menu;
+
+	int current_index; //the topmost VISIBLE item in the build menu. Actual topmost is always 0.
+	
 	void update(RenderWindow &window, InputStruct input, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply);
 	void draw(RenderWindow &window);
 };

@@ -169,13 +169,13 @@ Caption::Caption(string contents, string font, Vector2f coords, int char_size, C
     FloatRect rect = text.getGlobalBounds();
 
     if(bias == "left"){
-        text.setOrigin(0,rect.height/2);
+        text.setOrigin(0,char_size/2.0);
     }
     else if(bias == "middle"){
-        text.setOrigin(rect.width/2,rect.height/2);
+        text.setOrigin(rect.width/2.0,char_size/2.0);
     }
     else if(bias == "right"){
-        text.setOrigin(rect.width,rect.height/2);
+        text.setOrigin(rect.width,char_size/2.0);
     }
 
     text.setColor(color);
@@ -238,6 +238,25 @@ RectangleShape createLine(Vector2f start_position, Vector2f axis, double length,
     new_rectangle.setRotation(getRotationFromAxis(axis));
 
     return new_rectangle;
+}
+
+Sprite createSprite(string texture_id, Vector2f position, string bias){
+
+    Sprite sprite = Sprite(*getTexture(texture_id));
+    FloatRect rect = sprite.getGlobalBounds();
+
+    if(bias == "left"){
+        sprite.setOrigin(0,rect.height/2);
+    }
+    else if(bias == "middle"){
+        sprite.setOrigin(rect.width/2,rect.height/2);
+    }
+    else if(bias == "right"){
+        sprite.setOrigin(rect.width,rect.height/2);
+    }
+
+    sprite.setPosition(position.x,position.y);
+    return sprite;
 }
 
 string asString(int number)
@@ -338,10 +357,10 @@ void loadConfigs(){
     	TileProperties new_properties = TileProperties();
 
         new_properties.type_name = parser->Attribute("name");
-        new_properties.type_id = int(strtod(parser->Attribute("id"),NULL));
+        new_properties.type_id = static_cast<int>(strtod(parser->Attribute("id"),NULL));
         for(TiXmlElement* i = parser->FirstChildElement("index"); i != NULL; i = i->NextSiblingElement("index")){
 
-        	new_properties.texture_indexes.push_back(int(strtod(i->GetText(),NULL)));
+        	new_properties.texture_indexes.push_back(static_cast<int>(strtod(i->GetText(),NULL)));
         }
         string collidable = parser->Attribute("collidable");
         if(collidable == "true"){ collidable_terrain_types.insert(new_properties.type_id); }
@@ -360,22 +379,22 @@ void loadConfigs(){
         new_properties.icon_id = parser->Attribute("icon_id");
 
         if(parser->FirstChildElement("max_workers") != NULL){
-            new_properties.max_workers = int(strtod(parser->FirstChildElement("max_workers")->GetText(),NULL));
+            new_properties.max_workers = static_cast<int>(strtod(parser->FirstChildElement("max_workers")->GetText(),NULL));
         }
         if(parser->FirstChildElement("max_ammunition") != NULL){
-            new_properties.max_ammunition = int(strtod(parser->FirstChildElement("max_ammunition")->GetText(),NULL));
+            new_properties.max_ammunition = static_cast<int>(strtod(parser->FirstChildElement("max_ammunition")->GetText(),NULL));
         }
         if(parser->FirstChildElement("max_fuel") != NULL){
-            new_properties.max_fuel = int(strtod(parser->FirstChildElement("max_fuel")->GetText(),NULL));
+            new_properties.max_fuel = static_cast<int>(strtod(parser->FirstChildElement("max_fuel")->GetText(),NULL));
         }
         if(parser->FirstChildElement("power_contribution") != NULL){
-            new_properties.power_contribution = int(strtod(parser->FirstChildElement("power_contribution")->GetText(),NULL));
+            new_properties.power_contribution = static_cast<int>(strtod(parser->FirstChildElement("power_contribution")->GetText(),NULL));
         }
         if(parser->FirstChildElement("construction_contribution") != NULL){
-            new_properties.power_contribution = int(strtod(parser->FirstChildElement("construction_contribution")->GetText(),NULL));
+            new_properties.power_contribution = static_cast<int>(strtod(parser->FirstChildElement("construction_contribution")->GetText(),NULL));
         }
         if(parser->FirstChildElement("supply_contribution") != NULL){
-            new_properties.supply_contribution = int(strtod(parser->FirstChildElement("supply_contribution")->GetText(),NULL));
+            new_properties.supply_contribution = static_cast<int>(strtod(parser->FirstChildElement("supply_contribution")->GetText(),NULL));
         }
         if(parser->FirstChildElement("fuel_consumption") != NULL){
             new_properties.fuel_consumption = strtod(parser->FirstChildElement("fuel_consumption")->GetText(),NULL);
@@ -386,8 +405,8 @@ void loadConfigs(){
 
         for(TiXmlElement* i = parser->FirstChildElement("anim"); i != NULL; i = i->NextSiblingElement("anim")){
 
-            new_properties.anim_starts[i->GetText()] = int(strtod(i->Attribute("start"),NULL));
-            new_properties.anim_ends[i->GetText()] = int(strtod(i->Attribute("end"),NULL));
+            new_properties.anim_starts[i->GetText()] = static_cast<int>(strtod(i->Attribute("start"),NULL));
+            new_properties.anim_ends[i->GetText()] = static_cast<int>(strtod(i->Attribute("end"),NULL));
         }
 
         structure_properties[new_properties.type_name] = new_properties;

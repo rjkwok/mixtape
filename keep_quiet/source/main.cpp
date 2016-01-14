@@ -179,10 +179,6 @@ int main(){
     	//
 
     	//act on input
-    	scaleView(view, window_view, 4*ui_input.mmb_delta*dt);
-        scaleView(back_view_1, window_view, 4*ui_input.mmb_delta*dt);
-        scaleView(back_view_2, window_view, 4*ui_input.mmb_delta*dt);
-        scaleView(back_view_3, window_view, 4*ui_input.mmb_delta*dt);
     	if(ui_input.keys_released.count("esc") != 0){
     		window.close();
     	}
@@ -198,6 +194,12 @@ int main(){
     	if(ui_input.keys_held.count("w") != 0){
     		player->move(0,-1000*dt);
     	}
+        if(ui_input.keys_held.count("lshift") != 0){
+            scaleView(view, window_view, 4*ui_input.mmb_delta*dt);
+            scaleView(back_view_1, window_view, 4*ui_input.mmb_delta*dt);
+            scaleView(back_view_2, window_view, 4*ui_input.mmb_delta*dt);
+            scaleView(back_view_3, window_view, 4*ui_input.mmb_delta*dt);
+        }
    		//
 
         //update structures
