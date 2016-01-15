@@ -94,7 +94,7 @@ VisualsStruct::VisualsStruct(){
     current_index = 0;
     selected_structure_type_id = "";
 }
-void VisualsStruct::update(RenderWindow &window, InputStruct input, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply){
+void VisualsStruct::update(RenderWindow &window, InputStruct input, map<int,map<int,int> > &terrain, map<string, Structure*> &structures, map<string, Worker*> &workers, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply){
 
     //reset the visuals
     captions.clear();
@@ -183,6 +183,7 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, int total_am
 
         vector<string> build_list; //make an ordered indexed list of all the different kinds of structures
         for(map<string, StructureProperties>::iterator i = structure_properties.begin(); i != structure_properties.end(); i++){
+            if(i->second.parent != ""){ continue; }
             build_list.push_back(i->first);
         }
 
@@ -234,7 +235,21 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, int total_am
 
         if(selected_structure_type_id != ""){
             Vector2i window_coords = window.mapCoordsToPixel(input.view_mouse); //display preview of the itemselected for construction
-            sprites.push_back(createSprite(structure_properties[selected_structure_type_id].texture_id,Vector2f(window_coords.x,window_coords.y)));
+            Sprite preview = createSprite(structure_properties[selected_structure_type_id].texture_id,Vector2f(window_coords.x,window_coords.y));
+            IntRect preview_window = structure_properties[selected_structure_type_id].getFrame("default");
+            preview.setTextureRect(preview_window);
+            preview.setColor(Color(5,5,5,155));
+            double scale = window.getSize().x/window.getView().getSize().x;
+            preview.setScale(scale,scale);
+            sprites.push_back(preview);
+
+            if(input.lmb_released && input.window_mouse.x > build_menu_width){
+                if(selected_structure_type_id != ""){ //this fragment creates new structures on user command
+                    //there should be another check here to make sure the preview isn't obstructed
+                    structures[createUniqueId()] = new Structure(selected_structure_type_id, input.view_mouse);
+                    selected_structure_type_id = "";
+                }
+            }
         }
 
     }

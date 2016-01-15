@@ -15,7 +15,6 @@ struct TileProperties{
 	vector<int> texture_indexes;
 };
 
-
 struct Worker{
 
 	//entity that can fill production slots in structures

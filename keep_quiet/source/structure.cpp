@@ -17,16 +17,17 @@ StructureProperties::StructureProperties(){
     supply_contribution = 0;
     fuel_consumption = 0;
     construction_cost = 0;
+    parent = "";
+    render_order = 0;
 }
 
-int StructureProperties::getStartFrame(string anim_name){
+IntRect StructureProperties::getFrame(string frame_name){
 
-    return anim_starts[anim_name];
-}
-
-int StructureProperties::getEndFrame(string anim_name){
-
-    return anim_ends[anim_name];
+	int index = frame_names[frame_name];
+	IntRect frame_window = getTextureRect(texture_id);
+    frame_window.left = frame_window.width*(int(index * frame_window.width) % int(getTexture(texture_id)->getSize().x))/double(frame_window.width);
+    frame_window.top = frame_window.height*(((index - (int(index * frame_window.width) % int(getTexture(texture_id)->getSize().x))/double(frame_window.width))*frame_window.width)/getTexture(texture_id)->getSize().x);
+    return frame_window;
 }
 
 Structure::Structure(){}
@@ -36,12 +37,14 @@ Structure::Structure(string c_type_name, Vector2f c_position){
 	type_name = c_type_name;
 
     contributing = false;
-    construction_name = "main";
+    construction_name = type_name;
     construction_progress = 0;
 
-    sprite["main"] = createSprite(structure_properties[type_name].texture_id, c_position);
-    bounds["main"] = sprite["main"].getGlobalBounds();
+    sprite[type_name] = createSprite(structure_properties[type_name].texture_id, c_position);
+    bounds[type_name] = sprite[type_name].getGlobalBounds();
 
+    sprite[type_name].setTextureRect(structure_properties[type_name].getFrame("construction"));
+    
     ammunition = 0;
     fuel = 0;
 
@@ -104,7 +107,31 @@ double Structure::getFuelConsumption(){
 	return total;
 }
 
+void Structure::upgrade(string upgrade_name){
+
+	upgrade_names.push_back(upgrade_name);
+
+	contributing = false;
+    construction_name = upgrade_name;
+    construction_progress = 0;
+
+    sprite[upgrade_name] = createSprite(structure_properties[upgrade_name].texture_id, sprite[type_name].getPosition());
+    bounds[upgrade_name] = sprite[upgrade_name].getGlobalBounds();
+
+    sprite[upgrade_name].setTextureRect(structure_properties[upgrade_name].getFrame("construction"));
+
+}
+
 void Structure::update(double dt, int total_construction, int surplus_power){
+
+	//display tasked/max workers above structure
+    for(int index = 0; index < getMaxWorkers(); index++){
+
+        if(index < tasked_workers.size()){
+            //display stick-man as filled instead of hollow to indicate the tasked worker
+        }
+    }
+    //
 
     //if construction of the structure has not been completed:
     if(construction_name != ""){
@@ -122,8 +149,10 @@ void Structure::update(double dt, int total_construction, int surplus_power){
         //
         double construction_rate = total_construction * tasked_workers.size();
         construction_progress += (construction_rate*dt);
+
         if(construction_progress >= structure_properties[construction_name].construction_cost){
 	        //if progress is completed set texture to complete texture
+	        sprite[construction_name].setTextureRect(structure_properties[construction_name].getFrame("default"));
 
 	        //also dismiss all construction workers
 	        for(vector<Worker*>::iterator i = tasked_workers.begin(); i != tasked_workers.end(); i++){
@@ -138,14 +167,7 @@ void Structure::update(double dt, int total_construction, int surplus_power){
 	    return; //don't bother with the rest of the function since the structure is under construction
     }
 
-    //display tasked/max workers above structure
-    for(int index = 0; index < getMaxWorkers(); index++){
-
-        if(index < tasked_workers.size()){
-            //display stick-man as filled instead of hollow to indicate the tasked worker
-        }
-    }
-    //
+    
 
     //display power, construction and food contributions if non-zero. If power is required but not provided (power_contribution < 0, base power < required) or max_workers > 0 and no workers are tasked or fuel_consumption*dt > fuel, then display contributions in grey
     contributing = !(getPowerContribution() < 0 && surplus_power < 0) && !(getMaxWorkers() > 0 && tasked_workers.size() == 0) && !(getFuelConsumption()*dt > fuel);
@@ -162,16 +184,12 @@ void Structure::update(double dt, int total_construction, int surplus_power){
         }
     }
     //
-
-    //randomly animate
-
-    //  
     
 }
 
 void Structure::draw(RenderWindow &window){
 
-	window.draw(sprite["main"]);
+	window.draw(sprite[type_name]);
 
 	//draws sprite from lowest-to-highest render order via lookup (no sorted data structure)
 	set<string> already_drawn;

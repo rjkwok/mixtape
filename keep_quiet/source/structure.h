@@ -26,11 +26,9 @@ struct StructureProperties{
 	string texture_id;
 	string icon_id;
 
-	map<string, int> anim_starts;
-	map<string, int> anim_ends;
+	map<string, int> frame_names;
 
-	int getStartFrame(string anim_name);
-	int getEndFrame(string anim_name);
+	IntRect getFrame(string frame_name);
 
 };
 
@@ -74,6 +72,8 @@ struct Structure{
 	int getSupplyContribution();
 	int getConstructionContribution();
 	double getFuelConsumption();
+
+	void upgrade(string upgrade_name);
 };
 
 #endif

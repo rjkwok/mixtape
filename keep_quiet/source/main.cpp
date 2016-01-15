@@ -200,6 +200,7 @@ int main(){
             scaleView(back_view_2, window_view, 4*ui_input.mmb_delta*dt);
             scaleView(back_view_3, window_view, 4*ui_input.mmb_delta*dt);
         }
+        
    		//
 
         //update structures
@@ -268,7 +269,7 @@ int main(){
         //
 
         //update HUD
-    	ui_visuals.update(window, ui_input, total_ammunition, total_fuel, total_cash, total_power, total_supply, total_construction, workers.size(), used_power, used_workers, used_supply);
+    	ui_visuals.update(window, ui_input, terrain, structures, workers, total_ammunition, total_fuel, total_cash, total_power, total_supply, total_construction, workers.size(), used_power, used_workers, used_supply);
         //
 
     	//draw layers

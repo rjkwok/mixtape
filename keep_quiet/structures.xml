@@ -3,20 +3,20 @@
 <Structure name="Toolbench" texture_id="toolbench" icon_id="">
 
 	<construction_contribution>1</construction_contribution>
-	<construction_cost>30</construction_cost>
+	<construction_cost>0</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
-<Structure name="Ion Cannon" texture_id="tree" icon_id="">
+<Structure name="Ion Cannon" texture_id="toolbench" icon_id="">
 
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -25,8 +25,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="UGA Hauler Transport" texture_id="toolbench" icon_id="">
@@ -34,8 +34,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Relay" texture_id="toolbench" icon_id="">
@@ -43,8 +43,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -53,8 +53,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -63,8 +63,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -73,8 +73,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -83,8 +83,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -93,8 +93,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -103,8 +103,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -113,8 +113,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -123,8 +123,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -133,8 +133,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -143,8 +143,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -153,8 +153,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -163,8 +163,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
@@ -173,18 +173,18 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 
 <Structure name="Cantina" texture_id="toolbench" icon_id="">
 
 	<construction_contribution>1</construction_contribution>
-	<construction_cost>30</construction_cost>
+	<construction_cost>0</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Moisture Farm" texture_id="toolbench" icon_id="">
@@ -192,8 +192,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Wampa Corral" texture_id="toolbench" icon_id="">
@@ -201,8 +201,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Jjabra Bark Distillery" texture_id="toolbench" icon_id="">
@@ -210,8 +210,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Rebel Hololink" texture_id="toolbench" icon_id="">
@@ -219,8 +219,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Plasma Boiler" texture_id="toolbench" icon_id="">
@@ -228,8 +228,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Droid Assembly" texture_id="toolbench" icon_id="">
@@ -237,8 +237,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Cloning Vats" texture_id="toolbench" icon_id="">
@@ -246,17 +246,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
-
-</Structure>
-<Structure name="Toolbench" texture_id="toolbench" icon_id="">
-
-	<construction_contribution>1</construction_contribution>
-	<construction_cost>30</construction_cost>
-
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Manned Laser Artillery" texture_id="toolbench" icon_id="">
@@ -264,8 +255,8 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>
 <Structure name="Z-5 Yellowjacket" texture_id="toolbench" icon_id="">
@@ -273,7 +264,7 @@
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>
 
-	<anim start="0" end="0">default</anim>
-	<anim start="1" end="1">construction</anim>
+	<frame index="0">default</frame>
+	<frame index="1">construction</frame>
 
 </Structure>

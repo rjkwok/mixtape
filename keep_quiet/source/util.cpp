@@ -280,7 +280,13 @@ void loadConfigs(){
         new_properties.type_name = parser->Attribute("name");
         new_properties.texture_id = parser->Attribute("texture_id");
         new_properties.icon_id = parser->Attribute("icon_id");
-
+        
+        if(parser->Attribute("parent") != NULL){
+            new_properties.parent = parser->Attribute("parent");
+        }
+        if(parser->Attribute("render_order") != NULL){
+            new_properties.render_order = static_cast<int>(strtod(parser->Attribute("render_order"),NULL));
+        }
         if(parser->FirstChildElement("max_workers") != NULL){
             new_properties.max_workers = static_cast<int>(strtod(parser->FirstChildElement("max_workers")->GetText(),NULL));
         }
@@ -306,10 +312,9 @@ void loadConfigs(){
             new_properties.construction_cost = strtod(parser->FirstChildElement("construction_cost")->GetText(),NULL);
         }
 
-        for(TiXmlElement* i = parser->FirstChildElement("anim"); i != NULL; i = i->NextSiblingElement("anim")){
+        for(TiXmlElement* i = parser->FirstChildElement("frame"); i != NULL; i = i->NextSiblingElement("frame")){
 
-            new_properties.anim_starts[i->GetText()] = static_cast<int>(strtod(i->Attribute("start"),NULL));
-            new_properties.anim_ends[i->GetText()] = static_cast<int>(strtod(i->Attribute("end"),NULL));
+            new_properties.frame_names[i->GetText()] = static_cast<int>(strtod(i->Attribute("index"),NULL));
         }
 
         structure_properties[new_properties.type_name] = new_properties;
