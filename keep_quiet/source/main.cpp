@@ -220,19 +220,19 @@ int main(){
 
             if(i->second->contributing){
                 //add contributions to total
-                if(structure_properties[i->second->type_name].power_contribution > 0){
-                    total_power += structure_properties[i->second->type_name].power_contribution;
+                if(i->second->getPowerContribution() > 0){
+                    total_power += i->second->getPowerContribution();
                 }
                 else{
-                    used_power += abs(structure_properties[i->second->type_name].power_contribution);
+                    used_power += abs(i->second->getPowerContribution());
                 }
-                if(structure_properties[i->second->type_name].supply_contribution > 0){
-                    total_supply += structure_properties[i->second->type_name].supply_contribution;
+                if(i->second->getSupplyContribution() > 0){
+                    total_supply += i->second->getSupplyContribution();
                 }
                 else{
-                    used_supply += abs(structure_properties[i->second->type_name].supply_contribution);
+                    used_supply += abs(i->second->getSupplyContribution());
                 }
-                total_construction += structure_properties[i->second->type_name].power_contribution;
+                total_construction += i->second->getConstructionContribution();
             }
             used_workers += i->second->tasked_workers.size();
         }
@@ -353,11 +353,11 @@ int main(){
     		window.draw(*i->second);
     	}
 
+        //draw ui
     	window.setView(window_view);
-    	//draw ui
     	ui_visuals.draw(window);
-    	//
     	window.setView(view);
+        //
 
     	//flush to screen
     	window.display();

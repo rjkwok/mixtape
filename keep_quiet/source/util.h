@@ -15,31 +15,6 @@ struct TileProperties{
 	vector<int> texture_indexes;
 };
 
-struct StructureProperties{
-
-	StructureProperties();
-
-	string type_name;
-
-	int max_workers; //a constant is used instead of this value when the structure is in "construction" state
-	int max_ammunition;
-	int max_fuel;
-	int power_contribution;
-	int construction_contribution;
-	int supply_contribution;
-	double fuel_consumption;
-	double construction_cost;
-
-	string texture_id;
-	string icon_id;
-
-	map<string, int> anim_starts;
-	map<string, int> anim_ends;
-
-	int getStartFrame(string anim_name);
-	int getEndFrame(string anim_name);
-
-};
 
 struct Worker{
 
@@ -52,35 +27,6 @@ struct Worker{
 };
 
 
-struct Structure{
-
-	//something that is initiated as an incomplete construction that must have workers tasked to it
-	//evolves into (possible into an inherited class) upon completion, that may provide or draw power, construction rate, or food supply
-	//may require workers to be tasked for production to take place after completion as well
-	//some structures may have to buffer fuel or ammunition and require an interface for that to be loaded
-
-	Structure();
-
-	//defines structure properties
-	string type_name;
-	//
-
-	//variables that track the state of the structure
-	bool contributing; //used by base when tallying all contributions to determine whether or not to tally contributions from this structure
-	double construction_progress;
-	vector<Worker*> tasked_workers;
-	//
-
-	//buffered stuff
-	int ammunition; 
-	int fuel;
-	//
-
-	Sprite sprite;
-
-	void update(double dt, int total_construction, int surplus_power);
-	void draw(RenderWindow &window);
-};
 
 //generators
 char rndChar();

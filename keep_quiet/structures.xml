@@ -10,7 +10,7 @@
 
 </Structure>
 
-<Structure name="Ion Cannon" texture_id="toolbench" icon_id="">
+<Structure name="Ion Cannon" texture_id="tree" icon_id="">
 
 	<construction_contribution>1</construction_contribution>
 	<construction_cost>30</construction_cost>

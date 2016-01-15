@@ -92,6 +92,7 @@ VisualsStruct::VisualsStruct(){
     show_build_menu = true;
     show_stats_menu = true;
     current_index = 0;
+    selected_structure_type_id = "";
 }
 void VisualsStruct::update(RenderWindow &window, InputStruct input, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply){
 
@@ -201,6 +202,10 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, int total_am
         if(current_index < 0){ current_index = 0; } //prevents scrolling past the top of the build menu
         if(current_index > max_index){ current_index = max_index; } //prevents scrolling past the bottom of the build menu
         
+        //determine the current hovered-over menu item
+        int selected_index = current_index + floor((input.window_mouse.y-(window.getSize().y-build_menu_height))/build_menu_item_thickness);
+        if(input.window_mouse.x > build_menu_width){ selected_index = -1; } //if mouse not in menu along x axis set no item as selected
+
         //create the backdrop of the build menu
         rectangles.push_back(createRectangle(Vector2f((build_menu_width/2.0),window.getSize().y - build_menu_height +(build_menu_height/2.0)), Vector2f(build_menu_width,build_menu_height), outline_width, Color(15,15,15,205), Color(253,130,43,75))); //create the menu background of size width=far_right, height=far_bottom
 
@@ -209,9 +214,27 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, int total_am
         //generate the list items starting with the current index and moving up. The greater the index, the farther down the screen it will be.
         for(int index = current_index; index < build_list.size(); index++){
 
-            captions.push_back(Caption(build_list[index], font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
+            if(index == selected_index){
+                captions.push_back(Caption(build_list[index], font_id, anchor, character_size, Color(255,255,255,225), "left")); //HIGHLIGHT and generate a left-oriented caption at the current value of the anchor
+                if(input.lmb_released){ //if mouse is clicked while highlighting a menu item then select that menu item for construction
+                    if(build_list[index] == selected_structure_type_id){
+                        selected_structure_type_id = ""; //if this item was previously selected then deselect now
+                    }
+                    else{
+                        selected_structure_type_id = build_list[index];
+                    }
+                }
+            }
+            else{
+                captions.push_back(Caption(build_list[index], font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
+            }
             rectangles.push_back(createLine(anchor+Vector2f(0,character_size),Vector2f(-1,0),build_menu_width-(2*margin),text_colour)); //draw a line between this item and the next one
             anchor = anchor + Vector2f(0,build_menu_item_thickness); //shift the anchor down the screen by the item thickness
+        }
+
+        if(selected_structure_type_id != ""){
+            Vector2i window_coords = window.mapCoordsToPixel(input.view_mouse); //display preview of the itemselected for construction
+            sprites.push_back(createSprite(structure_properties[selected_structure_type_id].texture_id,Vector2f(window_coords.x,window_coords.y)));
         }
 
     }
@@ -222,11 +245,11 @@ void VisualsStruct::draw(RenderWindow &window){
     for(vector<RectangleShape>::iterator i = rectangles.begin(); i != rectangles.end(); i++){
         window.draw(*i);
     }
-    for(vector<Sprite>::iterator i = sprites.begin(); i != sprites.end(); i++){
-        window.draw(*i);
-    }
     for(vector<Caption>::iterator i = captions.begin(); i != captions.end(); i++){
         i->draw(window);
+    }
+    for(vector<Sprite>::iterator i = sprites.begin(); i != sprites.end(); i++){
+        window.draw(*i);
     }
 }
 

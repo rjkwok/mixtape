@@ -44,6 +44,8 @@ struct VisualsStruct{
 
 	int current_index; //the topmost VISIBLE item in the build menu. Actual topmost is always 0.
 	
+	string selected_structure_type_id;
+
 	void update(RenderWindow &window, InputStruct input, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply);
 	void draw(RenderWindow &window);
 };

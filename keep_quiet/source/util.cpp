@@ -12,107 +12,9 @@ extern map<string, Font> fonts;
 
 TileProperties::TileProperties(){}
 
-StructureProperties::StructureProperties(){
-
-    max_workers = 0;
-    max_ammunition = 0;
-    max_fuel = 0;
-    power_contribution = 0;
-    construction_contribution = 0;
-    supply_contribution = 0;
-    fuel_consumption = 0;
-    construction_cost = 0;
-}
-
-int StructureProperties::getStartFrame(string anim_name){
-
-    return anim_starts[anim_name];
-}
-
-int StructureProperties::getEndFrame(string anim_name){
-
-    return anim_ends[anim_name];
-}
-
 Worker::Worker(){
 
     tasked_structure_id = "";
-}
-
-Structure::Structure(){
-
-    contributing = false;
-}
-
-void Structure::update(double dt, int total_construction, int surplus_power){
-
-    
-
-    //if construction of the structure has not been completed:
-    if(construction_progress < structure_properties[type_name].construction_cost){
-        
-        //display tasked/max workers above structure
-        int max_construction_workers = 4;
-        for(int index = 0; index < max_construction_workers; index++){
-
-            if(index < tasked_workers.size()){
-                //display stick-man as filled instead of hollow to indicate the tasked worker
-            }
-        }
-        //
-
-        double construction_rate = total_construction * tasked_workers.size();
-        construction_progress += (construction_rate*dt);
-        //determine texture to use
-        if(construction_progress >= structure_properties[type_name].construction_cost){
-            //if progress is completed set texture to complete texture
-
-            //also dismiss all construction workers
-            for(vector<Worker*>::iterator i = tasked_workers.begin(); i != tasked_workers.end(); i++){
-                Worker* w = *i;
-                w->tasked_structure_id = "";
-            }
-            tasked_workers.clear();
-            //
-        }
-        return; //don't bother displaying any other info if still in construction
-    }
-    //
-
-    //display tasked/max workers above structure
-    for(int index = 0; index < structure_properties[type_name].max_workers; index++){
-
-        if(index < tasked_workers.size()){
-            //display stick-man as filled instead of hollow to indicate the tasked worker
-        }
-    }
-    //
-
-    //display power, construction and food contributions if non-zero. If power is required but not provided (power_contribution < 0, base power < required) or max_workers > 0 and no workers are tasked or fuel_consumption*dt > fuel, then display contributions in grey
-    contributing = !(structure_properties[type_name].power_contribution < 0 && surplus_power < 0) && !(structure_properties[type_name].max_workers > 0 && tasked_workers.size() == 0) && !(structure_properties[type_name].fuel_consumption*dt > fuel);
-    if(contributing){
-        int index = 0; //this tracks which contributions were displayed so that the subsequent one can shift over to make room
-        if(structure_properties[type_name].power_contribution != 0){
-            index++;
-        }
-        if(structure_properties[type_name].construction_contribution != 0){
-            index++;
-        }
-        if(structure_properties[type_name].supply_contribution != 0){
-
-        }
-    }
-    //
-
-    //randomly animate
-
-    //  
-    
-}
-
-void Structure::draw(RenderWindow &window){
-
-    window.draw(sprite);
 }
 
 char randChar()
@@ -243,6 +145,7 @@ RectangleShape createLine(Vector2f start_position, Vector2f axis, double length,
 Sprite createSprite(string texture_id, Vector2f position, string bias){
 
     Sprite sprite = Sprite(*getTexture(texture_id));
+    sprite.setTextureRect(getTextureRect(texture_id));
     FloatRect rect = sprite.getGlobalBounds();
 
     if(bias == "left"){
