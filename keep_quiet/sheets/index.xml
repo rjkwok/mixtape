@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
-<Tx id="sky" width="15000" height="15000" tiled="yes" file_path="sky.png"/>
+<Tx id="sky" width="100" height="15000" tiled="yes" file_path="sky.png"/>
 <Tx id="tree" width="122" height="125" tiled="no" file_path="tree.png"/>
 <Tx id="cloud" width="256" height="256" tiled="no" file_path="cloud.png"/>
 <Tx id="fern" width="37" height="50" tiled="no" file_path="fern.png"/>
 <Tx id="terrain" width="256" height="64" tiled="no" file_path="terrain.png"/>
 <Tx id="dot" width="2" height="2" tiled="no" file_path="dot.png"/>
-<Tx id="toolbench" width="107" height="104" tiled="no" file_path="toolbench.png"/>
+<Tx id="toolbench" width="119" height="96" tiled="no" file_path="toolbench.png"/>
 <Tx id="money_icon" width="32" height="32" tiled="no" file_path="icon_money.png"/>
 <Tx id="ammunition_icon" width="32" height="32" tiled="no" file_path="icon_ammunition.png"/>
 <Tx id="fuel_icon" width="32" height="32" tiled="no" file_path="icon_fuel.png"/>

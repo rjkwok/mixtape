@@ -92,9 +92,10 @@ VisualsStruct::VisualsStruct(){
     show_build_menu = true;
     show_stats_menu = true;
     current_index = 0;
-    selected_structure_type_id = "";
+    selected_type_id = "";
+    selected_structure_id = "";
 }
-void VisualsStruct::update(RenderWindow &window, InputStruct input, map<int,map<int,int> > &terrain, map<string, Structure*> &structures, map<string, Worker*> &workers, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply){
+void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &terrain, map<string, Structure*> &structures, map<string, Worker*> &workers, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply){
 
     //reset the visuals
     captions.clear();
@@ -108,6 +109,43 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, map<int,map<
     }
     if(input.keys_released.count("c") != 0){
         show_build_menu = !show_build_menu;
+    }
+    //
+
+    //if an already-built structure is selected, highlight it with extra UI
+    if(selected_structure_id != ""){
+        RectangleShape bounding_rect = createBoundingRectangle(structures[selected_structure_id]->sprite[structures[selected_structure_id]->type_name],Color(185,185,245,215));
+        Vector2i window_coords = window.mapCoordsToPixel(structures[selected_structure_id]->sprite[structures[selected_structure_id]->type_name].getPosition()); //display preview of the itemselected for construction
+        bounding_rect.setPosition(window_coords.x,window_coords.y);
+        double scale = window.getSize().x/window.getView().getSize().x;
+        bounding_rect.setScale(scale,scale);
+        rectangles.push_back(bounding_rect);
+    }
+    //
+
+    //if not actively placing a structure, allow a check to see if the user is selecting an already-built structure
+    if(selected_type_id == ""){ 
+        for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+            for(map<string, Sprite>::iterator j = i->second->sprite.begin(); j != i->second->sprite.end(); j++){
+                if(j->second.getGlobalBounds().contains(input.view_mouse)){
+                    RectangleShape bounding_rect = createBoundingRectangle(i->second->sprite[i->second->type_name],Color(253,130,43,215));
+                    Vector2i window_coords = window.mapCoordsToPixel(i->second->sprite[i->second->type_name].getPosition()); //display preview of the itemselected for construction
+                    bounding_rect.setPosition(window_coords.x,window_coords.y);
+                    double scale = window.getSize().x/window.getView().getSize().x;
+                    bounding_rect.setScale(scale,scale);
+                    rectangles.push_back(bounding_rect);
+                    if(input.lmb_released){
+                        if(selected_structure_id == i->first){
+                            selected_structure_id = "";
+                        }
+                        else{
+                            selected_structure_id = i->first;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
     }
     //
 
@@ -182,9 +220,16 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, map<int,map<
         //
 
         vector<string> build_list; //make an ordered indexed list of all the different kinds of structures
-        for(map<string, StructureProperties>::iterator i = structure_properties.begin(); i != structure_properties.end(); i++){
-            if(i->second.parent != ""){ continue; }
-            build_list.push_back(i->first);
+        if(selected_structure_id == ""){ //list all standalone buildings if no structure is selected
+            for(map<string, StructureProperties>::iterator i = structure_properties.begin(); i != structure_properties.end(); i++){
+                if(i->second.parent != ""){ continue; }
+                build_list.push_back(i->first);
+            }
+        }
+        else{ //if a building is selected list all possible upgrades
+            for(map<string, StructureProperties>::iterator i = structure_properties.begin(); i != structure_properties.end(); i++){
+                if(i->second.parent == structures[selected_structure_id]->type_name){ build_list.push_back(i->first); }  
+            }
         }
 
         double build_menu_height = window.getSize().y; //to determine how many items can be shown in the build list at any given time, we note the window height and if the stats menu is shown, we subtract that height.
@@ -212,43 +257,87 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, map<int,map<
 
         Vector2f anchor = top_left_anchor + Vector2f(margin,window.getSize().y - build_menu_height + character_size); //set anchor to the centre of top-left item in build menu to start
         
-        //generate the list items starting with the current index and moving up. The greater the index, the farther down the screen it will be.
-        for(int index = current_index; index < build_list.size(); index++){
+        if(selected_structure_id == ""){ //if no structure is selected then run the general build interface
+            //generate the list items starting with the current index and moving up. The greater the index, the farther down the screen it will be.
+            for(int index = current_index; index < build_list.size(); index++){
 
-            if(index == selected_index){
-                captions.push_back(Caption(build_list[index], font_id, anchor, character_size, Color(255,255,255,225), "left")); //HIGHLIGHT and generate a left-oriented caption at the current value of the anchor
-                if(input.lmb_released){ //if mouse is clicked while highlighting a menu item then select that menu item for construction
-                    if(build_list[index] == selected_structure_type_id){
-                        selected_structure_type_id = ""; //if this item was previously selected then deselect now
-                    }
-                    else{
-                        selected_structure_type_id = build_list[index];
+                if(index == selected_index){
+                    captions.push_back(Caption(build_list[index], font_id, anchor, character_size, Color(255,255,255,225), "left")); //HIGHLIGHT and generate a left-oriented caption at the current value of the anchor
+                    if(input.lmb_released){ //if mouse is clicked while highlighting a menu item then select that menu item for construction
+                        if(build_list[index] == selected_type_id){
+                            selected_type_id = ""; //if this item was previously selected then deselect now
+                        }
+                        else{
+                            selected_type_id = build_list[index];
+                        }
                     }
                 }
+                else{
+                    captions.push_back(Caption(build_list[index], font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
+                }
+                rectangles.push_back(createLine(anchor+Vector2f(0,character_size),Vector2f(-1,0),build_menu_width-(2*margin),text_colour)); //draw a line between this item and the next one
+                anchor = anchor + Vector2f(0,build_menu_item_thickness); //shift the anchor down the screen by the item thickness
             }
-            else{
-                captions.push_back(Caption(build_list[index], font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
+
+            if(selected_type_id != ""){ //if there is a building type selected
+                
+                Sprite preview = createSprite(structure_properties[selected_type_id].texture_id,input.view_mouse); //generate a preview sprite of the structure's basic shape at the mouse location
+                
+                //check if the preview is overlapping with any structures or the terrain
+                bool preview_obstructed = isIntersectingTerrain(preview, terrain);
+                if(!preview_obstructed){
+                    for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+                        if(isIntersecting(preview, *i->second)){
+                            preview_obstructed = true;
+                            break;
+                        }
+                    }
+                }
+                //
+
+                //transform the position and scale of the preview to properly render within the window view (since the UI renders in the window view and not the world view)
+                Vector2i window_coords = window.mapCoordsToPixel(input.view_mouse); //display preview of the itemselected for construction
+                preview.setPosition(window_coords.x,window_coords.y);
+                double scale = window.getSize().x/window.getView().getSize().x;
+                preview.setScale(scale,scale);
+                //
+
+                //set the correct frame and colour (highlight in red if the preview is obstructed) 
+                IntRect preview_window = structure_properties[selected_type_id].getFrame("default");
+                preview.setTextureRect(preview_window);
+                if(preview_obstructed){
+                    preview.setColor(Color(155,5,5,155));
+                }
+                else{
+                    preview.setColor(Color(125,125,225,155));
+                }
+                //
+                
+                //add the preview to the UI queue for rendering
+                sprites.push_back(preview);
+                //
+
+                //act on input
+                if(!preview_obstructed && input.lmb_released && input.window_mouse.x > build_menu_width){ //if the preview isn't overlapping anything and the mouse is outside the build menu and the left mouse button is clicked:
+                    structures[createUniqueId()] = new Structure(selected_type_id, input.view_mouse); //place a structure of the selected type at the mouse location
+                    selected_type_id = ""; //reset the selected structure type
+                }
+                //
             }
-            rectangles.push_back(createLine(anchor+Vector2f(0,character_size),Vector2f(-1,0),build_menu_width-(2*margin),text_colour)); //draw a line between this item and the next one
-            anchor = anchor + Vector2f(0,build_menu_item_thickness); //shift the anchor down the screen by the item thickness
         }
+        else{ //if a structure is selected show the structure upgrade interface
 
-        if(selected_structure_type_id != ""){
-            Vector2i window_coords = window.mapCoordsToPixel(input.view_mouse); //display preview of the itemselected for construction
-            Sprite preview = createSprite(structure_properties[selected_structure_type_id].texture_id,Vector2f(window_coords.x,window_coords.y));
-            IntRect preview_window = structure_properties[selected_structure_type_id].getFrame("default");
-            preview.setTextureRect(preview_window);
-            preview.setColor(Color(5,5,5,155));
-            double scale = window.getSize().x/window.getView().getSize().x;
-            preview.setScale(scale,scale);
-            sprites.push_back(preview);
+            //generate the list items starting with the current index and moving up. The greater the index, the farther down the screen it will be.
+            for(int index = current_index; index < build_list.size(); index++){
 
-            if(input.lmb_released && input.window_mouse.x > build_menu_width){
-                if(selected_structure_type_id != ""){ //this fragment creates new structures on user command
-                    //there should be another check here to make sure the preview isn't obstructed
-                    structures[createUniqueId()] = new Structure(selected_structure_type_id, input.view_mouse);
-                    selected_structure_type_id = "";
+                if(index == selected_index){
+                    captions.push_back(Caption(build_list[index], font_id, anchor, character_size, Color(255,255,255,225), "left")); //HIGHLIGHT and generate a left-oriented caption at the current value of the anchor
                 }
+                else{
+                    captions.push_back(Caption(build_list[index], font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
+                }
+                rectangles.push_back(createLine(anchor+Vector2f(0,character_size),Vector2f(-1,0),build_menu_width-(2*margin),text_colour)); //draw a line between this item and the next one
+                anchor = anchor + Vector2f(0,build_menu_item_thickness); //shift the anchor down the screen by the item thickness
             }
         }
 

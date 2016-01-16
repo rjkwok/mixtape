@@ -10,12 +10,6 @@ extern map<int, TileProperties> tile_properties;
 extern map<string, StructureProperties> structure_properties;
 extern map<string, Font> fonts;
 
-TileProperties::TileProperties(){}
-
-Worker::Worker(){
-
-    tasked_structure_id = "";
-}
 
 char randChar()
 {
@@ -25,6 +19,12 @@ char randChar()
 int randInt(int ubound){
 
 	return (rand() % ubound)+1;
+}
+
+int randSign(){
+
+    if(randInt(2) == 1){ return -1; }
+    else{ return 1; }
 }
 
 Vector2f getPerpendicularAxis(Vector2f axis)
@@ -98,7 +98,7 @@ RectangleShape createBoundingRectangle(Sprite sprite, Color color){
     new_rectangle.setPosition(sprite.getPosition());
     new_rectangle.setFillColor(Color(0,0,0,0));
     new_rectangle.setOutlineColor(color);
-    new_rectangle.setOutlineThickness(2.5);
+    new_rectangle.setOutlineThickness(4);
 
     return new_rectangle;
 }
@@ -381,11 +381,11 @@ double returnLower(double a, double b){
 	return b;
 }
 
-Vector2f wrapPoint(Vector2f point, int terrain_max_x){
+Vector2f wrapPoint(Vector2f point, Terrain &terrain){
 
 	Vector2f return_point = point;
-	if(point.x < 0){ return_point.x = (terrain_max_x*64.0) + point.x; }
-	if(point.x > terrain_max_x*64.0){ return_point.x = point.x - (terrain_max_x*64.0); }
+	if(point.x < 0){ return_point.x = (terrain.max_x*terrain.tile_size) + point.x; }
+	if(point.x > terrain.max_x*terrain.tile_size){ return_point.x = point.x - (terrain.max_x*terrain.tile_size); }
 	return return_point;
 }
 
@@ -624,7 +624,7 @@ void untangleSprites(Sprite &a, Sprite &b){
     b.move(b_displacement.x,b_displacement.y);
 }
 
-void untangleSprite(Sprite &sprite, FloatRect rect, int terrain_max_x){
+void untangleSprite(Sprite &sprite, FloatRect rect){
 
 	//determine how much the sprites are overlapping on each of the 4 axises defined by their rotations
 	//move the sprites apart along the axis with the least
@@ -637,14 +637,14 @@ void untangleSprite(Sprite &sprite, FloatRect rect, int terrain_max_x){
     Vector2f a_br = Vector2f(rect_a.width/2,rect_a.height/2);
     Vector2f a_bl = Vector2f(-rect_a.width/2,rect_a.height/2);
 
-    Vector2f a_ctr = wrapPoint(Vector2f(sprite.getPosition().x, sprite.getPosition().y), terrain_max_x);
+    Vector2f a_ctr = Vector2f(sprite.getPosition().x, sprite.getPosition().y);
 
     Vector2f b_tr = Vector2f(rect_b.width/2,-rect_b.height/2);
     Vector2f b_tl = Vector2f(-rect_b.width/2,-rect_b.height/2);
     Vector2f b_br = Vector2f(rect_b.width/2,rect_b.height/2);
     Vector2f b_bl = Vector2f(-rect_b.width/2,rect_b.height/2);
 
-    Vector2f b_ctr = wrapPoint(Vector2f(rect.left + (rect.width/2.0), rect.top + (rect.height/2.0)), terrain_max_x);
+    Vector2f b_ctr = Vector2f(rect.left + (rect.width/2.0), rect.top + (rect.height/2.0));
 
     Vector2f axis_1 = normalize(a_bl - a_tl);
     Vector2f axis_2 = normalize(a_tr - a_tl);
@@ -660,15 +660,15 @@ void untangleSprite(Sprite &sprite, FloatRect rect, int terrain_max_x){
 	bool a_before_b_3 = dot(axis_3, a_ctr) < dot(axis_3, b_ctr);
 	bool a_before_b_4 = dot(axis_4, a_ctr) < dot(axis_4, b_ctr);
 
-	a_tr = wrapPoint(a_ctr + rotateAboutOrigin(a_tr,sprite.getRotation()), terrain_max_x);
-	a_tl = wrapPoint(a_ctr + rotateAboutOrigin(a_tl,sprite.getRotation()), terrain_max_x);
-	a_br = wrapPoint(a_ctr + rotateAboutOrigin(a_br,sprite.getRotation()), terrain_max_x);
-	a_bl = wrapPoint(a_ctr + rotateAboutOrigin(a_bl,sprite.getRotation()), terrain_max_x);
+	a_tr = a_ctr + rotateAboutOrigin(a_tr,sprite.getRotation());
+	a_tl = a_ctr + rotateAboutOrigin(a_tl,sprite.getRotation());
+	a_br = a_ctr + rotateAboutOrigin(a_br,sprite.getRotation());
+	a_bl = a_ctr + rotateAboutOrigin(a_bl,sprite.getRotation());
 
-	b_tr = wrapPoint(b_ctr + b_tr, terrain_max_x);
-	b_tl = wrapPoint(b_ctr + b_tl, terrain_max_x);
-	b_br = wrapPoint(b_ctr + b_br, terrain_max_x);
-	b_bl = wrapPoint(b_ctr + b_bl, terrain_max_x);
+	b_tr = b_ctr + b_tr;
+	b_tl = b_ctr + b_tl;
+	b_br = b_ctr + b_br;
+	b_bl = b_ctr + b_bl;
 
     if(a_before_b_1){
     	//if a is before b when projected on the axis, then get the max corner of a and the min corner of b
@@ -859,15 +859,15 @@ void untangleSprite(Sprite &sprite, FloatRect rect, int terrain_max_x){
 
 }
 
-void keepSpriteOutOfTerrain(Sprite &sprite, Vector2f grid_ref, map<int,map<int,int> > &terrain, int terrain_max_x, int terrain_max_y){
+void keepSpriteOutOfTerrain(Sprite &sprite, Terrain &terrain){
 
 	FloatRect rect = sprite.getLocalBounds();
 	vector<Vector2f> checkpoints;
 
 	//subdivide the texture rect into enough sample points to get an accurate check against this grid resolution
-	double terrain_grid_size = 64.0;
-	int checkpoints_across = ceil(rect.width/64.0);
-	int checkpoints_down = ceil(rect.height/64.0);
+	double terrain_grid_size = terrain.tile_size;
+	int checkpoints_across = ceil(rect.width/terrain.tile_size);
+	int checkpoints_down = ceil(rect.height/terrain.tile_size);
 
 	double cell_size_across = rect.width/checkpoints_across;
 	double cell_size_down = rect.height/checkpoints_down;
@@ -884,33 +884,113 @@ void keepSpriteOutOfTerrain(Sprite &sprite, Vector2f grid_ref, map<int,map<int,i
 
 	//apply sprite's rotation and global position, then find relative position to grid_ref, then get a representative terrain square if intersecting immovable terrain
 	FloatRect tile_rect;
-	tile_rect.width = 64.0;
-	tile_rect.height = 64.0;
+	tile_rect.width = terrain.tile_size;
+	tile_rect.height = terrain.tile_size;
 
 	for(int index = 0; index < checkpoints.size(); index++){
 
-		checkpoints[index] = wrapPoint(sprite.getPosition() + rotateAboutOrigin(checkpoints[index], sprite.getRotation()) - grid_ref, terrain_max_x);
+		checkpoints[index] = sprite.getPosition() + rotateAboutOrigin(checkpoints[index], sprite.getRotation()) - terrain.grid_ref;
 
-		int terrain_index_x = floor(checkpoints[index].x/64.0);
-		int terrain_index_y = floor(checkpoints[index].y/-64.0);
+		int terrain_index_x = floor(checkpoints[index].x/terrain.tile_size);
+		int terrain_index_y = floor(checkpoints[index].y/-terrain.tile_size);
 		
-		if(terrain_index_y > terrain_max_y){ continue; } // won't be a collision possible if this point is not in the terrain layer
+		if(terrain_index_y > terrain.max_y){ continue; } // won't be a collision possible if this point is not in the terrain layer
 
-		if(collidable_terrain_types.count(terrain[terrain_index_x][terrain_index_y])==0){ continue; } //if this terrain block is not collidable don't continue
+        int faked_terrain_index_x = terrain_index_x;
+        if(faked_terrain_index_x > terrain.max_x){ faked_terrain_index_x -= terrain.max_x; }
+        if(faked_terrain_index_x < 0){ faked_terrain_index_x += terrain.max_x; }
 
-		tile_rect.left = (terrain_index_x*64.0) + grid_ref.x;
-		tile_rect.top = (terrain_index_y*-64.0) - 64.0 + grid_ref.y;
+		if(collidable_terrain_types.count(terrain.grid[faked_terrain_index_x][terrain_index_y])==0){ continue; } //if this terrain block is not collidable don't continue
+
+		tile_rect.left = (terrain_index_x*terrain.tile_size) + terrain.grid_ref.x;
+		tile_rect.top = (terrain_index_y*-terrain.tile_size) - terrain.tile_size + terrain.grid_ref.y;
 		
-		untangleSprite(sprite, tile_rect, terrain_max_x);
+		untangleSprite(sprite, tile_rect);
 	}
 
 	//
 
 }
 
-bool spritesIntersecting(Sprite a, Sprite b, double tolerance){
+bool isIntersectingTerrain(Sprite a, Terrain &terrain){
 
-     FloatRect rect_a = a.getLocalBounds();
+    FloatRect rect = a.getLocalBounds();
+    vector<Vector2f> checkpoints;
+
+    //subdivide the texture rect into enough sample points to get an accurate check against this grid resolution
+    double terrain_grid_size = terrain.tile_size;
+    int checkpoints_across = ceil(rect.width/terrain.tile_size);
+    int checkpoints_down = ceil(rect.height/terrain.tile_size);
+
+    double cell_size_across = rect.width/checkpoints_across;
+    double cell_size_down = rect.height/checkpoints_down;
+
+    checkpoints.push_back(Vector2f(-rect.width/2,-rect.height/2));
+    for(int x = 0; x <= checkpoints_across; x++){
+        for(int y = 0; y <= checkpoints_down; y++){
+            if(x == 0 && y == 0){ continue;}
+
+            checkpoints.push_back(checkpoints[0] + Vector2f(x*cell_size_across,y*cell_size_down));
+        }
+    }
+    //
+
+    //apply sprite's rotation and global position, then find relative position to grid_ref, then get a representative terrain square if intersecting immovable terrain
+    FloatRect tile_rect;
+    tile_rect.width = terrain.tile_size;
+    tile_rect.height = terrain.tile_size;
+
+    for(int index = 0; index < checkpoints.size(); index++){
+
+        checkpoints[index] = wrapPoint(a.getPosition() + rotateAboutOrigin(checkpoints[index], a.getRotation()) - terrain.grid_ref, terrain);
+
+        int terrain_index_x = floor(checkpoints[index].x/terrain.tile_size);
+        int terrain_index_y = floor(checkpoints[index].y/-terrain.tile_size);
+        
+        if(terrain_index_y > terrain.max_y){ continue; } // won't be a collision possible if this point is not in the terrain layer
+
+        if(collidable_terrain_types.count(terrain.grid[terrain_index_x][terrain_index_y]) != 0){ return true; } //if this terrain block is collidable then the sprite is colliding
+    }
+
+    return false;
+}
+bool isIntersectingTerrain(Structure &a, Terrain &terrain){
+
+    for(map<string, Sprite>::iterator i = a.sprite.begin(); i != a.sprite.end(); i++){
+        if(isIntersectingTerrain(i->second, terrain)){
+            return true;
+        }
+    }
+    return false;
+}
+bool isIntersecting(Structure &a, Structure &b, double tolerance){
+    
+    for(map<string, Sprite>::iterator i = a.sprite.begin(); i != a.sprite.end(); i++){
+        for(map<string, Sprite>::iterator j = b.sprite.begin(); j != b.sprite.end(); j++){
+            
+            if(isIntersecting(i->second, j->second, tolerance)){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+bool isIntersecting(Sprite a, Structure &b, double tolerance){
+    
+    for(map<string, Sprite>::iterator i = b.sprite.begin(); i != b.sprite.end(); i++){
+        if(isIntersecting(a, i->second, tolerance)){
+            return true;
+        }
+    }
+    return false;
+}
+bool isIntersecting(Structure &a, Sprite b, double tolerance){
+    
+    return isIntersecting(b, a, tolerance);
+}
+bool isIntersecting(Sprite a, Sprite b, double tolerance){
+
+    FloatRect rect_a = a.getLocalBounds();
      FloatRect rect_b = b.getLocalBounds();
 
      Vector2f a_tr = Vector2f(rect_a.width/2,-rect_a.height/2);

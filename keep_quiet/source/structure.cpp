@@ -30,6 +30,11 @@ IntRect StructureProperties::getFrame(string frame_name){
     return frame_window;
 }
 
+Worker::Worker(){
+
+    tasked_structure_id = "";
+}
+
 Structure::Structure(){}
 
 Structure::Structure(string c_type_name, Vector2f c_position){
@@ -41,8 +46,6 @@ Structure::Structure(string c_type_name, Vector2f c_position){
     construction_progress = 0;
 
     sprite[type_name] = createSprite(structure_properties[type_name].texture_id, c_position);
-    bounds[type_name] = sprite[type_name].getGlobalBounds();
-
     sprite[type_name].setTextureRect(structure_properties[type_name].getFrame("construction"));
     
     ammunition = 0;
@@ -116,8 +119,6 @@ void Structure::upgrade(string upgrade_name){
     construction_progress = 0;
 
     sprite[upgrade_name] = createSprite(structure_properties[upgrade_name].texture_id, sprite[type_name].getPosition());
-    bounds[upgrade_name] = sprite[upgrade_name].getGlobalBounds();
-
     sprite[upgrade_name].setTextureRect(structure_properties[upgrade_name].getFrame("construction"));
 
 }

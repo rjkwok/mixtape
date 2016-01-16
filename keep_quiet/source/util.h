@@ -6,30 +6,10 @@
 using namespace std;
 using namespace sf;
 
-struct TileProperties{
-
-	TileProperties();
-
-	string type_name;
-	int type_id;
-	vector<int> texture_indexes;
-};
-
-struct Worker{
-
-	//entity that can fill production slots in structures
-	//controls a representation of itself, a rebel npc, that moves and animates according to worker's current task
-
-	Worker();
-
-	string tasked_structure_id;
-};
-
-
-
 //generators
 char rndChar();
 int randInt(int ubound); //returns a random integer between 1 and ubound (randInt(1) will always return 1, randInt(2) will either return 1 or 2, etc.)
+int randSign();
 string createUniqueId();
 struct Caption{
 
@@ -56,13 +36,20 @@ Vector2f normalize(Vector2f v);
 Vector2f rotateAboutOrigin(Vector2f p, double degrees);
 Sprite* formatSprite(Sprite* sprite, double x, double y);
 Sprite* formatSprite(Sprite* sprite, double x, double y, double width, double height);
-Vector2f wrapPoint(Vector2f point, int terrain_max_x);
+Vector2f wrapPoint(Vector2f point, Terrain &terrain);
 double dot(Vector2f a, Vector2f b);
 double getRotationFromAxis(Vector2f axis);
-void untangleSprite(Sprite &sprite, FloatRect rect, int terrain_max_x);
+void untangleSprite(Sprite &sprite, FloatRect rect);
 void untangleSprites(Sprite &a, Sprite &b);
-void keepSpriteOutOfTerrain(Sprite &sprite, Vector2f grid_ref, map<int,map<int,int> > &terrain, int terrain_max_x, int terrain_max_y);
+void keepSpriteOutOfTerrain(Sprite &sprite, Terrain &terrain);
 //
+
+bool isIntersectingTerrain(Sprite a, Terrain &terrain);
+bool isIntersectingTerrain(Structure &a, Terrain &terrain);
+bool isIntersecting(Structure &a, Structure &b, double tolerance = 0);
+bool isIntersecting(Sprite a, Structure &b, double tolerance = 0);
+bool isIntersecting(Structure &a, Sprite b, double tolerance = 0);
+bool isIntersecting(Sprite a, Sprite b, double tolerance = 0);
 
 //file and memory management
 void loadConfigs();
@@ -79,7 +66,7 @@ IntRect getTextureRect(string key);
 //checks
 double returnHigher(double a, double b);
 double returnLower(double a, double b);
-bool spritesIntersecting(Sprite a, Sprite b, double tolerance);
+
 //
 
 //operator extensions

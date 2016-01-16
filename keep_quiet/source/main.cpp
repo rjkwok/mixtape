@@ -32,13 +32,16 @@ int main(){
 	//open a window and initialize the starting views
     RenderWindow window;
     View view;
-	window.create(VideoMode::getFullscreenModes()[0], "DEBUG", Style::Fullscreen);
-    window.setFramerateLimit(70);
-    view.reset(FloatRect(0,0,window.getSize().x,window.getSize().y));
-    View window_view = view;
-    View back_view_1 = view;
-    View back_view_2 = view;
-    View back_view_3 = view;
+	window.create(VideoMode::getFullscreenModes()[0], "DEBUG", Style::Fullscreen); //create a fullscreen window
+    window.setFramerateLimit(70); //limit fps so we don't hog resources
+    view.reset(FloatRect(0,0,window.getSize().x,window.getSize().y)); //initialize a view from the window size
+    View window_view = view; //fixed "window" view that doesn't shift with the player, used for drawing UI, and also as a reference with which to calculate the current scale of the other transformed views
+    View back_view_1 = view; //1st background layer (renders third)
+    View back_view_2 = view; //2nd background layer (renders second)
+    View back_view_3 = view; //3rd background layer (renders first)
+    double back_speed_1 = 1.0; //1st layer scroll speed fraction (for parallax effect)
+    double back_speed_2 = 0.5; //2nd layer scroll speed fraction (for parallax effect)
+    double back_speed_3 = 0.25; //3rd layer scroll speed fraction (for parallax effect)
     //
 
     //initialize ui modules
@@ -48,123 +51,75 @@ int main(){
 
     //initialize loop timer
     Clock timer;
-    double dt = 0;
+    double dt = 0; 
    	//
 
-    //initialize base variables
-    int total_ammunition = 0;
-    int total_fuel = 0;
-    int total_cash = 0;
-
-    int total_power = 0;
-    int total_supply = 1;
-    int total_construction = 1;
-    //total workers can just be pulled from workers.size() when necessary (workers is defined below)
-    
-    int used_power = 0;
-    int used_workers = 0;
-    int used_supply = 0;
+    //initialize base variables (total workers can just be pulled from workers.size() when necessary (workers is defined below))
+    int total_ammunition = 0; //"currency" style resource that can be spent into structures that consume it
+    int total_fuel = 0; //"currency" style resource that can be spent into structures that consume it
+    int total_cash = 0; //"currency" style resource that can be spent into structures that consume it
+    int total_power = 0; //this is a measure of the total POSITIVE power contributed by each Structure in the structures map
+    int total_supply = 1; //this is a measure of the total POSITIVE supply contributed by each Structure in the structures map
+    int total_construction = 1; //this is a measure of the construction rate, which is the sume of contributions from each Structure in the structures map + 1 elementary rate
+    int used_power = 0; //this is a measure of the total NEGATIVE power contributed by each Structure in the structures map
+    int used_workers = 0; //this is a count of all the workers currently engaged in a task
+    int used_supply = 0; //this is a measure of the total NEGATIVE supply contributed by each Structure in the structures map
     //
-
-    
 
     //initialize world structures
-    map<int,map<int,int> > terrain; //0 is no terrain, 1 is dirt, 2 is tunnel support, etc.
-    map<string, Sprite*> character_sprites;
-    map<string, Worker*> workers; //worker struct contains a pointer to a sprite in character_sprites
-    map<string, Structure*> structures;
-
+    Terrain terrain = Terrain(Vector2f(0,window.getSize().y),64,1000,24); //Passed every time a function needs to work with the terrain. Encapsulates terrain limits, resolution, origin, mapping, and visuals.
+    map<string, Sprite*> character_sprites; //holds the sprite of any moving NPC or player in the game
+    map<string, Worker*> workers; //worker struct contains a pointer to a sprite in character_sprites, worker NPCs stored in this structure to run AI processes and also for easy counting
+    map<string, Structure*> structures; //holds all "structures" which are non-moving user-placed entities in the game world that contribute to the base variables each tick
+    vector<Sprite*> back_1; //stores all the decorations that will render on the 1st background layer
+    vector<Sprite*> back_2; //stores all the decorations that will render on the 2nd background layer
+    vector<Sprite*> back_3; //stores all the decorations that will render on the 3rd background layer
     //
 
-    character_sprites["fern1"] = formatSprite(new Sprite(*textures["fern"]),0,0);
-    character_sprites["fern2"] = formatSprite(new Sprite(*textures["fern"]),500,0);
-    character_sprites["fern3"] = formatSprite(new Sprite(*textures["fern"]),1000,0);
+    //drop in some ferns as placeholder "characters" for collision testing
+    character_sprites["fern1"] = formatSprite(new Sprite(*textures["fern"]),200,-200);
+    character_sprites["fern2"] = formatSprite(new Sprite(*textures["fern"]),500,-200);
+    character_sprites["fern3"] = formatSprite(new Sprite(*textures["fern"]),1000,-200);
+    //
 
+    //assign the player pointer, which is used to send movement commands to the player as well as provide something for the cameras to track
     Sprite* player = character_sprites["fern1"];
-
     view.setCenter(player->getPosition().x,player->getPosition().y);
-
-    
-	vector<Sprite*> back_1;
-	vector<Sprite*> back_2;
-	vector<Sprite*> back_3;
-	double back_speed_1 = 1.0;
-	double back_speed_2 = 0.5;
-	double back_speed_3 = 0.25;
-
-	
-	int terrain_max_x = 1000;
-	int terrain_max_y = 24;
-	Vector2f grid_ref = Vector2f(0,window.getSize().y); //terrain grid bottom left origin
+    //
 
 	//terrain generation
-    // Grass Layer
-   for(int index_y = 14; index_y < 15; index_y++){
-       for(int index_x = 0; index_x < terrain_max_x; index_x++){
-            terrain[index_x][index_y] = 2;
+    int top_index = 12; //starting point for the algorithm
+    //this simple algorithm just keeps track of a "top index" up to which each column is filled with stone and dirt and grass. For each column iterated over there is a chance that the "top index" can increase or decrease by one.
+    for(int index_x = 0; index_x < terrain.max_x; index_x++){
+
+        if(index_x % randInt(3) == 0){ top_index += randSign(); } //random chance of having 1 added or subtracted from the "top index" for this column
+        if(top_index > terrain.max_y){ top_index = terrain.max_y; } //don't let the top index exceed the bounds of the terrain
+        if(top_index < 12){ top_index = 12; } //don't let the top index fall too low
+
+        for(int index_y = top_index-7; index_y < top_index; index_y++){ //for the first 7 blocks under the top index, fill with grass and dirt
+            if(index_y == top_index-1){ 
+                terrain.grid[index_x][index_y] = 2; //grass only appears on the very top block
+            }
+            else{
+                terrain.grid[index_x][index_y] = 14; //rest are dirt
+            }
+        }
+        for(int index_y = 2; index_y < top_index-7; index_y++){ //for the remaining blocks deeper still, fill with stone (except the last two rows)
+            terrain.grid[index_x][index_y] = 28;
+        }
+        for(int index_y = 0; index_y < 2; index_y++){ //last two rows are filled with "bedrock"
+            terrain.grid[index_x][index_y] = 32;
         }
     }
-    // Dirt
-	for(int index_y = 10; index_y < 14; index_y++){
-		for(int index_x = 0; index_x < terrain_max_x; index_x++){
-			terrain[index_x][index_y] = 14;
-		}
-	}
-    // Stone
-	for(int index_y = 2; index_y < 10; index_y++){
-		for(int index_x =0; index_x < terrain_max_x; index_x++){
-			terrain[index_x][index_y] = 28;
-		}
-	}
-    // Bedrock
-    for(int index_y = 0; index_y < 2; index_y++){
-        for(int index_x = 0; index_x < terrain_max_x; index_x++){
-            terrain[index_x][index_y] = 32;
-        }
-    }
-    // Restart Block
-  for(int index_y = 0; index_y < 14; index_y++){
-        for(int index_x = 0; index_x < 1; index_x++){
-            terrain[index_x][index_y] = 1;
-        }
-    }
-	//
+	terrain.updateTiles(); //update the terrain visual quilt to reflect all the newly generated terrain
+    //
 
-	VertexArray terrain_tiles(Quads,4); //only update on possible change to terrain
-
-	terrain_tiles.resize(terrain_max_x*terrain_max_y*4); //resize to buildable grid (needs to be equal to total area in tiles, not pixels, and then multiplied by 4 to have 4 vertexes per tile)
-	
-	//terrain update loop
-	for(int index_x = 0; index_x < terrain_max_x; index_x++){
-		for(int index_y = 0; index_y < terrain_max_y; index_y++){
-			//iterate over every tile
-			int tile_type_index = terrain[index_x][index_y]; //used here to determine which part of the loaded texture sheet to show
-			int texture_index = tile_properties[tile_type_index].texture_indexes[randInt(tile_properties[tile_type_index].texture_indexes.size())-1];
-			int tiles_across = floor(textures["terrain"]->getSize().x/64.0);
-			int u = texture_index % tiles_across;
-			int v = floor(texture_index/tiles_across);
-
-			sf::Vertex* tile = &terrain_tiles[4*(index_x + (index_y*terrain_max_x))]; //get a pointer to a location in the array defined by this tile's sequential position iterated left-to-right and then bottom-to-top
-			//take this and the next 3 array elements as the corners of the tile, texture and position them accordingly
-
-            tile[0].position = sf::Vector2f(grid_ref.x+(index_x*64.0), grid_ref.y-(index_y*64.0));
-            tile[1].position = sf::Vector2f(grid_ref.x+((index_x + 1)*64.0), grid_ref.y-(index_y*64.0));
-            tile[2].position = sf::Vector2f(grid_ref.x+((index_x + 1)*64.0), grid_ref.y-((index_y + 1)*64.0));
-            tile[3].position = sf::Vector2f(grid_ref.x+(index_x*64.0), grid_ref.y-((index_y + 1)*64.0));
-
-            tile[3].texCoords = sf::Vector2f(u*64.0, v*64.0);
-            tile[2].texCoords = sf::Vector2f((u + 1)*64.0, v*64.0);
-            tile[1].texCoords = sf::Vector2f((u + 1)*64.0, (v + 1)*64.0);
-            tile[0].texCoords = sf::Vector2f(u*64.0, (v + 1)*64.0);
-		}
-	}
-	//
-
-	back_3.push_back(formatSprite(new Sprite(*getTexture("sky")),0,1080,15000,15000));
-
-	Vector2f last_player_pos = player->getPosition();
+    //generate the backdrop
+	back_3.push_back(formatSprite(new Sprite(*getTexture("sky")),0,-7500.0 + (1.1*window.getSize().y),15000,15000)); 
+    //
 
    	//main program loop
+    Vector2f last_player_pos = player->getPosition(); //used to determine player movement vector across ticks, so that the camera can follow
     while(window.isOpen()){
 
     	//loop header
@@ -200,7 +155,6 @@ int main(){
             scaleView(back_view_2, window_view, 4*ui_input.mmb_delta*dt);
             scaleView(back_view_3, window_view, 4*ui_input.mmb_delta*dt);
         }
-        
    		//
 
         //update structures
@@ -239,22 +193,33 @@ int main(){
         }
         //
 
-        //process movement and collisions
+        //process movement and collisions ... ALMOST NONE OF THIS COLLISION PROCESSING HAS BEEN OPTIMIZED AND WILL NEED TO BE REVISITED AT SOME POINT
     	for(map<string,Sprite*>::iterator i = character_sprites.begin(); i != character_sprites.end(); i++){
 
-    		if(ceil(i->second->getPosition().x) > (terrain_max_x*64.0)){ i->second->setPosition(0,i->second->getPosition().y); }
-    		if(floor(i->second->getPosition().x) < 0){ i->second->setPosition((terrain_max_x*64.0),i->second->getPosition().y); }
-    		for(map<string,Sprite*>::iterator j = i; j != character_sprites.end(); j++){
+            //if the sprites has crossed either edge of the map, teleport it to the other side accordingly
+    		if(ceil(i->second->getPosition().x) > (terrain.max_x*terrain.tile_size)){ i->second->setPosition(0,i->second->getPosition().y); }
+    		if(floor(i->second->getPosition().x) < 0){ i->second->setPosition((terrain.max_x*terrain.tile_size),i->second->getPosition().y); }
+    		//
+
+            //check each character sprite against each other character sprite for collision
+            for(map<string,Sprite*>::iterator j = i; j != character_sprites.end(); j++){
 				if(j==i){continue;}
 
-				if(spritesIntersecting(*i->second,*j->second,0)){
+				if(isIntersecting(*i->second,*j->second,0)){
 					untangleSprites(*i->second,*j->second);
 				}
     		}
+            //
+
+            for(map<string, Structure*>::iterator j = structures.begin(); j != structures.end(); j++){
+                for(map<string, Sprite>::iterator k = j->second->sprite.begin(); k != j->second->sprite.end(); k++){
+                    if(isIntersecting(*i->second,k->second,0)){
+                        untangleSprite(*i->second,k->second.getGlobalBounds());
+                    }
+                }
+            }
     		
-    	}
-    	for(map<string,Sprite*>::iterator i = character_sprites.begin(); i != character_sprites.end(); i++){
-    		keepSpriteOutOfTerrain(*i->second, grid_ref, terrain, terrain_max_x, terrain_max_y);
+            keepSpriteOutOfTerrain(*i->second, terrain);
     	}
         //
 
@@ -294,38 +259,40 @@ int main(){
     	double window_left = view.getCenter().x - (view.getSize().x/2.0);
     	double window_right = window_left + view.getSize().x;
 
+        //if the view is past the left end of the map, jump the camera to the far right end of the map, take a picture and then jump back so that the right end of the map fills in the blank space past the left end.
     	if(window_left < 0){
-    		view.move(terrain_max_x*64.0,0);
+    		view.move(terrain.max_x*terrain.tile_size,0);
     		window.setView(view);
-    		window.draw(terrain_tiles, textures["terrain"]);
-    		view.move(terrain_max_x*-64.0,0);
-    		window.setView(view);
-    	}
-    	if(window_right > terrain_max_x*64.0){
-    		view.move(terrain_max_x*-64.0,0);
-    		window.setView(view);
-    		window.draw(terrain_tiles, textures["terrain"]);
-    		view.move(terrain_max_x*64.0,0);
+    		terrain.draw(window);
+    		view.move(terrain.max_x*-terrain.tile_size,0);
     		window.setView(view);
     	}
-    	window.draw(terrain_tiles, textures["terrain"]);
+        //same as just above, but this fills in the blank space past the far right end of the map with the stuff at the left end
+    	if(window_right > terrain.max_x*terrain.tile_size){
+    		view.move(terrain.max_x*-terrain.tile_size,0);
+    		window.setView(view);
+    		terrain.draw(window);
+    		view.move(terrain.max_x*terrain.tile_size,0);
+    		window.setView(view);
+    	}
+    	terrain.draw(window); //draw the parts of the terrain in regular view
 
         if(window_left < 0){
-            view.move(terrain_max_x*64.0,0);
+            view.move(terrain.max_x*terrain.tile_size,0);
             window.setView(view);
             for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
                 i->second->draw(window);
             }
-            view.move(terrain_max_x*-64.0,0);
+            view.move(terrain.max_x*-terrain.tile_size,0);
             window.setView(view);
         }
-        if(window_right > terrain_max_x*64.0){
-            view.move(terrain_max_x*-64.0,0);
+        if(window_right > terrain.max_x*terrain.tile_size){
+            view.move(terrain.max_x*-terrain.tile_size,0);
             window.setView(view);
             for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
                 i->second->draw(window);
             }
-            view.move(terrain_max_x*64.0,0);
+            view.move(terrain.max_x*terrain.tile_size,0);
             window.setView(view);
         }
         for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
@@ -333,21 +300,21 @@ int main(){
         }
     	
     	if(window_left < 0){
-    		view.move(terrain_max_x*64.0,0);
+    		view.move(terrain.max_x*terrain.tile_size,0);
     		window.setView(view);
     		for(map<string,Sprite*>::iterator i = character_sprites.begin(); i != character_sprites.end(); i++){
 	    		window.draw(*i->second);
 	    	}
-    		view.move(terrain_max_x*-64.0,0);
+    		view.move(terrain.max_x*-terrain.tile_size,0);
     		window.setView(view);
     	}
-    	if(window_right > terrain_max_x*64.0){
-    		view.move(terrain_max_x*-64.0,0);
+    	if(window_right > terrain.max_x*terrain.tile_size){
+    		view.move(terrain.max_x*-terrain.tile_size,0);
     		window.setView(view);
     		for(map<string,Sprite*>::iterator i = character_sprites.begin(); i != character_sprites.end(); i++){
 	    		window.draw(*i->second);
 	    	}
-    		view.move(terrain_max_x*64.0,0);
+    		view.move(terrain.max_x*terrain.tile_size,0);
     		window.setView(view);
     	}
     	for(map<string,Sprite*>::iterator i = character_sprites.begin(); i != character_sprites.end(); i++){

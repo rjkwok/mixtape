@@ -32,6 +32,16 @@ struct StructureProperties{
 
 };
 
+struct Worker{
+
+	//entity that can fill production slots in structures
+	//controls a representation of itself, a rebel npc, that moves and animates according to worker's current task
+
+	Worker();
+
+	string tasked_structure_id;
+};
+
 struct Structure{
 
 	//something that is initiated as an incomplete construction that must have workers tasked to it
@@ -58,7 +68,6 @@ struct Structure{
 	int fuel;
 	//
 
-	map<string, FloatRect> bounds;
 	map<string, Sprite> sprite;
 	vector<string> upgrade_names;
 
