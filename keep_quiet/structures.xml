@@ -3,45 +3,27 @@
 <Structure name="Toolbench" texture_id="toolbench" icon_id="">
 
 	<construction_contribution>1</construction_contribution>
-	<construction_cost>0</construction_cost>
+	<construction_cost>10</construction_cost>
+	<max_workers>1</max_workers>
 
-	<frame index="0">default</frame>
-	<frame index="1">construction</frame>
-
-</Structure>
-<Structure name="Toolshed" texture_id="toolbench" icon_id="" parent="Toolbench" render_order="1">
-
-	<construction_contribution>1</construction_contribution>
-	<construction_cost>0</construction_cost>
-
-	<frame index="0">default</frame>
-	<frame index="1">construction</frame>
+	<anim start="0" end="0" looping="yes">default</anim>
+	<anim start="1" end="6" looping="no">construction</anim>
 
 </Structure>
-<Structure name="Diagnostics" texture_id="toolbench" icon_id="" parent="Toolbench" render_order="2">
+<Structure name="Toolshed" texture_id="toolshed" icon_id="" parent="Toolbench" render_order="0">
 
 	<construction_contribution>1</construction_contribution>
-	<construction_cost>0</construction_cost>
+	<construction_cost>20</construction_cost>
 
-	<frame index="0">default</frame>
-	<frame index="1">construction</frame>
+	<anim start="0" end="0" looping="yes">default</anim>
+	<anim start="1" end="6" looping="no">construction</anim>
 
 </Structure>
-<Structure name="Jumbo Bench" texture_id="toolbench" icon_id="" parent="Toolbench" render_order="3">
+<Structure name="Camoflauge" texture_id="toolbench_camo" icon_id="" parent="Toolbench" render_order="2">
 
-	<construction_contribution>1</construction_contribution>
-	<construction_cost>0</construction_cost>
+	<construction_cost>10</construction_cost>
 
-	<frame index="0">default</frame>
-	<frame index="1">construction</frame>
-
-</Structure>
-<Structure name="Camoflauge" texture_id="toolbench" icon_id="" parent="Toolbench" render_order="4">
-
-	<construction_contribution>1</construction_contribution>
-	<construction_cost>0</construction_cost>
-
-	<frame index="0">default</frame>
-	<frame index="1">construction</frame>
+	<anim start="0" end="0" looping="yes">default</anim>
+	<anim start="1" end="1" looping="no">construction</anim>
 
 </Structure>

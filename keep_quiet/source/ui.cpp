@@ -95,12 +95,15 @@ VisualsStruct::VisualsStruct(){
     selected_type_id = "";
     selected_structure_id = "";
 }
-void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &terrain, map<string, Structure*> &structures, map<string, Worker*> &workers, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply){
+void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &terrain, map<string, Structure*> &structures, map<string, SmartWorker*> &workers, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply){
 
     //reset the visuals
     captions.clear();
     rectangles.clear();
     sprites.clear();
+    window_captions.clear();
+    window_rectangles.clear();
+    window_sprites.clear();
     //
 
     //act on input to show base stats menu and construction menu
@@ -114,38 +117,67 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
 
     //if an already-built structure is selected, highlight it with extra UI
     if(selected_structure_id != ""){
-        RectangleShape bounding_rect = createBoundingRectangle(structures[selected_structure_id]->sprite[structures[selected_structure_id]->type_name],Color(185,185,245,215));
-        Vector2i window_coords = window.mapCoordsToPixel(structures[selected_structure_id]->sprite[structures[selected_structure_id]->type_name].getPosition()); //display preview of the itemselected for construction
-        bounding_rect.setPosition(window_coords.x,window_coords.y);
-        double scale = window.getSize().x/window.getView().getSize().x;
-        bounding_rect.setScale(scale,scale);
-        rectangles.push_back(bounding_rect);
+        rectangles.push_back(createBoundingRectangle(structures[selected_structure_id]->bounds,Color(185,185,245,215)));
     }
     //
 
-    //if not actively placing a structure, allow a check to see if the user is selecting an already-built structure
-    if(selected_type_id == ""){ 
-        for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
-            for(map<string, Sprite>::iterator j = i->second->sprite.begin(); j != i->second->sprite.end(); j++){
-                if(j->second.getGlobalBounds().contains(input.view_mouse)){
-                    RectangleShape bounding_rect = createBoundingRectangle(i->second->sprite[i->second->type_name],Color(253,130,43,215));
-                    Vector2i window_coords = window.mapCoordsToPixel(i->second->sprite[i->second->type_name].getPosition()); //display preview of the itemselected for construction
-                    bounding_rect.setPosition(window_coords.x,window_coords.y);
-                    double scale = window.getSize().x/window.getView().getSize().x;
-                    bounding_rect.setScale(scale,scale);
-                    rectangles.push_back(bounding_rect);
-                    if(input.lmb_released){
-                        if(selected_structure_id == i->first){
-                            selected_structure_id = "";
-                        }
-                        else{
-                            selected_structure_id = i->first;
+    //draw per-structure ui
+    for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+
+        //display a counter of tasked workers vs max workers above this structure
+        int filled_workers = i->second->tasked_workers.size(); 
+        int max_workers = i->second->getMaxWorkers();
+        if(i->second->construction_name != ""){
+            //if this structure is under construction
+            max_workers = 4;
+        }
+        Vector2f anchor = Vector2f((i->second->bounds.left + i->second->bounds.width), i->second->bounds.top - (getTextureRect("filled_worker").height/2.0) - 8);
+        for(int index = 0; index < max_workers; index++){
+            if(index < filled_workers){
+                sprites.push_back(createSprite("filled_worker", anchor, "right"));
+            }
+            else{
+                sprites.push_back(createSprite("empty_worker", anchor, "right"));
+            }
+            anchor.x -= getTextureRect("filled_worker").width;
+        }
+        //
+
+        if(i->second->bounds.contains(input.view_mouse)){
+            rectangles.push_back(createBoundingRectangle(i->second->bounds,Color(253,130,43,215))); //highlight the structure if the mouse is hovering over top
+            if(selected_type_id == ""){ //if the user is not actively placing a new structure, placed structures may respond to input 
+                if(input.lmb_released && input.keys_held.count("lshift") != 0){ //open this structure's upgrade interface
+                    if(i->second->construction_name == "" && selected_structure_id == i->first){
+                        selected_structure_id = "";
+                    }
+                    else if(i->second->construction_name == ""){ //change/close which structure has its upgrade interface open
+                        selected_structure_id = i->first;
+                    }
+                }
+                else if(input.lmb_released){ //left click tasks another worker to this structure
+                    //task worker
+                    if(i->second->tasked_workers.size() < max_workers){
+                        for(map<string, SmartWorker*>::iterator j = workers.begin(); j != workers.end(); j++){
+                            if(j->second->tasked_structure_id == ""){
+                                j->second->tasked_structure_id = i->first;
+                                i->second->tasked_workers.push_back(j->second);
+                                break;
+                            }
                         }
                     }
-                    break;
+                }
+                else if(input.rmb_released){ //right click removes an already-tasked worker from this structure
+                    //untask worker
+                    if(i->second->tasked_workers.size() != 0){
+                        i->second->tasked_workers[i->second->tasked_workers.size()-1]->tasked_structure_id = "";
+                        i->second->tasked_workers.pop_back();
+                    }
                 }
             }
+            
         }
+
+        
     }
     //
 
@@ -161,51 +193,51 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
         string font_id = "font1";
         //
 
-        Vector2f anchor = top_left_anchor + Vector2f(margin,margin); //the first caption should be inset from the top left corner by the thickness of the menu outline, so that the captions do not overlap the outline. Inset extra according to margin setting.
+        Vector2f anchor = top_left_anchor + Vector2f(margin,margin); //the first caption should be inset from the top left corner by the thickness of the menu outline, so that the window_captions do not overlap the outline. Inset extra according to margin setting.
         double far_right = 0; //as captions are created note the far-right value, so that later on in this function we will know how wide the bounding box needs to be
         
         //first display information on the base's status
-        captions.push_back(Caption("Construction Rate >> " + asString(total_construction), font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
-        anchor = anchor + Vector2f(0,captions[captions.size()-1].text.getGlobalBounds().height + margin); //shift the anchor down the screen by an amount equal to the height of the caption we just generated, plus an extra amount equal to the margin setting.
-        if(anchor.x + captions[captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x + captions[captions.size()-1].text.getGlobalBounds().width; } //if the far-right tip of this caption is the rightmost point in this menu so far, set the rightmost point equal to the far-right tip of this caption
+        window_captions.push_back(Caption("Construction Rate >> " + asString(total_construction), font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
+        anchor = anchor + Vector2f(0,window_captions[window_captions.size()-1].text.getGlobalBounds().height + margin); //shift the anchor down the screen by an amount equal to the height of the caption we just generated, plus an extra amount equal to the margin setting.
+        if(anchor.x + window_captions[window_captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x + window_captions[window_captions.size()-1].text.getGlobalBounds().width; } //if the far-right tip of this caption is the rightmost point in this menu so far, set the rightmost point equal to the far-right tip of this caption
        
-        captions.push_back(Caption("Used Power >> " + asString(used_power) + "/" + asString(total_power), font_id, anchor, character_size, text_colour, "left"));//generate a left-oriented caption at the current value of the anchor
-        anchor = anchor + Vector2f(0,captions[captions.size()-1].text.getGlobalBounds().height + margin);//shift the anchor down the screen by an amount equal to the height of the caption we just generated, plus an extra amount equal to the margin setting.
-        if(anchor.x + captions[captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x + captions[captions.size()-1].text.getGlobalBounds().width; }//generate a left-oriented caption at the current value of the anchor
+        window_captions.push_back(Caption("Used Power >> " + asString(used_power) + "/" + asString(total_power), font_id, anchor, character_size, text_colour, "left"));//generate a left-oriented caption at the current value of the anchor
+        anchor = anchor + Vector2f(0,window_captions[window_captions.size()-1].text.getGlobalBounds().height + margin);//shift the anchor down the screen by an amount equal to the height of the caption we just generated, plus an extra amount equal to the margin setting.
+        if(anchor.x + window_captions[window_captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x + window_captions[window_captions.size()-1].text.getGlobalBounds().width; }//generate a left-oriented caption at the current value of the anchor
        
-        captions.push_back(Caption("Used Supply >> " + asString(used_supply) + "/" + asString(total_supply), font_id, anchor, character_size, text_colour, "left"));//generate a left-oriented caption at the current value of the anchor
-        anchor = anchor + Vector2f(0,captions[captions.size()-1].text.getGlobalBounds().height + margin);//shift the anchor down the screen by an amount equal to the height of the caption we just generated, plus an extra amount equal to the margin setting.
-        if(anchor.x + captions[captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x + captions[captions.size()-1].text.getGlobalBounds().width; }//generate a left-oriented caption at the current value of the anchor
+        window_captions.push_back(Caption("Used Supply >> " + asString(used_supply) + "/" + asString(total_supply), font_id, anchor, character_size, text_colour, "left"));//generate a left-oriented caption at the current value of the anchor
+        anchor = anchor + Vector2f(0,window_captions[window_captions.size()-1].text.getGlobalBounds().height + margin);//shift the anchor down the screen by an amount equal to the height of the caption we just generated, plus an extra amount equal to the margin setting.
+        if(anchor.x + window_captions[window_captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x + window_captions[window_captions.size()-1].text.getGlobalBounds().width; }//generate a left-oriented caption at the current value of the anchor
       
-        captions.push_back(Caption("Used Workers >> " + asString(used_workers) + "/" + asString(total_workers), font_id, anchor, character_size, text_colour, "left"));//generate a left-oriented caption at the current value of the anchor
-        anchor = anchor + Vector2f(0,captions[captions.size()-1].text.getGlobalBounds().height + margin);//shift the anchor down the screen by an amount equal to the height of the caption we just generated, plus an extra amount equal to the margin setting.
-        if(anchor.x + captions[captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x + captions[captions.size()-1].text.getGlobalBounds().width; }//generate a left-oriented caption at the current value of the anchor
+        window_captions.push_back(Caption("Used Workers >> " + asString(used_workers) + "/" + asString(total_workers), font_id, anchor, character_size, text_colour, "left"));//generate a left-oriented caption at the current value of the anchor
+        anchor = anchor + Vector2f(0,window_captions[window_captions.size()-1].text.getGlobalBounds().height + margin);//shift the anchor down the screen by an amount equal to the height of the caption we just generated, plus an extra amount equal to the margin setting.
+        if(anchor.x + window_captions[window_captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x + window_captions[window_captions.size()-1].text.getGlobalBounds().width; }//generate a left-oriented caption at the current value of the anchor
 
         anchor = anchor + Vector2f(0,margin); //shift the anchor down the screen by the margin value (to add a visual gap between the base status captions and the base inventory captions)
 
         //now display information on the base's inventory
-        //we don't need to update the rightmost point for any of the inventory captions except for the last one, since the last one is guaranteed to be farther right than the others.
-        sprites.push_back(createSprite("fuel_icon", anchor, "left")); //generate a sprite icon to precede the fuel caption
+        //we don't need to update the rightmost point for any of the inventory window_captions except for the last one, since the last one is guaranteed to be farther right than the others.
+        window_sprites.push_back(createSprite("fuel_icon", anchor, "left")); //generate a sprite icon to precede the fuel caption
         anchor = anchor + Vector2f(32 + margin,0); //shift the anchor across the screen by the width of the icon, plus the margin setting
-        captions.push_back(Caption(asString(total_fuel), font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the anchor displaying the total fuel
-        anchor = anchor + Vector2f(captions[captions.size()-1].text.getGlobalBounds().width + margin,0); //shift the anchor across the screen by the width of the caption we just generated, plus the margin setting
+        window_captions.push_back(Caption(asString(total_fuel), font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the anchor displaying the total fuel
+        anchor = anchor + Vector2f(window_captions[window_captions.size()-1].text.getGlobalBounds().width + margin,0); //shift the anchor across the screen by the width of the caption we just generated, plus the margin setting
 
-        sprites.push_back(createSprite("ammunition_icon", anchor, "left")); //generate a sprite icon to precede the ammunition caption
+        window_sprites.push_back(createSprite("ammunition_icon", anchor, "left")); //generate a sprite icon to precede the ammunition caption
         anchor = anchor + Vector2f(32 + margin,0); //shift the anchor across the screen by the width of the icon, plus the margin setting
-        captions.push_back(Caption(asString(total_ammunition), font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the anchor displaying the total ammunition
-        anchor = anchor + Vector2f(captions[captions.size()-1].text.getGlobalBounds().width + margin,0); //shift the anchor across the screen by the width of the caption we just generated, plus the margin setting
+        window_captions.push_back(Caption(asString(total_ammunition), font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the anchor displaying the total ammunition
+        anchor = anchor + Vector2f(window_captions[window_captions.size()-1].text.getGlobalBounds().width + margin,0); //shift the anchor across the screen by the width of the caption we just generated, plus the margin setting
 
-        sprites.push_back(createSprite("money_icon", anchor, "left")); //generate a sprite icon to precede the cash caption
+        window_sprites.push_back(createSprite("money_icon", anchor, "left")); //generate a sprite icon to precede the cash caption
         anchor = anchor + Vector2f(32 + margin,0); //shift the anchor across the screen by the width of the icon, plus the margin setting
-        captions.push_back(Caption(asString(total_cash), font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the anchor displaying the total cash
-        anchor = anchor + Vector2f(captions[captions.size()-1].text.getGlobalBounds().width + margin,0); //shift the anchor across the screen by the width of the caption we just generated, plus the margin setting
+        window_captions.push_back(Caption(asString(total_cash), font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the anchor displaying the total cash
+        anchor = anchor + Vector2f(window_captions[window_captions.size()-1].text.getGlobalBounds().width + margin,0); //shift the anchor across the screen by the width of the caption we just generated, plus the margin setting
 
-        if(anchor.x + captions[captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x+ captions[captions.size()-1].text.getGlobalBounds().width; } //now check if this last caption was farther right than the rightmost point
-        double far_bottom = anchor.y + captions[captions.size()-1].text.getGlobalBounds().height; //the bottom of this last caption will be the farthest-down point on the menu
+        if(anchor.x + window_captions[window_captions.size()-1].text.getGlobalBounds().width > far_right){ far_right = anchor.x+ window_captions[window_captions.size()-1].text.getGlobalBounds().width; } //now check if this last caption was farther right than the rightmost point
+        double far_bottom = anchor.y + window_captions[window_captions.size()-1].text.getGlobalBounds().height; //the bottom of this last caption will be the farthest-down point on the menu
         far_right += (margin-outline_width); //add the margin setting to expand the right side of the menu (if the margin is > 0), and since we added the outline width earlier to offset the captions we need to negate that now so that the backdrop isn't made too large
         far_bottom += (margin-outline_width); //add the margin setting to expand the bottom side of the menu (if the margin is > 0), and since we added the outline width earlier to offset the captions we need to negate that now so that the backdrop isn't made too large
 
-        rectangles.push_back(createRectangle(Vector2f((far_right/2.0),(far_bottom/2.0)), Vector2f(far_right,far_bottom), outline_width, Color(15,15,15,205), Color(253,130,43,75))); //create the menu background of size width=far_right, height=far_bottom
+        window_rectangles.push_back(createRectangle(Vector2f((far_right/2.0),(far_bottom/2.0)), Vector2f(far_right,far_bottom), outline_width, Color(15,15,15,205), Color(253,130,43,75))); //create the menu background of size width=far_right, height=far_bottom
     }
 
     if(show_build_menu){ //if the build menu is supposed to be shown right now
@@ -228,13 +260,13 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
         }
         else{ //if a building is selected list all possible upgrades
             for(map<string, StructureProperties>::iterator i = structure_properties.begin(); i != structure_properties.end(); i++){
-                if(i->second.parent == structures[selected_structure_id]->type_name){ build_list.push_back(i->first); }  
+                if(i->second.parent == structures[selected_structure_id]->type_name && !structures[selected_structure_id]->hasUpgrade(i->first)){ build_list.push_back(i->first); }  
             }
         }
 
         double build_menu_height = window.getSize().y; //to determine how many items can be shown in the build list at any given time, we note the window height and if the stats menu is shown, we subtract that height.
         if(show_stats_menu){
-            build_menu_height -= (rectangles[rectangles.size()-1].getGlobalBounds().height);
+            build_menu_height -= (window_rectangles[window_rectangles.size()-1].getGlobalBounds().height);
         }
 
         double build_menu_item_thickness = 2.0*character_size; //determine how many items can fit in a build menu of this height, and if they don't all fit at once set the max scroll index to a number > 0 to allow scrolling
@@ -253,7 +285,7 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
         if(input.window_mouse.x > build_menu_width){ selected_index = -1; } //if mouse not in menu along x axis set no item as selected
 
         //create the backdrop of the build menu
-        rectangles.push_back(createRectangle(Vector2f((build_menu_width/2.0),window.getSize().y - build_menu_height +(build_menu_height/2.0)), Vector2f(build_menu_width,build_menu_height), outline_width, Color(15,15,15,205), Color(253,130,43,75))); //create the menu background of size width=far_right, height=far_bottom
+        window_rectangles.push_back(createRectangle(Vector2f((build_menu_width/2.0),window.getSize().y - build_menu_height +(build_menu_height/2.0)), Vector2f(build_menu_width,build_menu_height), outline_width, Color(15,15,15,205), Color(253,130,43,75))); //create the menu background of size width=far_right, height=far_bottom
 
         Vector2f anchor = top_left_anchor + Vector2f(margin,window.getSize().y - build_menu_height + character_size); //set anchor to the centre of top-left item in build menu to start
         
@@ -262,7 +294,7 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
             for(int index = current_index; index < build_list.size(); index++){
 
                 if(index == selected_index){
-                    captions.push_back(Caption(build_list[index], font_id, anchor, character_size, Color(255,255,255,225), "left")); //HIGHLIGHT and generate a left-oriented caption at the current value of the anchor
+                    window_captions.push_back(Caption(build_list[index], font_id, anchor, character_size, Color(255,255,255,225), "left")); //HIGHLIGHT and generate a left-oriented caption at the current value of the anchor
                     if(input.lmb_released){ //if mouse is clicked while highlighting a menu item then select that menu item for construction
                         if(build_list[index] == selected_type_id){
                             selected_type_id = ""; //if this item was previously selected then deselect now
@@ -273,16 +305,22 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
                     }
                 }
                 else{
-                    captions.push_back(Caption(build_list[index], font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
+                    window_captions.push_back(Caption(build_list[index], font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
                 }
-                rectangles.push_back(createLine(anchor+Vector2f(0,character_size),Vector2f(-1,0),build_menu_width-(2*margin),text_colour)); //draw a line between this item and the next one
+                window_rectangles.push_back(createLine(anchor+Vector2f(0,character_size),Vector2f(-1,0),build_menu_width-(2*margin),text_colour)); //draw a line between this item and the next one
                 anchor = anchor + Vector2f(0,build_menu_item_thickness); //shift the anchor down the screen by the item thickness
             }
 
             if(selected_type_id != ""){ //if there is a building type selected
                 
-                Sprite preview = createSprite(structure_properties[selected_type_id].texture_id,input.view_mouse); //generate a preview sprite of the structure's basic shape at the mouse location
                 
+
+                Sprite preview = createSprite(structure_properties[selected_type_id].texture_id,input.view_mouse); //generate a preview sprite of the structure's basic shape at the mouse location
+                preview.move(0,distanceFromGround(preview.getGlobalBounds(), terrain));
+                if(preview.getGlobalBounds().top + preview.getGlobalBounds().height > terrain.grid_ref.y){
+                    preview.setPosition(preview.getPosition().x, terrain.grid_ref.y - (preview.getGlobalBounds().height/2.0));
+                }
+
                 //check if the preview is overlapping with any structures or the terrain
                 bool preview_obstructed = isIntersectingTerrain(preview, terrain);
                 if(!preview_obstructed){
@@ -295,15 +333,8 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
                 }
                 //
 
-                //transform the position and scale of the preview to properly render within the window view (since the UI renders in the window view and not the world view)
-                Vector2i window_coords = window.mapCoordsToPixel(input.view_mouse); //display preview of the itemselected for construction
-                preview.setPosition(window_coords.x,window_coords.y);
-                double scale = window.getSize().x/window.getView().getSize().x;
-                preview.setScale(scale,scale);
-                //
-
                 //set the correct frame and colour (highlight in red if the preview is obstructed) 
-                IntRect preview_window = structure_properties[selected_type_id].getFrame("default");
+                IntRect preview_window = getFrame(structure_properties[selected_type_id].start_index["default"], preview);
                 preview.setTextureRect(preview_window);
                 if(preview_obstructed){
                     preview.setColor(Color(155,5,5,155));
@@ -319,7 +350,7 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
 
                 //act on input
                 if(!preview_obstructed && input.lmb_released && input.window_mouse.x > build_menu_width){ //if the preview isn't overlapping anything and the mouse is outside the build menu and the left mouse button is clicked:
-                    structures[createUniqueId()] = new Structure(selected_type_id, input.view_mouse); //place a structure of the selected type at the mouse location
+                    structures[createUniqueId()] = new Structure(selected_type_id, preview.getPosition()); //place a structure of the selected type at the mouse location
                     selected_type_id = ""; //reset the selected structure type
                 }
                 //
@@ -331,12 +362,45 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
             for(int index = current_index; index < build_list.size(); index++){
 
                 if(index == selected_index){
-                    captions.push_back(Caption(build_list[index], font_id, anchor, character_size, Color(255,255,255,225), "left")); //HIGHLIGHT and generate a left-oriented caption at the current value of the anchor
+                    window_captions.push_back(Caption(build_list[index], font_id, anchor, character_size, Color(255,255,255,225), "left")); //HIGHLIGHT and generate a left-oriented caption at the current value of the anchor
+                    
+                    Sprite preview = createSprite(structure_properties[build_list[index]].texture_id, Vector2f(structures[selected_structure_id]->sprite[structures[selected_structure_id]->type_name].getPosition().x, structures[selected_structure_id]->sprite[structures[selected_structure_id]->type_name].getPosition().y - ((getTextureRect(structure_properties[build_list[index]].texture_id).height - getTextureRect(structure_properties[structures[selected_structure_id]->type_name].texture_id).height)/2.0)));
+                    
+                    //check if the preview is overlapping with any structures or the terrain
+                    bool preview_obstructed = isIntersectingTerrain(preview, terrain);
+                    if(!preview_obstructed){
+                        for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+                            if(i->first == selected_structure_id){ continue; }
+                            if(isIntersecting(preview, *i->second)){
+                                preview_obstructed = true;
+                                break;
+                            }
+                        }
+                    }
+                    //
+
+                    IntRect preview_window = getFrame(structure_properties[build_list[index]].start_index["default"], preview);
+
+                    preview.setTextureRect(preview_window);
+                    if(preview_obstructed){
+                        preview.setColor(Color(225,55,55,215));
+                    }
+                    else{
+                        preview.setColor(Color(125,125,225,215));
+                    }
+                    //
+
+                    sprites.push_back(preview);
+
+                    if(input.lmb_released && !preview_obstructed){
+                        structures[selected_structure_id]->upgrade(build_list[index]);
+                        selected_structure_id = "";
+                    }
                 }
                 else{
-                    captions.push_back(Caption(build_list[index], font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
+                    window_captions.push_back(Caption(build_list[index], font_id, anchor, character_size, text_colour, "left")); //generate a left-oriented caption at the current value of the anchor
                 }
-                rectangles.push_back(createLine(anchor+Vector2f(0,character_size),Vector2f(-1,0),build_menu_width-(2*margin),text_colour)); //draw a line between this item and the next one
+                window_rectangles.push_back(createLine(anchor+Vector2f(0,character_size),Vector2f(-1,0),build_menu_width-(2*margin),text_colour)); //draw a line between this item and the next one
                 anchor = anchor + Vector2f(0,build_menu_item_thickness); //shift the anchor down the screen by the item thickness
             }
         }
@@ -344,7 +408,9 @@ void VisualsStruct::update(RenderWindow &window, InputStruct input, Terrain &ter
     }
  
 }
-void VisualsStruct::draw(RenderWindow &window){
+void VisualsStruct::draw(RenderWindow &window, View &world_view, View &window_view){
+
+    window.setView(world_view);
 
     for(vector<RectangleShape>::iterator i = rectangles.begin(); i != rectangles.end(); i++){
         window.draw(*i);
@@ -353,6 +419,18 @@ void VisualsStruct::draw(RenderWindow &window){
         i->draw(window);
     }
     for(vector<Sprite>::iterator i = sprites.begin(); i != sprites.end(); i++){
+        window.draw(*i);
+    }
+
+    window.setView(window_view);
+
+    for(vector<RectangleShape>::iterator i = window_rectangles.begin(); i != window_rectangles.end(); i++){
+        window.draw(*i);
+    }
+    for(vector<Caption>::iterator i = window_captions.begin(); i != window_captions.end(); i++){
+        i->draw(window);
+    }
+    for(vector<Sprite>::iterator i = window_sprites.begin(); i != window_sprites.end(); i++){
         window.draw(*i);
     }
 }

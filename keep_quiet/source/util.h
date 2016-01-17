@@ -21,11 +21,27 @@ struct Caption{
     void draw(RenderWindow &window);
 };
 
+struct Animation{
+
+	Animation();
+	Animation(int c_start, int c_end, bool c_looping = false);
+
+	int start_frame;
+	int end_frame;
+	bool is_looping;
+	int current_frame;
+	double time_since_last_frame;
+
+	bool play(double dt, Sprite &sprite, double fps = 16.0);
+};
+
 RectangleShape createBoundingRectangle(Sprite sprite, Color color);
+RectangleShape createBoundingRectangle(FloatRect rect, Color color);
 CircleShape createBoundingCircle(Sprite sprite, Color color, double margin = 0);
 RectangleShape createRectangle(Vector2f new_position, Vector2f new_size, int outline_width, Color fill_color, Color outline_color);
 RectangleShape createLine(Vector2f start_position, Vector2f axis, double length, Color color);
 Sprite createSprite(string texture_id, Vector2f position, string bias = "middle");
+Sprite* createNewSprite(string texture_id, Vector2f position, string bias = "middle");
 //
 
 //useful transformations/conversions
@@ -34,22 +50,9 @@ string asString(double number);
 Vector2f getPerpendicularAxis(Vector2f axis);
 Vector2f normalize(Vector2f v);
 Vector2f rotateAboutOrigin(Vector2f p, double degrees);
-Sprite* formatSprite(Sprite* sprite, double x, double y);
-Sprite* formatSprite(Sprite* sprite, double x, double y, double width, double height);
-Vector2f wrapPoint(Vector2f point, Terrain &terrain);
 double dot(Vector2f a, Vector2f b);
 double getRotationFromAxis(Vector2f axis);
-void untangleSprite(Sprite &sprite, FloatRect rect);
-void untangleSprites(Sprite &a, Sprite &b);
-void keepSpriteOutOfTerrain(Sprite &sprite, Terrain &terrain);
 //
-
-bool isIntersectingTerrain(Sprite a, Terrain &terrain);
-bool isIntersectingTerrain(Structure &a, Terrain &terrain);
-bool isIntersecting(Structure &a, Structure &b, double tolerance = 0);
-bool isIntersecting(Sprite a, Structure &b, double tolerance = 0);
-bool isIntersecting(Structure &a, Sprite b, double tolerance = 0);
-bool isIntersecting(Sprite a, Sprite b, double tolerance = 0);
 
 //file and memory management
 void loadConfigs();
@@ -61,6 +64,7 @@ void destroyTextures();
 //retrieval functions
 Texture* getTexture(string key);
 IntRect getTextureRect(string key);
+IntRect getFrame(int frame_index, Sprite &sprite);
 //
 
 //checks

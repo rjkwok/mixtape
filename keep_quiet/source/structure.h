@@ -26,20 +26,21 @@ struct StructureProperties{
 	string texture_id;
 	string icon_id;
 
-	map<string, int> frame_names;
-
-	IntRect getFrame(string frame_name);
-
+	map<string, int> start_index;
+	map<string, int> end_index;
+	map<string, bool> is_looping;
 };
 
 struct Worker{
 
 	//entity that can fill production slots in structures
-	//controls a representation of itself, a rebel npc, that moves and animates according to worker's current task
+	//SmartWorker is the actual class with the AI, but it inherits from this one so that this one can outline the size of a Worker object for the Structure class defined below	
 
 	Worker();
 
 	string tasked_structure_id;
+	Sprite* sprite;
+
 };
 
 struct Structure{
@@ -68,12 +69,18 @@ struct Structure{
 	int fuel;
 	//
 
+	FloatRect bounds;
 	map<string, Sprite> sprite;
+	map<string, map<string, Animation> > animation;
+	map<string, string> current_animation_name;
 	vector<string> upgrade_names;
 
+	void recalculateBounds();
+	void dismissWorkers();
 	void update(double dt, int total_construction, int surplus_power);
 	void draw(RenderWindow &window);
 
+	bool hasUpgrade(string upgrade_name);
 	int getMaxWorkers();
 	int getMaxFuel();
 	int getMaxAmmunition();
@@ -83,6 +90,16 @@ struct Structure{
 	double getFuelConsumption();
 
 	void upgrade(string upgrade_name);
+};
+
+struct SmartWorker: public Worker{
+
+	//controls a representation of itself, a rebel npc, that moves and animates according to worker's current task
+
+	SmartWorker();
+	SmartWorker(Sprite* c_sprite);
+
+	void update(double dt, map<string, Structure*> &structures);
 };
 
 #endif

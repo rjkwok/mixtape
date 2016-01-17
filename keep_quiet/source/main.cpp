@@ -69,7 +69,7 @@ int main(){
     //initialize world structures
     Terrain terrain = Terrain(Vector2f(0,window.getSize().y),64,1000,24); //Passed every time a function needs to work with the terrain. Encapsulates terrain limits, resolution, origin, mapping, and visuals.
     map<string, Sprite*> character_sprites; //holds the sprite of any moving NPC or player in the game
-    map<string, Worker*> workers; //worker struct contains a pointer to a sprite in character_sprites, worker NPCs stored in this structure to run AI processes and also for easy counting
+    map<string, SmartWorker*> workers; //worker struct contains a pointer to a sprite in character_sprites, worker NPCs stored in this structure to run AI processes and also for easy counting
     map<string, Structure*> structures; //holds all "structures" which are non-moving user-placed entities in the game world that contribute to the base variables each tick
     vector<Sprite*> back_1; //stores all the decorations that will render on the 1st background layer
     vector<Sprite*> back_2; //stores all the decorations that will render on the 2nd background layer
@@ -77,14 +77,19 @@ int main(){
     //
 
     //drop in some ferns as placeholder "characters" for collision testing
-    character_sprites["fern1"] = formatSprite(new Sprite(*textures["fern"]),200,-200);
-    character_sprites["fern2"] = formatSprite(new Sprite(*textures["fern"]),500,-200);
-    character_sprites["fern3"] = formatSprite(new Sprite(*textures["fern"]),1000,-200);
+    character_sprites["fern1"] = createNewSprite("fern", Vector2f(200,-200));
+    character_sprites["fern2"] = createNewSprite("fern", Vector2f(500,-200));
+    character_sprites["fern3"] = createNewSprite("fern", Vector2f(1000,-200));
+    workers["Galahad"] = new SmartWorker(character_sprites["fern2"]);
+    workers["Lancelot"] = new SmartWorker(character_sprites["fern3"]);
     //
 
     //assign the player pointer, which is used to send movement commands to the player as well as provide something for the cameras to track
     Sprite* player = character_sprites["fern1"];
     view.setCenter(player->getPosition().x,player->getPosition().y);
+
+    double player_dy = 0;
+    double player_ddy = 0;
     //
 
 	//terrain generation
@@ -115,7 +120,8 @@ int main(){
     //
 
     //generate the backdrop
-	back_3.push_back(formatSprite(new Sprite(*getTexture("sky")),0,-7500.0 + (1.1*window.getSize().y),15000,15000)); 
+	back_3.push_back(createNewSprite("sky",Vector2f(0,-7500.0 + (1.1*window.getSize().y))));
+    back_3[back_3.size()-1]->setTextureRect(IntRect(0,0,15000,15000)); 
     //
 
    	//main program loop
@@ -137,17 +143,14 @@ int main(){
     	if(ui_input.keys_released.count("esc") != 0){
     		window.close();
     	}
-    	if(ui_input.keys_held.count("a") != 0){
+        if(ui_input.keys_released.count("space") != 0 && distanceFromGround(player->getGlobalBounds(), terrain) < terrain.tile_size/2.0){ //jump, but only if the player is close enough to a ground surface
+            player_dy -= 900;
+        }
+    	if(ui_input.keys_held.count("a") != 0){ //user directly controls player velocity on the x axis
     		player->move(-1000*dt,0);
     	}
-    	if(ui_input.keys_held.count("d") != 0){
+    	if(ui_input.keys_held.count("d") != 0){ //user directly controls player velocity on the x axis
     		player->move(1000*dt,0);
-    	}
-    	if(ui_input.keys_held.count("s") != 0){
-    		player->move(0,1000*dt);
-    	}
-    	if(ui_input.keys_held.count("w") != 0){
-    		player->move(0,-1000*dt);
     	}
         if(ui_input.keys_held.count("lshift") != 0){
             scaleView(view, window_view, 4*ui_input.mmb_delta*dt);
@@ -162,6 +165,28 @@ int main(){
 
             i->second->update(dt, total_construction, total_power - used_power);
         }
+        //
+
+        //update workers
+        for(map<string, SmartWorker*>::iterator i = workers.begin(); i != workers.end(); i++){
+
+            i->second->update(dt, structures);
+        }
+        //
+
+        //update player
+        if(distanceFromGround(player->getGlobalBounds(), terrain) > 0){ //if the player is in the air, enact a gravitational acceleration
+            player_ddy = 3000;
+        }
+        else{ //if the player is on the ground, downwards acceleration and velocity should both be 0
+            player_ddy = 0;
+            if(player_dy > 0){
+                player_dy = 0;
+            }
+        }
+        //accelerate and move the player on the y axis
+        player_dy += (player_ddy*dt);
+        player->move(0,player_dy*dt);
         //
 
         //update base statistics dependent on structures
@@ -191,6 +216,7 @@ int main(){
             }
             used_workers += i->second->tasked_workers.size();
         }
+        used_supply += workers.size();
         //
 
         //process movement and collisions ... ALMOST NONE OF THIS COLLISION PROCESSING HAS BEEN OPTIMIZED AND WILL NEED TO BE REVISITED AT SOME POINT
@@ -226,7 +252,6 @@ int main(){
         //move layers and camera to follow player
     	Vector2f player_disp = player->getPosition()-last_player_pos; //store last tick's player position in a variable outside the loop. Use after player is processed to determine how far the player moved and set this as that.
     	last_player_pos = player->getPosition();
-
     	view.move(player_disp.x,player_disp.y);
     	back_view_1.move(player_disp.x*back_speed_1,player_disp.y*back_speed_1);
     	back_view_2.move(player_disp.x*back_speed_2,player_disp.y*back_speed_2);
@@ -322,8 +347,7 @@ int main(){
     	}
 
         //draw ui
-    	window.setView(window_view);
-    	ui_visuals.draw(window);
+    	ui_visuals.draw(window, view, window_view);
     	window.setView(view);
         //
 
@@ -337,7 +361,7 @@ int main(){
     for(map<string, Sprite*>::iterator i = character_sprites.begin(); i != character_sprites.end(); i++){
         delete i->second;
     }
-    for(map<string, Worker*>::iterator i = workers.begin(); i != workers.end(); i++){
+    for(map<string, SmartWorker*>::iterator i = workers.begin(); i != workers.end(); i++){
         delete i->second;
     }
     for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){

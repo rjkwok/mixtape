@@ -21,9 +21,10 @@
 
 #include "tinystr.h"
 #include "tinyxml.h"
+#include "util.h"
 #include "structure.h"
 #include "terrain.h"
-#include "util.h"
+#include "collision.h"
 #include "ui.h"
 
 #endif

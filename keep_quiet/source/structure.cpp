@@ -21,18 +21,38 @@ StructureProperties::StructureProperties(){
     render_order = 0;
 }
 
-IntRect StructureProperties::getFrame(string frame_name){
-
-	int index = frame_names[frame_name];
-	IntRect frame_window = getTextureRect(texture_id);
-    frame_window.left = frame_window.width*(int(index * frame_window.width) % int(getTexture(texture_id)->getSize().x))/double(frame_window.width);
-    frame_window.top = frame_window.height*(((index - (int(index * frame_window.width) % int(getTexture(texture_id)->getSize().x))/double(frame_window.width))*frame_window.width)/getTexture(texture_id)->getSize().x);
-    return frame_window;
-}
-
 Worker::Worker(){
 
     tasked_structure_id = "";
+}
+
+SmartWorker::SmartWorker(){
+
+    tasked_structure_id = "";
+}
+
+SmartWorker::SmartWorker(Sprite* c_sprite){
+
+	sprite = c_sprite;
+	tasked_structure_id = "";
+}
+
+void SmartWorker::update(double dt, map<string, Structure*> &structures){
+
+	if(tasked_structure_id != ""){
+
+		Vector2f target = Vector2f(structures[tasked_structure_id]->bounds.left + (structures[tasked_structure_id]->bounds.width/2.0),structures[tasked_structure_id]->bounds.top + structures[tasked_structure_id]->bounds.height);
+		Vector2f direction = normalize(target - sprite->getPosition());
+		double speed = 400;
+		Vector2f displacement = direction * (speed * dt);
+		sprite->move(displacement.x,displacement.y);
+	}
+	else{
+		Vector2f direction = normalize(Vector2f(randSign()*randInt(30),randSign()*randInt(30)));
+		double speed = 400;
+		Vector2f displacement = direction * (speed * dt);
+		sprite->move(displacement.x,displacement.y);
+	}
 }
 
 Structure::Structure(){}
@@ -46,10 +66,18 @@ Structure::Structure(string c_type_name, Vector2f c_position){
     construction_progress = 0;
 
     sprite[type_name] = createSprite(structure_properties[type_name].texture_id, c_position);
-    sprite[type_name].setTextureRect(structure_properties[type_name].getFrame("construction"));
-    
+
+    for(map<string, int>::iterator i = structure_properties[type_name].start_index.begin(); i != structure_properties[type_name].start_index.end(); i++){
+
+    	animation[type_name][i->first] = Animation(i->second, structure_properties[type_name].end_index[i->first], structure_properties[type_name].is_looping[i->first]);
+    }
+    current_animation_name[type_name] = "construction";
+    sprite[type_name].setTextureRect(getFrame(structure_properties[type_name].start_index["construction"], sprite[type_name]));
+
     ammunition = 0;
     fuel = 0;
+
+    recalculateBounds();
 
 }
 
@@ -110,7 +138,29 @@ double Structure::getFuelConsumption(){
 	return total;
 }
 
+void Structure::recalculateBounds(){
+
+	double top = sprite[type_name].getGlobalBounds().top;
+	double left = sprite[type_name].getGlobalBounds().left;
+	double bottom = top + sprite[type_name].getGlobalBounds().height;
+	double right = left + sprite[type_name].getGlobalBounds().width;
+
+	for(map<string,Sprite>::iterator i = sprite.begin(); i != sprite.end(); i++){
+		if(i->first == type_name){ continue; } //all the values are initialized off this item so no point comparing against this item
+
+		FloatRect rect = i->second.getGlobalBounds();
+		if(rect.top < top){ top = rect.top; }
+		if(rect.top + rect.height > bottom){ bottom = rect.top + rect.height; }
+		if(rect.left < left){ left = rect.left; }
+		if(rect.left + rect.width > right){ right = rect.left + rect.width; }
+	}
+
+	bounds = FloatRect(left, top, right-left, bottom-top);
+}
+
 void Structure::upgrade(string upgrade_name){
+
+	dismissWorkers();
 
 	upgrade_names.push_back(upgrade_name);
 
@@ -118,19 +168,45 @@ void Structure::upgrade(string upgrade_name){
     construction_name = upgrade_name;
     construction_progress = 0;
 
-    sprite[upgrade_name] = createSprite(structure_properties[upgrade_name].texture_id, sprite[type_name].getPosition());
-    sprite[upgrade_name].setTextureRect(structure_properties[upgrade_name].getFrame("construction"));
+    sprite[upgrade_name] = createSprite(structure_properties[upgrade_name].texture_id, Vector2f(sprite[type_name].getPosition().x, sprite[type_name].getPosition().y - ((getTextureRect(structure_properties[upgrade_name].texture_id).height - getTextureRect(structure_properties[type_name].texture_id).height)/2.0)));
+    for(map<string, int>::iterator i = structure_properties[upgrade_name].start_index.begin(); i != structure_properties[upgrade_name].start_index.end(); i++){
 
+    	animation[upgrade_name][i->first] = Animation(i->second, structure_properties[upgrade_name].end_index[i->first], structure_properties[upgrade_name].is_looping[i->first]);
+    }
+    current_animation_name[upgrade_name] = "construction";
+    sprite[upgrade_name].setTextureRect(getFrame(structure_properties[upgrade_name].start_index["construction"], sprite[upgrade_name]));
+
+    recalculateBounds();
+
+}
+
+bool Structure::hasUpgrade(string upgrade_name){
+
+	for(vector<string>::iterator i = upgrade_names.begin(); i != upgrade_names.end(); i++){
+		if(*i == upgrade_name){ return true; }
+	}
+	return false;
+}
+
+void Structure::dismissWorkers(){
+
+	for(vector<Worker*>::iterator i = tasked_workers.begin(); i != tasked_workers.end(); i++){
+        Worker* w = *i;
+        w->tasked_structure_id = "";
+    }
+	tasked_workers.clear();
 }
 
 void Structure::update(double dt, int total_construction, int surplus_power){
 
-	//display tasked/max workers above structure
-    for(int index = 0; index < getMaxWorkers(); index++){
+	//run animations
+    for(map<string,string>::iterator i = current_animation_name.begin(); i != current_animation_name.end(); i++){
 
-        if(index < tasked_workers.size()){
-            //display stick-man as filled instead of hollow to indicate the tasked worker
-        }
+    	if(i->second == "construction"){ continue; } //construction animation is executed at a special fps further down in this function
+    	if(!animation[i->first][i->second].play(dt, sprite[i->first])){
+    		//if animation has stopped playing
+    		i->second = "default";
+    	}
     }
     //
 
@@ -139,31 +215,25 @@ void Structure::update(double dt, int total_construction, int surplus_power){
 
     	contributing = false;
 
-    	//display tasked/max workers above structure
-        int max_construction_workers = 4;
-        for(int index = 0; index < max_construction_workers; index++){
-
-            if(index < tasked_workers.size()){
-                //display stick-man as filled instead of hollow to indicate the tasked worker
-            }
-        }
-        //
         double construction_rate = total_construction * tasked_workers.size();
         construction_progress += (construction_rate*dt);
 
+        int total_frames = (animation[construction_name]["construction"].end_frame - animation[construction_name]["construction"].start_frame) + 1;
+        double progress_per_frame = structure_properties[construction_name].construction_cost/total_frames;
+        double construction_fps = (construction_rate/progress_per_frame);
+        animation[construction_name]["construction"].play(dt, sprite[construction_name], construction_fps);
+
         if(construction_progress >= structure_properties[construction_name].construction_cost){
-	        //if progress is completed set texture to complete texture
-	        sprite[construction_name].setTextureRect(structure_properties[construction_name].getFrame("default"));
+	        //if progress is completed set animation to default
+	        current_animation_name[construction_name] = "default";
 
 	        //also dismiss all construction workers
-	        for(vector<Worker*>::iterator i = tasked_workers.begin(); i != tasked_workers.end(); i++){
-	            Worker* w = *i;
-	            w->tasked_structure_id = "";
-	        }
+	        dismissWorkers();
+
+	        //end and reset the construction process
 	        construction_progress = 0;
 	        construction_name = "";
-	        tasked_workers.clear();
-	        //
+
 	    }
 	    return; //don't bother with the rest of the function since the structure is under construction
     }
@@ -190,29 +260,38 @@ void Structure::update(double dt, int total_construction, int surplus_power){
 
 void Structure::draw(RenderWindow &window){
 
-	window.draw(sprite[type_name]);
-
 	//draws sprite from lowest-to-highest render order via lookup (no sorted data structure)
 	set<string> already_drawn;
-	while(already_drawn.size() < upgrade_names.size()){
-		int index_to_draw = -1;
+	while(already_drawn.size() < sprite.size()){
+		string name_to_draw = "";
 		int current_bottom_layer = -1;
-		for(int index = 0; index < upgrade_names.size(); index++){
-			if(already_drawn.count(upgrade_names[index]) == 0){
-				index_to_draw = index;
-				current_bottom_layer = structure_properties[upgrade_names[index]].render_order;
+		for(map<string, Sprite>::iterator i = sprite.begin(); i != sprite.end(); i++){
+			if(already_drawn.count(i->first) == 0){
+				name_to_draw = i->first;
+				if(i->first == type_name){ current_bottom_layer = 1;}
+				else{
+					current_bottom_layer = structure_properties[i->first].render_order;
+				}
 				break;
 			}
 		}
-		for(int index = 0; index < upgrade_names.size(); index++){
-			if(already_drawn.count(upgrade_names[index]) != 0){ continue; }
-			if(structure_properties[upgrade_names[index]].render_order < current_bottom_layer){
-				current_bottom_layer = structure_properties[upgrade_names[index]].render_order;
-				index_to_draw = index;
+		for(map<string, Sprite>::iterator i = sprite.begin(); i != sprite.end(); i++){
+			if(already_drawn.count(i->first) != 0){ continue; }
+			if(i->first == type_name){
+				if(1 < current_bottom_layer){
+					current_bottom_layer = 1;
+					name_to_draw = type_name;
+				}
+			}
+			else{
+				if(structure_properties[i->first].render_order < current_bottom_layer){
+					current_bottom_layer = structure_properties[i->first].render_order;
+					name_to_draw = i->first;
+				}
 			}
 		}
-		window.draw(sprite[upgrade_names[index_to_draw]]);
-		already_drawn.insert(upgrade_names[index_to_draw]);
+		window.draw(sprite[name_to_draw]);
+		already_drawn.insert(name_to_draw);
 	}
     
 }
