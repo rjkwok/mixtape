@@ -24,6 +24,7 @@
 #include "util.h"
 #include "structure.h"
 #include "terrain.h"
+#include "ship.h"
 #include "collision.h"
 #include "ui.h"
 

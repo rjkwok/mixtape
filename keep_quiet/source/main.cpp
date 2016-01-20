@@ -9,6 +9,7 @@ map<string, Texture*> textures;
 map<string, IntRect> texture_rects;
 map<int, TileProperties> tile_properties;
 map<string, StructureProperties> structure_properties;
+map<string, ShipProperties> ship_properties;
 set<int> collidable_terrain_types;
 map<string, Font> fonts;
 //
@@ -67,7 +68,7 @@ int main(){
     //
 
     //initialize world structures
-    Terrain terrain = Terrain(Vector2f(0,window.getSize().y),64,1000,24); //Passed every time a function needs to work with the terrain. Encapsulates terrain limits, resolution, origin, mapping, and visuals.
+    Terrain terrain = Terrain(Vector2f(0,window.getSize().y),32,2000,48); //Passed every time a function needs to work with the terrain. Encapsulates terrain limits, resolution, origin, mapping, and visuals.
     map<string, Sprite*> character_sprites; //holds the sprite of any moving NPC or player in the game
     map<string, SmartWorker*> workers; //worker struct contains a pointer to a sprite in character_sprites, worker NPCs stored in this structure to run AI processes and also for easy counting
     map<string, Structure*> structures; //holds all "structures" which are non-moving user-placed entities in the game world that contribute to the base variables each tick
@@ -93,15 +94,15 @@ int main(){
     //
 
 	//terrain generation
-    int top_index = 12; //starting point for the algorithm
+    int top_index = 24; //starting point for the algorithm
     //this simple algorithm just keeps track of a "top index" up to which each column is filled with stone and dirt and grass. For each column iterated over there is a chance that the "top index" can increase or decrease by one.
     for(int index_x = 0; index_x < terrain.max_x; index_x++){
 
         if(index_x % randInt(3) == 0){ top_index += randSign(); } //random chance of having 1 added or subtracted from the "top index" for this column
         if(top_index > terrain.max_y){ top_index = terrain.max_y; } //don't let the top index exceed the bounds of the terrain
-        if(top_index < 12){ top_index = 12; } //don't let the top index fall too low
+        if(top_index < 24){ top_index = 24; } //don't let the top index fall too low
 
-        for(int index_y = top_index-7; index_y < top_index; index_y++){ //for the first 7 blocks under the top index, fill with grass and dirt
+        for(int index_y = top_index-14; index_y < top_index; index_y++){ //for the first 7 blocks under the top index, fill with grass and dirt
             if(index_y == top_index-1){ 
                 terrain.grid[index_x][index_y] = 2; //grass only appears on the very top block
             }
@@ -109,10 +110,10 @@ int main(){
                 terrain.grid[index_x][index_y] = 14; //rest are dirt
             }
         }
-        for(int index_y = 2; index_y < top_index-7; index_y++){ //for the remaining blocks deeper still, fill with stone (except the last two rows)
+        for(int index_y = 4; index_y < top_index-14; index_y++){ //for the remaining blocks deeper still, fill with stone (except the last two rows)
             terrain.grid[index_x][index_y] = 28;
         }
-        for(int index_y = 0; index_y < 2; index_y++){ //last two rows are filled with "bedrock"
+        for(int index_y = 0; index_y < 4; index_y++){ //last two rows are filled with "bedrock"
             terrain.grid[index_x][index_y] = 32;
         }
     }
