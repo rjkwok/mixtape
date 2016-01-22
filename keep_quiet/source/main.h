@@ -22,10 +22,12 @@
 #include "tinystr.h"
 #include "tinyxml.h"
 #include "util.h"
-#include "structure.h"
 #include "terrain.h"
-#include "ship.h"
-#include "collision.h"
+#include "structure.h"
 #include "ui.h"
+#include "ship.h"
+#include "character.h"
+#include "collision.h"
+
 
 #endif

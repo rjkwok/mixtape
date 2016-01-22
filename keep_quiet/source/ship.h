@@ -14,6 +14,7 @@ struct ShipProperties{
 	string type_name;
 	string parent;
 	int render_order;
+	Vector2f relative_position;
 
 	double max_fuel;
 	double fuel_consumption;
@@ -38,10 +39,12 @@ struct Ship{
 	//
 
 	//variables that track the state of the ship
+	string pilot_id;
 	double fuel;
 	Vector2f position;
 	Vector2f velocity;
 	Vector2f acceleration_vector; //direction of acceleration (normalized) determined by user/ai input
+	bool antigrav_enabled;
 	int acceleration_gear; 
 	//
 
@@ -52,7 +55,9 @@ struct Ship{
 	vector<string> upgrade_names;
 
 	void recalculateBounds();
-	void update(double dt);
+	void controlFromInput(InputStruct input);
+	void updateSpritePositions();
+	void update(double dt, Terrain &terrain);
 	void draw(RenderWindow &window);
 
 	bool hasUpgrade(string upgrade_name);

@@ -1,29 +1,8 @@
 <?xml version="1.0" ?>
 
-<Structure name="Toolbench" texture_id="toolbench" icon_id="">
+<Structure name="Cantina" exterior_texture_id="toolshed" backdrop_texture_id="toolbench_camo" door_texture_id="tree" tiles_across="100" tiles_up="100" grid_origin_x="-384" grid_origin_y="384" exterior_offset_x="0" exterior_offset_y="0" backdrop_offset_x="0" backdrop_offset_y="0">
 
-	<construction_contribution>1</construction_contribution>
-	<construction_cost>10</construction_cost>
-	<max_workers>1</max_workers>
-
-	<anim start="0" end="0" looping="yes">default</anim>
-	<anim start="1" end="6" looping="no">construction</anim>
-
-</Structure>
-<Structure name="Toolshed" texture_id="toolshed" icon_id="" parent="Toolbench" render_order="0">
-
-	<construction_contribution>1</construction_contribution>
-	<construction_cost>20</construction_cost>
-
-	<anim start="0" end="0" looping="yes">default</anim>
-	<anim start="1" end="6" looping="no">construction</anim>
-
-</Structure>
-<Structure name="Camoflauge" texture_id="toolbench_camo" icon_id="" parent="Toolbench" render_order="2">
-
-	<construction_cost>10</construction_cost>
-
-	<anim start="0" end="0" looping="yes">default</anim>
-	<anim start="1" end="1" looping="no">construction</anim>
+	<tile x="1" y="1">28</tile>
+	<deco id="fern1" x="20" y="20">fern</deco>
 
 </Structure>

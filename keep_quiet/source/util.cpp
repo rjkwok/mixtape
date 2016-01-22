@@ -8,6 +8,8 @@ extern map<string, IntRect> texture_rects;
 extern set<int> collidable_terrain_types;
 extern map<int, TileProperties> tile_properties;
 extern map<string, StructureProperties> structure_properties;
+extern map<string, ShipProperties> ship_properties;
+extern map<string, CharacterProperties> character_properties;
 extern map<string, Font> fonts;
 
 
@@ -200,6 +202,9 @@ Sprite createSprite(string texture_id, Vector2f position, string bias){
     else if(bias == "middle"){
         sprite.setOrigin(rect.width/2,rect.height/2);
     }
+    else if(bias == "bottom middle"){
+        sprite.setOrigin(rect.width/2,rect.height);
+    }
     else if(bias == "right"){
         sprite.setOrigin(rect.width,rect.height/2);
     }
@@ -219,6 +224,9 @@ Sprite* createNewSprite(string texture_id, Vector2f position, string bias){
     }
     else if(bias == "middle"){
         sprite->setOrigin(rect.width/2,rect.height/2);
+    }
+    else if(bias == "bottom middle"){
+        sprite->setOrigin(rect.width/2,rect.height);
     }
     else if(bias == "right"){
         sprite->setOrigin(rect.width,rect.height/2);
@@ -344,6 +352,58 @@ void loadConfigs(){
         StructureProperties new_properties = StructureProperties();
 
         new_properties.type_name = parser->Attribute("name");
+
+        if(parser->Attribute("tiles_across") != NULL){
+            new_properties.grid_size.x = static_cast<int>(strtod(parser->Attribute("tiles_across"),NULL));
+        }
+        if(parser->Attribute("tiles_up") != NULL){
+            new_properties.grid_size.y = static_cast<int>(strtod(parser->Attribute("tiles_up"),NULL));
+        }
+        if(parser->Attribute("grid_origin_x") != NULL){
+            new_properties.grid_origin.x = strtod(parser->Attribute("grid_origin_x"),NULL);
+        }
+        if(parser->Attribute("grid_origin_y") != NULL){
+            new_properties.grid_origin.y = strtod(parser->Attribute("grid_origin_y"),NULL);
+        }
+
+        new_properties.backdrop_texture_id = parser->Attribute("backdrop_texture_id");
+        new_properties.door_texture_id = parser->Attribute("door_texture_id");
+        new_properties.exterior_texture_id = parser->Attribute("exterior_texture_id");
+        
+        if(parser->Attribute("exterior_offset_x") != NULL){
+            new_properties.exterior_offset.x = strtod(parser->Attribute("exterior_offset_x"),NULL);
+        }
+        if(parser->Attribute("exterior_offset_y") != NULL){
+            new_properties.exterior_offset.y = strtod(parser->Attribute("exterior_offset_y"),NULL);
+        }
+        if(parser->Attribute("backdrop_offset_x") != NULL){
+            new_properties.backdrop_offset.x = strtod(parser->Attribute("backdrop_offset_x"),NULL);
+        }
+        if(parser->Attribute("backdrop_offset_y") != NULL){
+            new_properties.backdrop_offset.y = strtod(parser->Attribute("backdrop_offset_y"),NULL);
+        }
+
+        for(TiXmlElement* i = parser->FirstChildElement("tile"); i != NULL; i = i->NextSiblingElement("tile")){
+
+            new_properties.grid[static_cast<int>(strtod(i->Attribute("x"),NULL))][static_cast<int>(strtod(i->Attribute("y"),NULL))] = static_cast<int>(strtod(i->GetText(),NULL));
+        }
+        for(TiXmlElement* i = parser->FirstChildElement("deco"); i != NULL; i = i->NextSiblingElement("deco")){
+
+            new_properties.deco_position[i->Attribute("id")] = Vector2f(strtod(i->Attribute("x"),NULL),strtod(i->Attribute("y"),NULL));
+            new_properties.deco_texture_id[i->Attribute("id")] = i->GetText();
+        }
+
+        structure_properties[new_properties.type_name] = new_properties;
+    }
+
+    TiXmlDocument doc4("ships.xml");
+    doc4.LoadFile();
+
+    for(TiXmlElement* parser = doc4.FirstChildElement("Ship"); parser!=NULL; parser = parser->NextSiblingElement("Ship"))
+    {
+        ShipProperties new_properties = ShipProperties();
+
+        new_properties.type_name = parser->Attribute("name");
         new_properties.texture_id = parser->Attribute("texture_id");
         new_properties.icon_id = parser->Attribute("icon_id");
         
@@ -353,29 +413,23 @@ void loadConfigs(){
         if(parser->Attribute("render_order") != NULL){
             new_properties.render_order = static_cast<int>(strtod(parser->Attribute("render_order"),NULL));
         }
-        if(parser->FirstChildElement("max_workers") != NULL){
-            new_properties.max_workers = static_cast<int>(strtod(parser->FirstChildElement("max_workers")->GetText(),NULL));
+        if(parser->Attribute("x") != NULL){
+            new_properties.relative_position.x = strtod(parser->Attribute("x"),NULL);
         }
-        if(parser->FirstChildElement("max_ammunition") != NULL){
-            new_properties.max_ammunition = static_cast<int>(strtod(parser->FirstChildElement("max_ammunition")->GetText(),NULL));
+        if(parser->Attribute("y") != NULL){
+            new_properties.relative_position.y = strtod(parser->Attribute("y"),NULL);
+        }
+        if(parser->FirstChildElement("max_gear") != NULL){
+            new_properties.max_gear = static_cast<int>(strtod(parser->FirstChildElement("max_gear")->GetText(),NULL));
         }
         if(parser->FirstChildElement("max_fuel") != NULL){
-            new_properties.max_fuel = static_cast<int>(strtod(parser->FirstChildElement("max_fuel")->GetText(),NULL));
+            new_properties.max_fuel = strtod(parser->FirstChildElement("max_fuel")->GetText(),NULL);
         }
-        if(parser->FirstChildElement("power_contribution") != NULL){
-            new_properties.power_contribution = static_cast<int>(strtod(parser->FirstChildElement("power_contribution")->GetText(),NULL));
-        }
-        if(parser->FirstChildElement("construction_contribution") != NULL){
-            new_properties.construction_contribution = static_cast<int>(strtod(parser->FirstChildElement("construction_contribution")->GetText(),NULL));
-        }
-        if(parser->FirstChildElement("supply_contribution") != NULL){
-            new_properties.supply_contribution = static_cast<int>(strtod(parser->FirstChildElement("supply_contribution")->GetText(),NULL));
+        if(parser->FirstChildElement("max_speed") != NULL){
+            new_properties.max_speed = strtod(parser->FirstChildElement("max_speed")->GetText(),NULL);
         }
         if(parser->FirstChildElement("fuel_consumption") != NULL){
             new_properties.fuel_consumption = strtod(parser->FirstChildElement("fuel_consumption")->GetText(),NULL);
-        }
-        if(parser->FirstChildElement("construction_cost") != NULL){
-            new_properties.construction_cost = strtod(parser->FirstChildElement("construction_cost")->GetText(),NULL);
         }
 
         for(TiXmlElement* i = parser->FirstChildElement("anim"); i != NULL; i = i->NextSiblingElement("anim")){
@@ -391,7 +445,33 @@ void loadConfigs(){
             }
         }
 
-        structure_properties[new_properties.type_name] = new_properties;
+        ship_properties[new_properties.type_name] = new_properties;
+    }
+
+    TiXmlDocument doc5("characters.xml");
+    doc5.LoadFile();
+
+    for(TiXmlElement* parser = doc5.FirstChildElement("Character"); parser!=NULL; parser = parser->NextSiblingElement("Character"))
+    {
+        CharacterProperties new_properties = CharacterProperties();
+
+        new_properties.type_name = parser->Attribute("name");
+        new_properties.texture_id = parser->Attribute("texture_id");
+
+        for(TiXmlElement* i = parser->FirstChildElement("anim"); i != NULL; i = i->NextSiblingElement("anim")){
+
+            new_properties.start_index[i->GetText()] = static_cast<int>(strtod(i->Attribute("start"),NULL));
+            new_properties.end_index[i->GetText()] = static_cast<int>(strtod(i->Attribute("end"),NULL));
+            string looping = i->Attribute("looping");
+            if(looping=="yes"){
+                new_properties.is_looping[i->GetText()] = true;
+            }
+            else{
+                new_properties.is_looping[i->GetText()] = false;
+            }
+        }
+
+        character_properties[new_properties.type_name] = new_properties;
     }
 }
 

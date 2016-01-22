@@ -16,6 +16,7 @@ ShipProperties::ShipProperties(){
     max_gear = 0;
     parent = "";
     render_order = 0;
+    relative_position = Vector2f(0,0);
 }
 
 Ship::Ship(){}
@@ -24,7 +25,7 @@ Ship::Ship(string c_type_name, Vector2f c_position){
 
 	type_name = c_type_name;
 
-    sprite[type_name] = createSprite(ship_properties[type_name].texture_id, c_position);
+    sprite[type_name] = createSprite(ship_properties[type_name].texture_id, c_position + ship_properties[type_name].relative_position);
 
     for(map<string, int>::iterator i = ship_properties[type_name].start_index.begin(); i != ship_properties[type_name].start_index.end(); i++){
 
@@ -34,6 +35,11 @@ Ship::Ship(string c_type_name, Vector2f c_position){
     sprite[type_name].setTextureRect(getFrame(ship_properties[type_name].start_index["default"], sprite[type_name]));
 
     fuel = 0;
+    acceleration_gear = 1;
+    antigrav_enabled = false;
+    position = c_position;
+    velocity = Vector2f(0,0);
+    acceleration_vector = Vector2f(0,0);
 
     recalculateBounds();
 
@@ -49,11 +55,12 @@ double Ship::getMaxFuel(){
 }
 double Ship::getFuelConsumption(){
 
+	//fuel consumption is in litres, but this function returns kilolitres
 	double total = ship_properties[type_name].fuel_consumption;
 	for(vector<string>::iterator i = upgrade_names.begin(); i != upgrade_names.end(); i++){
 		total += ship_properties[*i].fuel_consumption;
 	}
-	return total;
+	return total/1000;
 }
 double Ship::getMaxSpeed(){
 
@@ -117,9 +124,38 @@ bool Ship::hasUpgrade(string upgrade_name){
 	return false;
 }
 
-void Ship::update(double dt){
+void Ship::controlFromInput(InputStruct input){
 
-	double acceleration_per_gear = 10;
+	Vector2f direction = Vector2f(0,0);
+
+	if(input.keys_held.count("a") != 0){
+		direction = direction + Vector2f(-1,0);
+	}
+	if(input.keys_held.count("d") != 0){
+		direction = direction + Vector2f(1,0);
+	}
+	if(input.keys_held.count("w") != 0){
+		direction = direction + Vector2f(0,-1);
+	}
+	if(input.keys_held.count("s") != 0){
+		direction = direction + Vector2f(0,1);
+	}
+
+	if(direction.x == 0 && direction.y == 0){
+		acceleration_vector = direction;
+	}
+	else{
+		acceleration_vector = normalize(direction);
+	}
+	
+	if(input.keys_released.count("g") != 0){
+		antigrav_enabled = !antigrav_enabled;
+	}
+}
+
+void Ship::update(double dt, Terrain &terrain){
+
+	double acceleration_per_gear = 20000;  //constant throughout game, should define this as such later
 
 	//run animations
     for(map<string,string>::iterator i = current_animation_name.begin(); i != current_animation_name.end(); i++){
@@ -131,22 +167,83 @@ void Ship::update(double dt){
     }
     //
 
+    if(acceleration_vector.x != 0 || acceleration_vector.y != 0){
+    	double target = getRotationFromAxis(acceleration_vector) - 90;
+    	if(target < 0){ target += 360; }
+    	if(target > 360){ target -= 360; }
+    	sprite[type_name].setRotation(sprite[type_name].getRotation() + (16*(target-sprite[type_name].getRotation())*dt));
+    }
+
     //update position and its derivatives
     double acceleration_magnitude = acceleration_gear*acceleration_per_gear;
     Vector2f acceleration = acceleration_vector*acceleration_magnitude;
-    Vector2f gravity = Vector2f(0,3000);
     double required_fuel = acceleration_magnitude*getFuelConsumption()*dt;
-    if(required_fuel >= fuel){
+    if(required_fuel <= fuel){ //fuel is measured in kilolitres
     	fuel -= required_fuel;
-    	velocity = velocity + (acceleration*dt);
+
+    	if(abs(velocity.x + (acceleration.x*dt)) <= getMaxSpeed()){
+    		velocity.x = velocity.x + (acceleration.x*dt);
+    	}
+    	if(velocity.y > 0 || abs(velocity.y + (acceleration.y*dt)) < getMaxSpeed()){
+    		velocity.y = velocity.y + (acceleration.y*dt);
+    	}
     }
-    velocity = velocity + (gravity*dt);
+
+    double gravity_magnitude = 3000; //constant throughout game, should define this as such later
+    double antigrav_required_fuel = gravity_magnitude*getFuelConsumption()*dt;
+    if(antigrav_enabled && antigrav_required_fuel <= fuel){
+    	
+
+    	//hover above ground when antigrav is on
+    	FloatRect hovering_bounds = bounds;
+    	hovering_bounds.top = position.y - hovering_bounds.height;
+       	hovering_bounds.width *= 1.25;
+       	hovering_bounds.left = position.x - (hovering_bounds.width/2.0);
+    	double current_height = distanceFromGround(hovering_bounds, terrain);
+    	double hover_height = 900;
+
+    	if(current_height < hover_height){
+    		fuel -= antigrav_required_fuel;
+    	velocity = velocity - Vector2f(0,gravity_magnitude*dt);
+    		Vector2f hover_velocity;
+    		//if(abs(velocity.x) < terrain.tile_size){
+    			hover_velocity = Vector2f(0,4*(current_height-hover_height));
+    		//}
+    		//else{
+    		//	hover_velocity = Vector2f(0, 1/(2*terrain.tile_size*(1/abs(velocity.x)))*(current_height-hover_height)); //the velocity the ship would need to correct itself up to hovering height within 1/8 a second
+    		//} 
+    		position = position + (hover_velocity*dt);
+
+    		if(velocity.y > 0){
+	    		Vector2f hover_velocity = Vector2f(0, 0); //the velocity the ship would need to correct itself up to hovering height within 1/8 a second
+	    		Vector2f needed_acceleration = Vector2f(0,-velocity.y)*8; //the acceleration the ship needs to achieve that velocity within 1/8 a second
+	    		velocity = velocity + (needed_acceleration*dt); //achieve that velocity 
+	    	}
+    	}
+        
+    	//
+    }
+    velocity = velocity + Vector2f(0,gravity_magnitude*dt);
+    
+
     position = position + (velocity*dt);
+    
+    //update bounds position
+    bounds.top = position.y - bounds.height;
+    bounds.left = position.x - (bounds.width/2.0);
     //
     
     //update sprites relative to the (possibly) new position
-
+    updateSpritePositions();
     //
+}
+
+void Ship::updateSpritePositions(){
+
+	sprite[type_name].setPosition(position + ship_properties[type_name].relative_position);
+    for(vector<string>::iterator i = upgrade_names.begin(); i != upgrade_names.end(); i++){
+    	sprite[*i].setPosition(position + ship_properties[type_name].relative_position);
+    }
 }
 
 void Ship::draw(RenderWindow &window){

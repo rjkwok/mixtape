@@ -11,3 +11,4 @@
 <Tx id="fuel_icon" width="32" height="32" tiled="no" file_path="icon_fuel.png"/>
 <Tx id="filled_worker" width="12" height="16" tiled="no" file_path="icon_filled_worker.png"/>
 <Tx id="empty_worker" width="12" height="16" tiled="no" file_path="icon_empty_worker.png"/>
+<Tx id="transport" width="390" height="273" tiled="no" file_path="transport.png"/>

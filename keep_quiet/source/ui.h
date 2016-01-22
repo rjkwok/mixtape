@@ -32,7 +32,7 @@ struct InputStruct{
 
 struct VisualsStruct{
 
-	//handles all processing and display of UI graphics such as highlights, text, etc.
+	//handles all storage and display of UI graphics such as highlights, text, etc.
 	VisualsStruct();
 
 	vector<Caption> captions;
@@ -42,15 +42,7 @@ struct VisualsStruct{
 	vector<RectangleShape> window_rectangles;
 	vector<Sprite> window_sprites;
 
-	bool show_build_menu;
-	bool show_stats_menu;
-
-	int current_index; //the topmost VISIBLE item in the build menu. Actual topmost is always 0.
-	
-	string selected_type_id;
-	string selected_structure_id;
-
-	void update(RenderWindow &window, InputStruct input, Terrain &terrain, map<string, Structure*> &structures, map<string, SmartWorker*> &workers, int total_ammunition, int total_fuel, int total_cash, int total_power, int total_supply, int total_construction, int total_workers, int used_power, int used_workers, int used_supply);
+	void clear();
 	void draw(RenderWindow &window, View &world_view, View &window_view);
 };
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+
+<Ship name="Transport" x="0" y="-137" texture_id="transport" icon_id="">
+
+	<max_fuel>10000</max_fuel>
+	<max_gear>2</max_gear>
+	<max_speed>6000</max_speed>
+	<fuel_consumption>1</fuel_consumption>
+
+	<anim start="0" end="0" looping="yes">default</anim>
+
+</Ship>

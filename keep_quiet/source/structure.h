@@ -11,95 +11,52 @@ struct StructureProperties{
 	StructureProperties();
 
 	string type_name;
-	string parent;
-	int render_order;
+	
+	map<int, map<int, int> > grid;
+	Vector2i grid_size;
+	Vector2f grid_origin;
 
-	int max_workers; //a constant is used instead of this value when the structure is in "construction" state
-	int max_ammunition;
-	int max_fuel;
-	int power_contribution;
-	int construction_contribution;
-	int supply_contribution;
-	double fuel_consumption;
-	double construction_cost;
+	string backdrop_texture_id;
+	string door_texture_id;
+	string exterior_texture_id;
 
-	string texture_id;
-	string icon_id;
+	Vector2f exterior_offset;
+	Vector2f backdrop_offset;
 
-	map<string, int> start_index;
-	map<string, int> end_index;
-	map<string, bool> is_looping;
-};
-
-struct Worker{
-
-	//entity that can fill production slots in structures
-	//SmartWorker is the actual class with the AI, but it inherits from this one so that this one can outline the size of a Worker object for the Structure class defined below	
-
-	Worker();
-
-	string tasked_structure_id;
-	Sprite* sprite;
-
+	map<string, Vector2f> deco_position; //gives the 2d coordinate within the cell that the decoration is centered at
+	map<string, string> deco_texture_id; //gives the texture id that the decoration will need to build itself from
 };
 
 struct Structure{
 
-	//something that is initiated as an incomplete construction that must have workers tasked to it
-	//evolves into (possible into an inherited class) upon completion, that may provide or draw power, construction rate, or food supply
-	//may require workers to be tasked for production to take place after completion as well
-	//some structures may have to buffer fuel or ammunition and require an interface for that to be loaded
-
 	Structure();
-	Structure(string c_type_name, Vector2f position);
+	Structure(string c_id, string c_type_name, Vector2f position);
 
-	//defines a local copy of structure properties
+	//defines the structure within the world
+	string id;
 	string type_name;
+	Vector2f exterior_position;
 	//
 
-	//variables that track the state of the structure
-	bool contributing; //used by base when tallying all contributions to determine whether or not to tally contributions from this structure
-	string construction_name; //identifies what upgrade is in construction
-	double construction_progress;
-	vector<Worker*> tasked_workers;
+	//renders at the exterior position when outside the structure, and at the origin when inside the structure
+	Sprite door; //the door provides the interface for switching between being inside and outside a structure
 	//
 
-	//buffered stuff
-	int ammunition; 
-	int fuel;
+	//renders as the outside of the structure (at the door position + relative exterior position)
+	Sprite exterior_sprite;
 	//
 
-	FloatRect bounds;
-	map<string, Sprite> sprite;
-	map<string, map<string, Animation> > animation;
-	map<string, string> current_animation_name;
-	vector<string> upgrade_names;
+	//renders as the inside of the structure
+	Terrain terrain; //all tiles default to air unless otherwise specified
+	Sprite backdrop;
+	map<string,Sprite> decorations; //these don't collide but are separate from the backdrop so that they can be selected if need be
+	VertexArray tiles;
+	//
 
-	void recalculateBounds();
-	void dismissWorkers();
-	void update(double dt, int total_construction, int surplus_power);
-	void draw(RenderWindow &window);
+	void drawInterior(RenderWindow &window);
+	void drawExterior(RenderWindow &window);
 
-	bool hasUpgrade(string upgrade_name);
-	int getMaxWorkers();
-	int getMaxFuel();
-	int getMaxAmmunition();
-	int getPowerContribution();
-	int getSupplyContribution();
-	int getConstructionContribution();
-	double getFuelConsumption();
-
-	void upgrade(string upgrade_name);
 };
 
-struct SmartWorker: public Worker{
-
-	//controls a representation of itself, a rebel npc, that moves and animates according to worker's current task
-
-	SmartWorker();
-	SmartWorker(Sprite* c_sprite);
-
-	void update(double dt, map<string, Structure*> &structures);
-};
 
 #endif
