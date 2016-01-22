@@ -67,7 +67,7 @@ int main(){
     //
 
     //drop in a character for the player to puppet
-    characters["fern1"] = new Character("fern1", "Player", Vector2f(200,-200));
+    characters["fern1"] = new Character("fern1", "Player", Vector2f(200,-1500));
     //
 
     //assign the player pointer, which is used to send movement commands to the player as well as provide something for the cameras to track
