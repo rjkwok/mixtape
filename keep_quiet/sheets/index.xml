@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <Tx id="sky" width="100" height="15000" tiled="yes" file_path="sky.png"/>
-<Tx id="tree" width="122" height="125" tiled="no" file_path="tree.png"/>
+<Tx id="tree" width="500" height="738" tiled="no" file_path="tree.png"/>
 <Tx id="fern" width="37" height="50" tiled="no" file_path="fern.png"/>
 <Tx id="terrain" width="256" height="64" tiled="no" file_path="terrain.png"/>
 <Tx id="toolbench" width="119" height="96" tiled="no" file_path="toolbench.png"/>
@@ -12,3 +12,4 @@
 <Tx id="filled_worker" width="12" height="16" tiled="no" file_path="icon_filled_worker.png"/>
 <Tx id="empty_worker" width="12" height="16" tiled="no" file_path="icon_empty_worker.png"/>
 <Tx id="transport" width="390" height="273" tiled="no" file_path="transport.png"/>
+<Tx id="cloud" width="800" height="600" tiled="no" file_path="cloud.png"/>

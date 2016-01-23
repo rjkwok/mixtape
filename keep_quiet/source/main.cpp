@@ -38,12 +38,13 @@ int main(){
     window.setFramerateLimit(70); //limit fps so we don't hog resources
     view.reset(FloatRect(0,0,window.getSize().x,window.getSize().y)); //initialize a view from the window size
     View window_view = view; //fixed "window" view that doesn't shift with the player, used for drawing UI, and also as a reference with which to calculate the current scale of the other transformed views
-    View back_view_1 = view; //1st background layer (renders third)
-    View back_view_2 = view; //2nd background layer (renders second)
-    View back_view_3 = view; //3rd background layer (renders first)
-    double back_speed_1 = 1.0; //1st layer scroll speed fraction (for parallax effect)
-    double back_speed_2 = 0.5; //2nd layer scroll speed fraction (for parallax effect)
-    double back_speed_3 = 0.25; //3rd layer scroll speed fraction (for parallax effect)
+    View background_view = view; //1st background layer (renders third)
+    View sky_view = view; //sky layer (renders second, and never shifts on the x axis)
+    View stars_view = view; //stars layer (renders first)
+    double background_speed = 0.5; //background layer scroll speed fraction (for parallax effect)
+    double sky_speed = 0.25; //sky layer scroll speed fraction (for parallax effect) 
+    double stars_speed = 0.1; //stars layer scroll speed fraction (for parallax effect)
+    double scale = 1.0; //the scale is the same for all views except the window view
     //
 
     //initialize ui modules
@@ -61,9 +62,10 @@ int main(){
     map<string, Character*> characters; //holds the sprite of any moving NPC or player in the game
     map<string, Structure*> structures; //holds all "structures" which are non-moving user-placed entities in the game world that contribute to the base variables each tick
     map<string, Ship*> ships;
-    vector<Sprite*> back_1; //stores all the decorations that will render on the 1st background layer
-    vector<Sprite*> back_2; //stores all the decorations that will render on the 2nd background layer
-    vector<Sprite*> back_3; //stores all the decorations that will render on the 3rd background layer
+    vector<Sprite> foreground; //stores all the decorations that render in the foreground
+    vector<Sprite> background; //stores all the decorations that will render on the 1st background layer
+    vector<RectangleShape> sky;
+    VertexArray stars(Points, 0);
     //
 
     //drop in a character for the player to puppet
@@ -77,6 +79,50 @@ int main(){
     //drop in a ship for testing
     ships["Serenity"] = new Ship("Transport", Vector2f(400, -2600));
     ships["Serenity"]->fuel = 10000;
+    //
+
+    //sky generation
+    double atmosphere_height = 30000; //generation configuration property
+    int atmosphere_resolution = 100; //generation configuration property
+    Color atmosphere_colour = Color(181,255,255,255); //generation configuration property
+    
+    double atmosphere_opacity = 255; 
+    int total_segments = ceil(atmosphere_height/atmosphere_resolution);
+    for(int index = 0; index < total_segments; index++){
+        sky.push_back(createRectangle(Vector2f(window.getSize().x/2.0,((window.getSize().y*4.0) - (atmosphere_resolution/2.0)) - (index*atmosphere_resolution)), Vector2f(window.getSize().x*8.0, atmosphere_resolution), 0, atmosphere_colour, Color(0,0,0,0)));
+        atmosphere_opacity -= 255.0/total_segments;
+        if(atmosphere_opacity < 0){ atmosphere_opacity = 0; }
+        atmosphere_colour.a = atmosphere_opacity;
+    }
+    //
+
+    //star generation
+    int stars_height = 40000; //generation configuration property //upper bound that stars will be generated to
+    int total_constellations = 8000; //generation configuration property //total groups of stars that will be randomly generated
+    int max_stars_per_constellation = 16; //generation configuration property
+    int max_star_spread = 1024; //generation configuration property //radius of each constellation 
+
+    for(int index = 0; index < total_constellations; index++){
+
+        int total_stars = randInt(max_stars_per_constellation);
+        Vector2f constellation_origin = Vector2f(randInt(terrain.max_x)*terrain.tile_size,-randInt(1000)*(stars_height/1000.0));
+
+        for(int star_index = 0; star_index < total_stars; star_index++){
+            Vector2f star_position = constellation_origin + Vector2f(randSign()*randInt(max_star_spread),randSign()*randInt(max_star_spread));
+            stars.append(Vertex(star_position, Color(255,255,255,240)));
+        }
+    }
+   //
+
+    //cloud generation
+    int total_clouds = 200; //generation configuration property
+    double clouds_height = 10000; //generation configuration property
+
+    for(int index = 0; index < total_clouds; index++){
+
+        background.push_back(createSprite("cloud", Vector2f(randInt(terrain.max_x)*terrain.tile_size,-1000-randInt(clouds_height-1000)),"middle"));
+        background[background.size()-1].setScale(4.0,4.0);
+    }
     //
 
 	//terrain generation
@@ -106,13 +152,24 @@ int main(){
 	terrain.updateTiles(); //update the terrain visual quilt to reflect all the newly generated terrain
     //
 
-    //generate the backdrop
-	back_3.push_back(createNewSprite("sky",Vector2f(0,-7500.0 + (1.1*window.getSize().y))));
-    back_3[back_3.size()-1]->setTextureRect(IntRect(0,0,15000,15000)); 
+    //tree generation
+    int total_trees = 800; //generation configuration property
+
+    for(int index = 0; index < total_trees; index++){
+
+        Vector2f tree_position;
+        int tile_x = randInt(terrain.max_x-20)+10;
+        for(int jndex = 0; jndex < terrain.max_y; jndex++){
+            if(collidable_terrain_types.count(terrain.grid[tile_x][jndex]) == 0){
+                tree_position =  Vector2f(terrain.grid_ref.x + (tile_x*terrain.tile_size),terrain.grid_ref.y - ((jndex-2)*terrain.tile_size));
+                break;
+            }
+        }
+        foreground.push_back(createSprite("tree", tree_position, "bottom middle"));
+    }
     //
 
    	//main program loop
-    Vector2f last_player_pos = player->sprite.getPosition(); //used to determine player movement vector across ticks, so that the camera can follow
     while(window.isOpen()){
 
     	//loop header
@@ -139,12 +196,6 @@ int main(){
     	if(player->ship_id == "" && ui_input.keys_held.count("d") != 0){ //user directly controls player velocity on the x axis
     		player->sprite.move(1000*dt,0);
     	}
-        if(ui_input.keys_held.count("lshift") != 0){
-            scaleView(view, window_view, 4*ui_input.mmb_delta*dt);
-            scaleView(back_view_1, window_view, 4*ui_input.mmb_delta*dt);
-            scaleView(back_view_2, window_view, 4*ui_input.mmb_delta*dt);
-            scaleView(back_view_3, window_view, 4*ui_input.mmb_delta*dt);
-        }
    		//
 
         //update ships
@@ -191,55 +242,129 @@ int main(){
         }
         //
 
-        //move layers and camera to follow player
-    	Vector2f player_disp = player->sprite.getPosition()-last_player_pos; //store last tick's player position in a variable outside the loop. Use after player is processed to determine how far the player moved and set this as that.
-    	last_player_pos = player->sprite.getPosition();
-    	view.move(player_disp.x,player_disp.y);
-    	back_view_1.move(player_disp.x*back_speed_1,player_disp.y*back_speed_1);
-    	back_view_2.move(player_disp.x*back_speed_2,player_disp.y*back_speed_2);
-    	back_view_3.move(player_disp.x*back_speed_3,player_disp.y*back_speed_3);
-        //
-
         //update HUD
         ui_visuals.clear();
     	//select ship to pilot and/or eject from ship
-        for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
-            if(i->second->bounds.contains(ui_input.view_mouse)){
-                if(ui_input.lmb_released){
-                    player->ship_id = i->first;
+        if(player->ship_id == ""){
+            for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
+                if(i->second->bounds.intersects(player->sprite.getGlobalBounds())){
+                    ui_visuals.rectangles.push_back(createBoundingRectangle(i->second->bounds,Color(253,130,43,205)));
+                    ui_visuals.captions.push_back(Caption("[ENTER] TO PILOT SHIP", "font1", Vector2f(i->second->bounds.left, i->second->bounds.top - 36), 36, Color(253,130,43,205), "left"));
+                    if(ui_input.keys_released.count("enter")){
+                        player->ship_id = i->first;     
+                    }
                 }
             }
         }
-        if(player->ship_id != "" && ui_input.keys_released.count("space") != 0){
+        else if(ui_input.keys_released.count("space") != 0){
+            //this executes if player ship id is not blank and the user pressed the key to eject
             ships[player->ship_id]->antigrav_enabled = false;
             player->ship_id = "";
         }
         //
+
+        //scale the view appropriately depending on wheher or not the player is inside a ship
+        double target_scale = 0.8;
+        if(player->ship_id != ""){
+            target_scale = 0.25;
+        }
+        scale = scale + ((target_scale - scale)*4.0*dt); //instead of switching directly between scales, gradually scale towards the desired scale
+        //update view scales
+        view.setSize(window_view.getSize().x/scale,window_view.getSize().y/scale);
+        background_view.setSize(window_view.getSize().x/scale,window_view.getSize().y/scale);
+        sky_view.setSize(window_view.getSize().x/scale,window_view.getSize().y/scale);
+        stars_view.setSize(window_view.getSize().x/scale,window_view.getSize().y/scale);
+        //
+
+        //move layers and camera to follow player
+        view.setCenter(player->sprite.getPosition().x,player->sprite.getPosition().y);
+        background_view.setCenter(player->sprite.getPosition().x*background_speed,player->sprite.getPosition().y*background_speed);
+        sky_view.setCenter(window.getSize().x/2.0,player->sprite.getPosition().y*sky_speed);
+        stars_view.setCenter(player->sprite.getPosition().x*stars_speed,player->sprite.getPosition().y*stars_speed);
+
+        window.setView(view);
+        if(window.mapCoordsToPixel(terrain.grid_ref).y <= window.getSize().y){ //if the botttom of the terrain is above the bottom of the screen
+
+            double y_correction = (window.getSize().y - window.mapCoordsToPixel(terrain.grid_ref).y)/scale; //apply a displacement to the center of each view so as not to reveal below the bottom of the terrain
+            view.setCenter(player->sprite.getPosition().x,player->sprite.getPosition().y - y_correction);
+            background_view.setCenter(player->sprite.getPosition().x*background_speed,(player->sprite.getPosition().y - y_correction)*background_speed);
+            sky_view.setCenter(window.getSize().x/2.0,player->sprite.getPosition().y*sky_speed);
+            stars_view.setCenter(player->sprite.getPosition().x*stars_speed,(player->sprite.getPosition().y - y_correction)*stars_speed);
+        }
         //
 
     	//draw layers
-    	window.setView(back_view_3);
-    	for(vector<Sprite*>::iterator i = back_3.begin(); i != back_3.end(); i++){
-    		Sprite* p = *i;
-    		window.draw(*p);
-    	}
-    	window.setView(back_view_2);
-    	for(vector<Sprite*>::iterator i = back_2.begin(); i != back_2.end(); i++){
-    		Sprite* p = *i;
-    		window.draw(*p);
-    	}
-    	window.setView(back_view_1);
-    	for(vector<Sprite*>::iterator i = back_1.begin(); i != back_1.end(); i++){
-    		Sprite* p = *i;
-    		window.draw(*p);
-    	}
-    	
-    	window.setView(view);
-    	//draw regular things
-    	double window_left = view.getCenter().x - (view.getSize().x/2.0);
-    	double window_right = window_left + view.getSize().x;
+        double window_left = view.getCenter().x - (view.getSize().x/2.0);
+        double window_right = window_left + view.getSize().x;
 
-        //if the view is past the left end of the map, jump the camera to the far right end of the map, take a picture and then jump back so that the right end of the map fills in the blank space past the left end.
+        if(window_left < 0){
+            stars_view.move(terrain.max_x*terrain.tile_size,0);
+            window.setView(stars_view);
+            window.draw(stars);
+            stars_view.move(terrain.max_x*-terrain.tile_size,0);
+            window.setView(stars_view);
+        }
+        if(window_right > terrain.max_x*terrain.tile_size){
+            stars_view.move(terrain.max_x*-terrain.tile_size,0);
+            window.setView(stars_view);
+            window.draw(stars);
+            stars_view.move(terrain.max_x*terrain.tile_size,0);
+            window.setView(stars_view);
+        }
+        window.setView(stars_view);
+    	window.draw(stars);
+
+    	window.setView(sky_view);
+    	for(vector<RectangleShape>::iterator i = sky.begin(); i != sky.end(); i++){
+            window.draw(*i);
+        }
+
+        if(window_left < 0){ //if the view is past the left end of the map, jump the camera to the far right end of the map, take a picture and then jump back so that the right end of the map fills in the blank space past the left end.
+            background_view.move(terrain.max_x*terrain.tile_size,0);
+            window.setView(background_view);
+            for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
+                window.draw(*i);
+            }
+            background_view.move(terrain.max_x*-terrain.tile_size,0);
+            window.setView(background_view);
+        }
+        if(window_right > terrain.max_x*terrain.tile_size){ //same as just above, but this fills in the blank space past the far right end of the map with the stuff at the left end
+            background_view.move(terrain.max_x*-terrain.tile_size,0);
+            window.setView(background_view);
+            for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
+                window.draw(*i);
+            }
+            background_view.move(terrain.max_x*terrain.tile_size,0);
+            window.setView(background_view);
+        }
+    	window.setView(background_view);
+    	for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
+    		window.draw(*i);
+    	}
+
+        if(window_left < 0){
+            view.move(terrain.max_x*terrain.tile_size,0);
+            window.setView(view);
+             for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
+                window.draw(*i);
+            }
+            view.move(terrain.max_x*-terrain.tile_size,0);
+            window.setView(view);
+        }
+        if(window_right > terrain.max_x*terrain.tile_size){
+            view.move(terrain.max_x*-terrain.tile_size,0);
+            window.setView(view);
+             for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
+                window.draw(*i);
+            }
+            view.move(terrain.max_x*terrain.tile_size,0);
+            window.setView(view);
+        }
+        window.setView(view);
+        for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
+            window.draw(*i);
+        }
+        
     	if(window_left < 0){
     		view.move(terrain.max_x*terrain.tile_size,0);
     		window.setView(view);
@@ -247,7 +372,6 @@ int main(){
     		view.move(terrain.max_x*-terrain.tile_size,0);
     		window.setView(view);
     	}
-        //same as just above, but this fills in the blank space past the far right end of the map with the stuff at the left end
     	if(window_right > terrain.max_x*terrain.tile_size){
     		view.move(terrain.max_x*-terrain.tile_size,0);
     		window.setView(view);
@@ -255,7 +379,8 @@ int main(){
     		view.move(terrain.max_x*terrain.tile_size,0);
     		window.setView(view);
     	}
-    	terrain.draw(window); //draw the parts of the terrain in regular view
+        window.setView(view);
+    	terrain.draw(window); 
 
         if(window_left < 0){
             view.move(terrain.max_x*terrain.tile_size,0);
@@ -275,6 +400,7 @@ int main(){
             view.move(terrain.max_x*terrain.tile_size,0);
             window.setView(view);
         }
+        window.setView(view);
         for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
             i->second->drawExterior(window);
         }
@@ -297,6 +423,7 @@ int main(){
             view.move(terrain.max_x*terrain.tile_size,0);
             window.setView(view);
         }
+        window.setView(view);
         for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
             i->second->draw(window);
         }
@@ -319,9 +446,11 @@ int main(){
     		view.move(terrain.max_x*terrain.tile_size,0);
     		window.setView(view);
     	}
+        window.setView(view);
     	for(map<string,Character*>::iterator i = characters.begin(); i != characters.end(); i++){
             i->second->draw(window);
         }
+        //
 
         //draw ui
     	ui_visuals.draw(window, view, window_view);
@@ -344,15 +473,6 @@ int main(){
     for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
         delete i->second;
     }
-    for(vector<Sprite*>::iterator i = back_3.begin(); i != back_3.end(); i++){
-		delete *i;
-	}
-	for(vector<Sprite*>::iterator i = back_2.begin(); i != back_2.end(); i++){
-		delete *i;
-	}
-	for(vector<Sprite*>::iterator i = back_1.begin(); i != back_1.end(); i++){
-		delete *i;
-	}	
     destroyTextures();
     //
 

@@ -38,6 +38,7 @@ struct Animation{
 RectangleShape createBoundingRectangle(Sprite sprite, Color color);
 RectangleShape createBoundingRectangle(FloatRect rect, Color color);
 CircleShape createBoundingCircle(Sprite sprite, Color color, double margin = 0);
+CircleShape createCircle(double radius, Vector2f position, Color colour);
 RectangleShape createRectangle(Vector2f new_position, Vector2f new_size, int outline_width, Color fill_color, Color outline_color);
 RectangleShape createLine(Vector2f start_position, Vector2f axis, double length, Color color);
 Sprite createSprite(string texture_id, Vector2f position, string bias = "middle");

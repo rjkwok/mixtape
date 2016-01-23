@@ -1081,7 +1081,7 @@ void keepShipOutOfTerrain(Ship &ship, Terrain &terrain, double dt){
             }
 
             //sap momentum from the ship on collision with terrain
-            ship.velocity.x = ship.velocity.x - (ship.velocity.x*2.0*dt); //get rid of x component of velocity at an instantaneous rate such that 1/2 a second of collision would reduce to 0
+            ship.velocity.x = ship.velocity.x - (ship.velocity.x*8.0*dt); //get rid of x component of velocity at an instantaneous rate such that 1/8 a second of collision would reduce to 0
             ship.velocity.y = -ship.velocity.y*0.2; //"bounce" ship on the y-axis at 1/5th of the previous velocity
             //
 

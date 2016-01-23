@@ -164,6 +164,18 @@ CircleShape createBoundingCircle(Sprite sprite, Color color, double margin){
     return new_circle;
 }
 
+CircleShape createCircle(double radius, Vector2f position, Color colour){
+
+    CircleShape new_circle(radius);
+    new_circle.setOrigin(radius, radius);
+    new_circle.setPosition(position);
+    new_circle.setFillColor(colour);
+    new_circle.setOutlineColor(Color(0,0,0,0));
+    new_circle.setOutlineThickness(0);
+
+    return new_circle;
+}
+
 RectangleShape createRectangle(Vector2f new_position, Vector2f new_size, int outline_width, Color fill_color, Color outline_color){
 
     RectangleShape new_rectangle(new_size);
