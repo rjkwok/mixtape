@@ -28,6 +28,7 @@ Character::Character(string c_name, string c_type_name, Vector2f position){
     current_animation_name = "default";
     sprite.setTextureRect(getFrame(character_properties[type_name].start_index["default"], sprite));
 
+    structure_id = "";
 	ship_id = "";
 
 	dy = 0;

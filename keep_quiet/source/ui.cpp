@@ -50,6 +50,15 @@ void InputStruct::collect(RenderWindow &window, View &view, View &window_view){
                 else if(event.mouseButton.button==sf::Mouse::Right){ rmb_released = true;}
                 break;
 
+            case sf::Event::KeyReleased:
+                if(event.key.code == Keyboard::Up){
+                    keys_released.insert("up");
+                }
+                else if(event.key.code == Keyboard::Down){
+                    keys_released.insert("down");
+                }
+                break;
+
             case sf::Event::TextEntered:
                 string key_id;
                 if(event.text.unicode >= 32 && event.text.unicode <= 126){ text_entered.insert(event.text.unicode); }
@@ -61,6 +70,7 @@ void InputStruct::collect(RenderWindow &window, View &view, View &window_view){
                 for(string::iterator parser = key_id.begin(); parser != key_id.end(); parser++){ *parser = tolower(*parser); }
                 keys_released.insert(key_id);
                 break;
+           
         }
     }
     if(Keyboard::isKeyPressed(Keyboard::LShift)){ keys_held.insert("lshift");}

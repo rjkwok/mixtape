@@ -26,6 +26,7 @@ struct Character{
 	string name; //unique identifier
 	string type_name; //defines the properties of this character ie visuals
 
+	string structure_id; //the id of the structure this character is inside, if any
 	string ship_id; //the id of the ship this character is piloting, if any
 	Sprite sprite; //all character position and rotation info is stored as this single sprite
 	double dy; //y rate of change (velocity on y-axis only)

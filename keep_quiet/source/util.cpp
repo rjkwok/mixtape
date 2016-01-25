@@ -440,6 +440,9 @@ void loadConfigs(){
         if(parser->FirstChildElement("max_speed") != NULL){
             new_properties.max_speed = strtod(parser->FirstChildElement("max_speed")->GetText(),NULL);
         }
+        if(parser->FirstChildElement("handling") != NULL){
+            new_properties.handling = strtod(parser->FirstChildElement("handling")->GetText(),NULL);
+        }
         if(parser->FirstChildElement("fuel_consumption") != NULL){
             new_properties.fuel_consumption = strtod(parser->FirstChildElement("fuel_consumption")->GetText(),NULL);
         }

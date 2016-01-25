@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<Structure name="Cantina" exterior_texture_id="toolshed" backdrop_texture_id="toolbench_camo" door_texture_id="tree" tiles_across="100" tiles_up="100" grid_origin_x="-384" grid_origin_y="384" exterior_offset_x="0" exterior_offset_y="0" backdrop_offset_x="0" backdrop_offset_y="0">
+<Structure name="Command Center" exterior_texture_id="command_center" backdrop_texture_id="toolbench_camo" door_texture_id="door" tiles_across="100" tiles_up="100" grid_origin_x="-384" grid_origin_y="384" exterior_offset_x="82" exterior_offset_y="0" backdrop_offset_x="0" backdrop_offset_y="0">
 
 	<tile x="1" y="1">28</tile>
 	<deco id="fern1" x="20" y="20">fern</deco>

@@ -3,9 +3,10 @@
 <Ship name="Transport" x="0" y="-137" texture_id="transport" icon_id="">
 
 	<max_fuel>10000</max_fuel>
-	<max_gear>2</max_gear>
+	<max_gear>3</max_gear>
 	<max_speed>6000</max_speed>
 	<fuel_consumption>1</fuel_consumption>
+	<handling>0.5</handling>
 
 	<anim start="0" end="0" looping="yes">default</anim>
 

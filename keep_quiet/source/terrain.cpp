@@ -5,6 +5,7 @@ using namespace sf;
 
 extern map<string, Texture*> textures;
 extern map<int, TileProperties> tile_properties;
+extern set<int> collidable_terrain_types;
 
 TileProperties::TileProperties(){}
 
@@ -22,7 +23,6 @@ Terrain::Terrain(Vector2f bottom_left_origin, double c_tile_size, int terrain_ti
 
 void Terrain::updateTiles(){
 
-    //terrain update loop
     for(int index_x = 0; index_x < max_x; index_x++){
         for(int index_y = 0; index_y < max_y; index_y++){
             //iterate over every tile
@@ -46,13 +46,45 @@ void Terrain::updateTiles(){
             tile[0].texCoords = sf::Vector2f(u*tile_size, (v + 1)*tile_size);
         }
     }
-    //
+    
 }
 
 void Terrain::changeTile(int x, int y, int type_id){
 
     grid[x][y] = type_id;
     updateTiles();
+}
+
+void Terrain::setSurfaceY(double x, double y){
+
+    int tile_x = floor((x-grid_ref.x)/tile_size);
+    int target_max_filled_tile_y = floor((grid_ref.y - y)/tile_size) - 1;
+
+    int current_max_filled_tile_y = floor((grid_ref.y - getSurfaceY(x))/tile_size)-1;
+
+    if(current_max_filled_tile_y > target_max_filled_tile_y){
+        //clear tiles from top down until the target tile is hit
+        for(int tile_y = current_max_filled_tile_y; tile_y > target_max_filled_tile_y; tile_y--){
+            grid[tile_x][tile_y] = 0;
+        }
+    }
+    else if(current_max_filled_tile_y < target_max_filled_tile_y){
+        //fill tiles from the bottom up until the target tile is hit
+        for(int tile_y = current_max_filled_tile_y+1; tile_y <= target_max_filled_tile_y; tile_y++){
+            grid[tile_x][tile_y] = 14;
+        }
+    }
+
+}
+double Terrain::getSurfaceY(double x){
+
+    int tile_x = floor((x-grid_ref.x)/tile_size);
+    for(int tile_y = 0; tile_y < max_y; tile_y++){
+        if(collidable_terrain_types.count(grid[tile_x][tile_y]) == 0){
+            return grid_ref.y - (tile_y*tile_size);
+        }
+    }
+    return max_y-1;
 }
 
 void Terrain::draw(RenderWindow &window){

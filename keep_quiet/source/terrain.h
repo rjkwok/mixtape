@@ -32,6 +32,8 @@ struct Terrain{
 
     void updateTiles(); //restitches the vertexarray "quilt"
     void changeTile(int x, int y, int type_id);
+    void setSurfaceY(double x, double y);
+    double getSurfaceY(double x);
     void draw(RenderWindow &window);
 	
 };

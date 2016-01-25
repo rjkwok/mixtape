@@ -14,6 +14,7 @@ ShipProperties::ShipProperties(){
     fuel_consumption = 0;
     max_speed = 0;
     max_gear = 0;
+    handling = 1.0;
     parent = "";
     render_order = 0;
     relative_position = Vector2f(0,0);
@@ -35,11 +36,12 @@ Ship::Ship(string c_type_name, Vector2f c_position){
     sprite[type_name].setTextureRect(getFrame(ship_properties[type_name].start_index["default"], sprite[type_name]));
 
     fuel = 0;
-    acceleration_gear = 1;
+    acceleration_gear = 0;
     antigrav_enabled = false;
     position = c_position;
     velocity = Vector2f(0,0);
-    acceleration_vector = Vector2f(0,0);
+    acceleration_vector = Vector2f(1,0);
+    target_vector = Vector2f(0,0);
 
     recalculateBounds();
 
@@ -78,7 +80,16 @@ int Ship::getMaxGear(){
 	}
 	return total;
 }
+double Ship::getHandling(){
 
+	//returns the time in seconds it takes for the ship to do a 180 change in the acceleration vector
+
+	double total = ship_properties[type_name].handling;
+	for(vector<string>::iterator i = upgrade_names.begin(); i != upgrade_names.end(); i++){
+		total += ship_properties[*i].handling;
+	}
+	return total;
+}
 
 void Ship::recalculateBounds(){
 
@@ -129,33 +140,39 @@ void Ship::controlFromInput(InputStruct input){
 	Vector2f direction = Vector2f(0,0);
 
 	if(input.keys_held.count("a") != 0){
-		direction = direction + Vector2f(-1,0);
+		direction = direction + Vector2f(-1,-0.1);
 	}
 	if(input.keys_held.count("d") != 0){
-		direction = direction + Vector2f(1,0);
+		direction = direction + Vector2f(1,-0.1);
 	}
 	if(input.keys_held.count("w") != 0){
-		direction = direction + Vector2f(0,-1);
+		direction = direction + Vector2f(0.01,-1);
 	}
 	if(input.keys_held.count("s") != 0){
-		direction = direction + Vector2f(0,1);
+		direction = direction + Vector2f(0.01,1);
 	}
 
 	if(direction.x == 0 && direction.y == 0){
-		acceleration_vector = direction;
+		target_vector = direction;
 	}
 	else{
-		acceleration_vector = normalize(direction);
+		target_vector = normalize(direction);
 	}
 	
 	if(input.keys_released.count("g") != 0){
 		antigrav_enabled = !antigrav_enabled;
 	}
+	if(input.keys_released.count("up") != 0 && acceleration_gear != getMaxGear()){
+		acceleration_gear++;
+	}
+	if(input.keys_released.count("down") != 0 && acceleration_gear != 0){
+		acceleration_gear--;
+	}
 }
 
 void Ship::update(double dt, Terrain &terrain){
 
-	double acceleration_per_gear = 20000;  //constant throughout game, should define this as such later
+	double acceleration_per_gear = 10000;  //constant throughout game, should define this as such later
 
 	//run animations
     for(map<string,string>::iterator i = current_animation_name.begin(); i != current_animation_name.end(); i++){
@@ -167,15 +184,28 @@ void Ship::update(double dt, Terrain &terrain){
     }
     //
 
-    if(acceleration_vector.x != 0 || acceleration_vector.y != 0){
-    	double target = getRotationFromAxis(acceleration_vector) - 90;
-    	if(target < 0){ target += 360; }
-    	if(target > 360){ target -= 360; }
-    	sprite[type_name].setRotation(sprite[type_name].getRotation() + (16*(target-sprite[type_name].getRotation())*dt));
-    }
-
-    //update position and its derivatives
     double acceleration_magnitude = acceleration_gear*acceleration_per_gear;
+
+    if(target_vector.x != 0 || target_vector.y != 0){
+
+    	Vector2f target_difference = target_vector - acceleration_vector;
+		if(hypot(target_difference.x,target_difference.y) <= 0.1){
+			target_difference = Vector2f(0,0);
+		}
+		if(target_difference.x != 0 || target_difference.y != 0){
+			target_difference = normalize(target_difference);
+		}
+		acceleration_vector = acceleration_vector + (target_difference*(1.0/getHandling())*dt);
+
+		if(acceleration_vector.x != 0 || acceleration_vector.y != 0){
+			double target = getRotationFromAxis(acceleration_vector) - 90;
+			if(target < 0){ target += 360; }
+			if(target > 360){ target -= 360; }
+			sprite[type_name].setRotation(target);
+		}
+    }
+	
+    //update position and its derivatives
     Vector2f acceleration = acceleration_vector*acceleration_magnitude;
     double required_fuel = acceleration_magnitude*getFuelConsumption()*dt;
     if(required_fuel <= fuel){ //fuel is measured in kilolitres
