@@ -1,4 +1,4 @@
-This repository contains four unrelated, incomplete projects from varying times within the past four years.
+This repository contains four unrelated, incomplete projects from varying times (and skill levels) within the past four years. KEEP_QUIET is the most recent and is being actively worked on.
 
 SHIPWRECK:
 	
