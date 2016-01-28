@@ -27,6 +27,7 @@ struct Terrain{
     int max_y;
     Vector2f grid_ref; //terrain grid bottom left origin
     double tile_size;
+    bool looping; //flags whether or not collision functions need to consider that this terrain loops back on itself
 
     VertexArray tiles; //one giant graphics "quilt" stitched together from all the different tiles. Only update on change to terrain.
 

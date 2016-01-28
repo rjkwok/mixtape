@@ -153,6 +153,7 @@ int main(){
         }
     }
 	terrain.updateTiles(); //update the terrain visual quilt to reflect all the newly generated terrain
+    terrain.looping = true;
     //
 
     //tree generation
@@ -213,7 +214,10 @@ int main(){
     	if(ui_input.keys_released.count("esc") != 0){
     		window.close();
     	}
-        if(player->ship_id == "" && ui_input.keys_released.count("space") != 0 && distanceFromGround(player->sprite.getGlobalBounds(), terrain) < terrain.tile_size/2.0){ //jump, but only if the player is close enough to a ground surface
+        if(player->ship_id == "" && player->structure_id == "" && ui_input.keys_released.count("space") != 0 && distanceFromGround(player->sprite.getGlobalBounds(), terrain) < terrain.tile_size/2.0){ //jump, but only if the player is close enough to a ground surface
+            player->dy -= 900;
+        }
+        if(player->ship_id == "" && player->structure_id != "" && ui_input.keys_released.count("space") != 0 && distanceFromGround(player->sprite.getGlobalBounds(), structures[player->structure_id]->terrain) < structures[player->structure_id]->terrain.tile_size/2.0){ //jump, but only if the player is close enough to a ground surface
             player->dy -= 900;
         }
     	if(player->ship_id == "" && ui_input.keys_held.count("a") != 0){ //user directly controls player velocity on the x axis
@@ -222,14 +226,26 @@ int main(){
     	if(player->ship_id == "" && ui_input.keys_held.count("d") != 0){ //user directly controls player velocity on the x axis
     		player->sprite.move(1000*dt,0);
     	}
-        if(player->ship_id == "" && (ui_input.keys_released.count("w") != 0 || ui_input.keys_held.count("w") != 0)){
-            //check if the player is in front of a door, and if so, enter the building
-            for(map<string,Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
-                if(i->second->door.getGlobalBounds().intersects(player->sprite.getGlobalBounds())){
-                    player->structure_id = i->first;
-                    break;
+        if(player->ship_id == "" && (ui_input.keys_released.count("w") != 0)){
+            
+            if(player->structure_id == ""){
+                //check if the player is in front of a door, and if so, enter the building
+                for(map<string,Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+                    if(i->second->door.getGlobalBounds().intersects(player->sprite.getGlobalBounds())){
+                        player->structure_id = i->first;
+                        player->sprite.setPosition(0,0);
+                        break;
+                    }
                 }
             }
+            else{
+                //check if the player is in front of the exit door, and if so, exit the building
+                if(structures[player->structure_id]->door.getGlobalBounds().intersects(player->sprite.getGlobalBounds())){
+                    player->sprite.setPosition(structures[player->structure_id]->exterior_position);
+                    player->structure_id = "";
+                }
+            }
+            
         }
    		//
 
@@ -246,7 +262,13 @@ int main(){
         //update characters
         for(map<string, Character*>::iterator i = characters.begin(); i != characters.end(); i++){
 
-            i->second->update(dt, terrain);
+            if(i->second->structure_id == ""){
+                i->second->update(dt, terrain);
+            }
+            else{
+                i->second->update(dt, structures[i->second->structure_id]->terrain);
+            }
+            
         }
         //
 
@@ -256,6 +278,7 @@ int main(){
             //check each character sprite against each other character sprite for collision
             for(map<string,Character*>::iterator j = i; j != characters.end(); j++){
 				if(j==i){continue;}
+                if(j->second->structure_id != i->second->structure_id){continue;}
 
 				if(isIntersecting(i->second->sprite,j->second->sprite,0)){
 					untangleSprites(i->second->sprite,j->second->sprite);
@@ -263,8 +286,14 @@ int main(){
     		}
             //
 
-            keepSpriteOutOfTerrain(i->second->sprite, terrain);
+            if(i->second->structure_id == ""){
+                keepSpriteOutOfTerrain(i->second->sprite, terrain);
+            }
+            else{
+                keepSpriteOutOfTerrain(i->second->sprite, structures[i->second->structure_id]->terrain);
+            }
     	}
+
         for(map<string,Ship*>::iterator j = ships.begin(); j != ships.end(); j++){
             keepShipOutOfTerrain(*j->second, terrain, dt);
         }
@@ -280,7 +309,7 @@ int main(){
         //update HUD
         ui_visuals.clear();
     	//select ship to pilot and/or eject from ship
-        if(player->ship_id == ""){
+        if(player->ship_id == "" && player->structure_id == ""){
             for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
                 if(i->second->bounds.intersects(player->sprite.getGlobalBounds())){
                     ui_visuals.rectangles.push_back(createBoundingRectangle(i->second->bounds,Color(253,130,43,205)));
@@ -291,7 +320,7 @@ int main(){
                 }
             }
         }
-        else if(ui_input.keys_released.count("space") != 0){
+        else if(player->ship_id != "" && ui_input.keys_released.count("enter") != 0){
             //this executes if player ship id is not blank and the user pressed the key to eject
             ships[player->ship_id]->antigrav_enabled = false;
             player->ship_id = "";
@@ -319,198 +348,214 @@ int main(){
         sky_view.setCenter(window.getSize().x/2.0,player->sprite.getPosition().y*sky_speed);
         stars_view.setCenter(player->sprite.getPosition().x*stars_speed,player->sprite.getPosition().y*stars_speed);
 
-        window.setView(view);
-        if(window.mapCoordsToPixel(terrain.grid_ref).y <= window.getSize().y){ //if the botttom of the terrain is above the bottom of the screen
+        if(player->structure_id == ""){ //if the player is outdoors
 
-            double y_correction = (window.getSize().y - window.mapCoordsToPixel(terrain.grid_ref).y)/scale; //apply a displacement to the center of each view so as not to reveal below the bottom of the terrain
-            view.setCenter(player->sprite.getPosition().x,player->sprite.getPosition().y - y_correction);
-            background_view.setCenter(player->sprite.getPosition().x*background_speed,player->sprite.getPosition().y - y_correction);
-            clouds_view.setCenter(player->sprite.getPosition().x*clouds_speed,(player->sprite.getPosition().y - y_correction)*clouds_speed);
-            sky_view.setCenter(window.getSize().x/2.0,player->sprite.getPosition().y*sky_speed);
-            stars_view.setCenter(player->sprite.getPosition().x*stars_speed,(player->sprite.getPosition().y - y_correction)*stars_speed);
-        }
-        //
+            window.setView(view);
+            if(window.mapCoordsToPixel(terrain.grid_ref).y <= window.getSize().y){ //if the botttom of the terrain is above the bottom of the screen
 
-    	//draw layers
-        double window_left = view.getCenter().x - (view.getSize().x/2.0);
-        double window_right = window_left + view.getSize().x;
+                double y_correction = (window.getSize().y - window.mapCoordsToPixel(terrain.grid_ref).y)/scale; //apply a displacement to the center of each view so as not to reveal below the bottom of the terrain
+                view.setCenter(player->sprite.getPosition().x,player->sprite.getPosition().y - y_correction);
+                background_view.setCenter(player->sprite.getPosition().x*background_speed,player->sprite.getPosition().y - y_correction);
+                clouds_view.setCenter(player->sprite.getPosition().x*clouds_speed,(player->sprite.getPosition().y - y_correction)*clouds_speed);
+                sky_view.setCenter(window.getSize().x/2.0,player->sprite.getPosition().y*sky_speed);
+                stars_view.setCenter(player->sprite.getPosition().x*stars_speed,(player->sprite.getPosition().y - y_correction)*stars_speed);
+            }
+            //
 
-        if(window_left < 0){
-            stars_view.move(terrain.max_x*terrain.tile_size,0);
+            //draw layers
+            double window_left = view.getCenter().x - (view.getSize().x/2.0);
+            double window_right = window_left + view.getSize().x;
+
+            if(window_left < 0){
+                stars_view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(stars_view);
+                window.draw(stars);
+                stars_view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(stars_view);
+            }
+            if(window_right > terrain.max_x*terrain.tile_size){
+                stars_view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(stars_view);
+                window.draw(stars);
+                stars_view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(stars_view);
+            }
             window.setView(stars_view);
             window.draw(stars);
-            stars_view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(stars_view);
-        }
-        if(window_right > terrain.max_x*terrain.tile_size){
-            stars_view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(stars_view);
-            window.draw(stars);
-            stars_view.move(terrain.max_x*terrain.tile_size,0);
-            window.setView(stars_view);
-        }
-        window.setView(stars_view);
-    	window.draw(stars);
 
-    	window.setView(sky_view);
-    	for(vector<RectangleShape>::iterator i = sky.begin(); i != sky.end(); i++){
-            window.draw(*i);
-        }
+            window.setView(sky_view);
+            for(vector<RectangleShape>::iterator i = sky.begin(); i != sky.end(); i++){
+                window.draw(*i);
+            }
 
-        if(window_left < 0){ //if the view is past the left end of the map, jump the camera to the far right end of the map, take a picture and then jump back so that the right end of the map fills in the blank space past the left end.
-            clouds_view.move(terrain.max_x*terrain.tile_size,0);
+            if(window_left < 0){ //if the view is past the left end of the map, jump the camera to the far right end of the map, take a picture and then jump back so that the right end of the map fills in the blank space past the left end.
+                clouds_view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(clouds_view);
+                for(vector<Sprite>::iterator i = clouds.begin(); i != clouds.end(); i++){
+                    window.draw(*i);
+                }
+                clouds_view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(clouds_view);
+            }
+            if(window_right > terrain.max_x*terrain.tile_size){ //same as just above, but this fills in the blank space past the far right end of the map with the stuff at the left end
+                clouds_view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(clouds_view);
+                for(vector<Sprite>::iterator i = clouds.begin(); i != clouds.end(); i++){
+                    window.draw(*i);
+                }
+                clouds_view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(clouds_view);
+            }
             window.setView(clouds_view);
             for(vector<Sprite>::iterator i = clouds.begin(); i != clouds.end(); i++){
                 window.draw(*i);
             }
-            clouds_view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(clouds_view);
-        }
-        if(window_right > terrain.max_x*terrain.tile_size){ //same as just above, but this fills in the blank space past the far right end of the map with the stuff at the left end
-            clouds_view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(clouds_view);
-            for(vector<Sprite>::iterator i = clouds.begin(); i != clouds.end(); i++){
-                window.draw(*i);
-            }
-            clouds_view.move(terrain.max_x*terrain.tile_size,0);
-            window.setView(clouds_view);
-        }
-    	window.setView(clouds_view);
-    	for(vector<Sprite>::iterator i = clouds.begin(); i != clouds.end(); i++){
-    		window.draw(*i);
-    	}
 
-        if(window_left < 0){
-            view.move(terrain.max_x*terrain.tile_size,0);
+            if(window_left < 0){
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(background_view);
+                 for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
+                    window.draw(*i);
+                }
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(background_view);
+            }
+            if(window_right > terrain.max_x*terrain.tile_size){
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(background_view);
+                 for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
+                    window.draw(*i);
+                }
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(background_view);
+            }
             window.setView(background_view);
-             for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
+            for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
                 window.draw(*i);
             }
-            view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(background_view);
-        }
-        if(window_right > terrain.max_x*terrain.tile_size){
-            view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(background_view);
-             for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
-                window.draw(*i);
-            }
-            view.move(terrain.max_x*terrain.tile_size,0);
-            window.setView(background_view);
-        }
-        window.setView(background_view);
-        for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
-            window.draw(*i);
-        }
 
-        if(window_left < 0){
-            view.move(terrain.max_x*terrain.tile_size,0);
+            if(window_left < 0){
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+                 for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
+                    window.draw(*i);
+                }
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+            }
+            if(window_right > terrain.max_x*terrain.tile_size){
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+                 for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
+                    window.draw(*i);
+                }
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+            }
             window.setView(view);
-             for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
+            for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
                 window.draw(*i);
             }
-            view.move(terrain.max_x*-terrain.tile_size,0);
+            
+            if(window_left < 0){
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+                terrain.draw(window);
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+            }
+            if(window_right > terrain.max_x*terrain.tile_size){
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+                terrain.draw(window);
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+            }
             window.setView(view);
+            terrain.draw(window); 
+
+            if(window_left < 0){
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+                for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+                    i->second->drawExterior(window);
+                }
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+            }
+            if(window_right > terrain.max_x*terrain.tile_size){
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+                for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+                    i->second->drawExterior(window);
+                }
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+            }
+            window.setView(view);
+            for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
+                i->second->drawExterior(window);
+            }
+            
+            if(window_left < 0){
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+                for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
+                    i->second->draw(window);
+                }
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+            }
+            if(window_right > terrain.max_x*terrain.tile_size){
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+                for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
+                    i->second->draw(window);
+                }
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+            }
+            window.setView(view);
+            for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
+                i->second->draw(window);
+            }
+
+            if(window_left < 0){
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+                for(map<string,Character*>::iterator i = characters.begin(); i != characters.end(); i++){
+                    if(i->second->structure_id == player->structure_id){
+                        i->second->draw(window);
+                    }
+                }
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+            }
+            if(window_right > terrain.max_x*terrain.tile_size){
+                view.move(terrain.max_x*-terrain.tile_size,0);
+                window.setView(view);
+                for(map<string,Character*>::iterator i = characters.begin(); i != characters.end(); i++){
+                    if(i->second->structure_id == player->structure_id){
+                        i->second->draw(window);
+                    }
+                }
+                view.move(terrain.max_x*terrain.tile_size,0);
+                window.setView(view);
+            }
         }
-        if(window_right > terrain.max_x*terrain.tile_size){
-            view.move(terrain.max_x*-terrain.tile_size,0);
+        else{
+
+            //if the player is indoors the drawing is as simple as just drawing the structure's decorations and tiles, since interiors do not loop back on themselves like the outdoors
             window.setView(view);
-             for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
-                window.draw(*i);
-            }
-            view.move(terrain.max_x*terrain.tile_size,0);
-            window.setView(view);
+            structures[player->structure_id]->drawInterior(window);
         }
         window.setView(view);
-        for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
-            window.draw(*i);
+        for(map<string,Character*>::iterator i = characters.begin(); i != characters.end(); i++){ //characters are stored in a memory structure and never inside a Structure instance. But they can still in the game be "inside" a Structure, so we always check if each character should be drawn on an individual basis regardless of whether the player is indoors or outdoors.
+            if(i->second->structure_id == player->structure_id){
+                i->second->draw(window);
+            }
         }
         
-    	if(window_left < 0){
-    		view.move(terrain.max_x*terrain.tile_size,0);
-    		window.setView(view);
-    		terrain.draw(window);
-    		view.move(terrain.max_x*-terrain.tile_size,0);
-    		window.setView(view);
-    	}
-    	if(window_right > terrain.max_x*terrain.tile_size){
-    		view.move(terrain.max_x*-terrain.tile_size,0);
-    		window.setView(view);
-    		terrain.draw(window);
-    		view.move(terrain.max_x*terrain.tile_size,0);
-    		window.setView(view);
-    	}
-        window.setView(view);
-    	terrain.draw(window); 
-
-        if(window_left < 0){
-            view.move(terrain.max_x*terrain.tile_size,0);
-            window.setView(view);
-            for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
-                i->second->drawExterior(window);
-            }
-            view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(view);
-        }
-        if(window_right > terrain.max_x*terrain.tile_size){
-            view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(view);
-            for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
-                i->second->drawExterior(window);
-            }
-            view.move(terrain.max_x*terrain.tile_size,0);
-            window.setView(view);
-        }
-        window.setView(view);
-        for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
-            i->second->drawExterior(window);
-        }
-    	
-        if(window_left < 0){
-            view.move(terrain.max_x*terrain.tile_size,0);
-            window.setView(view);
-            for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
-                i->second->draw(window);
-            }
-            view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(view);
-        }
-        if(window_right > terrain.max_x*terrain.tile_size){
-            view.move(terrain.max_x*-terrain.tile_size,0);
-            window.setView(view);
-            for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
-                i->second->draw(window);
-            }
-            view.move(terrain.max_x*terrain.tile_size,0);
-            window.setView(view);
-        }
-        window.setView(view);
-        for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
-            i->second->draw(window);
-        }
-
-    	if(window_left < 0){
-    		view.move(terrain.max_x*terrain.tile_size,0);
-    		window.setView(view);
-    		for(map<string,Character*>::iterator i = characters.begin(); i != characters.end(); i++){
-                i->second->draw(window);
-	    	}
-    		view.move(terrain.max_x*-terrain.tile_size,0);
-    		window.setView(view);
-    	}
-    	if(window_right > terrain.max_x*terrain.tile_size){
-    		view.move(terrain.max_x*-terrain.tile_size,0);
-    		window.setView(view);
-    		for(map<string,Character*>::iterator i = characters.begin(); i != characters.end(); i++){
-                i->second->draw(window);
-            }
-    		view.move(terrain.max_x*terrain.tile_size,0);
-    		window.setView(view);
-    	}
-        window.setView(view);
-    	for(map<string,Character*>::iterator i = characters.begin(); i != characters.end(); i++){
-            i->second->draw(window);
-        }
         //
 
         //draw ui

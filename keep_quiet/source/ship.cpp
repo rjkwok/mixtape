@@ -13,7 +13,7 @@ ShipProperties::ShipProperties(){
     max_fuel = 0;
     fuel_consumption = 0;
     max_speed = 0;
-    max_gear = 0;
+    gear = 0;
     handling = 1.0;
     parent = "";
     render_order = 0;
@@ -36,12 +36,12 @@ Ship::Ship(string c_type_name, Vector2f c_position){
     sprite[type_name].setTextureRect(getFrame(ship_properties[type_name].start_index["default"], sprite[type_name]));
 
     fuel = 0;
-    acceleration_gear = 0;
     antigrav_enabled = false;
     position = c_position;
     velocity = Vector2f(0,0);
     acceleration_vector = Vector2f(1,0);
     target_vector = Vector2f(0,0);
+    braking = false;
 
     recalculateBounds();
 
@@ -72,11 +72,11 @@ double Ship::getMaxSpeed(){
 	}
 	return total;
 }
-int Ship::getMaxGear(){
+int Ship::getGear(){
 
-	int total = ship_properties[type_name].max_gear;
+	int total = ship_properties[type_name].gear;
 	for(vector<string>::iterator i = upgrade_names.begin(); i != upgrade_names.end(); i++){
-		total += ship_properties[*i].max_gear;
+		total += ship_properties[*i].gear;
 	}
 	return total;
 }
@@ -138,6 +138,7 @@ bool Ship::hasUpgrade(string upgrade_name){
 void Ship::controlFromInput(InputStruct input){
 
 	Vector2f direction = Vector2f(0,0);
+	braking = false;
 
 	if(input.keys_held.count("a") != 0){
 		direction = direction + Vector2f(-1,-0.1);
@@ -151,7 +152,9 @@ void Ship::controlFromInput(InputStruct input){
 	if(input.keys_held.count("s") != 0){
 		direction = direction + Vector2f(0.01,1);
 	}
-
+	if(input.keys_held.count("lshift") != 0){
+		braking = true;
+	}
 	if(direction.x == 0 && direction.y == 0){
 		target_vector = direction;
 	}
@@ -162,12 +165,7 @@ void Ship::controlFromInput(InputStruct input){
 	if(input.keys_released.count("g") != 0){
 		antigrav_enabled = !antigrav_enabled;
 	}
-	if(input.keys_released.count("up") != 0 && acceleration_gear != getMaxGear()){
-		acceleration_gear++;
-	}
-	if(input.keys_released.count("down") != 0 && acceleration_gear != 0){
-		acceleration_gear--;
-	}
+
 }
 
 void Ship::update(double dt, Terrain &terrain){
@@ -184,9 +182,9 @@ void Ship::update(double dt, Terrain &terrain){
     }
     //
 
-    double acceleration_magnitude = acceleration_gear*acceleration_per_gear;
+    double acceleration_magnitude = getGear()*acceleration_per_gear; //acceleration magnitude is proportional to the acceleration gear property of the ship
 
-    if(target_vector.x != 0 || target_vector.y != 0){
+    if(target_vector.x != 0 || target_vector.y != 0){ //when the pilot is inputting any non-zero target vector, rotate the ship (and acceleraton vector) towards that target
 
     	Vector2f target_difference = target_vector - acceleration_vector;
 		if(hypot(target_difference.x,target_difference.y) <= 0.1){
@@ -204,20 +202,31 @@ void Ship::update(double dt, Terrain &terrain){
 			sprite[type_name].setRotation(target);
 		}
     }
-	
-    //update position and its derivatives
-    Vector2f acceleration = acceleration_vector*acceleration_magnitude;
-    double required_fuel = acceleration_magnitude*getFuelConsumption()*dt;
-    if(required_fuel <= fuel){ //fuel is measured in kilolitres
-    	fuel -= required_fuel;
 
-    	if(abs(velocity.x + (acceleration.x*dt)) <= getMaxSpeed()){
-    		velocity.x = velocity.x + (acceleration.x*dt);
-    	}
-    	if(velocity.y > 0 || abs(velocity.y + (acceleration.y*dt)) < getMaxSpeed()){
-    		velocity.y = velocity.y + (acceleration.y*dt);
+    //update position and its derivatives
+    if(!braking){ //if the ship is not braking, calculate an acceleration along the current acceleration vector direction
+    	Vector2f acceleration = acceleration_vector*acceleration_magnitude;
+	    if(acceleration.x*target_vector.x <= 0){ acceleration.x = 0; } //if this is negative then the pilot's desired direction of travel must be OPPOSITE the current acceleration vector. This check prevents the ship from accelerating briefly in the wrong direction as it corrects its course.
+	    if(acceleration.y*target_vector.y <= 0){ acceleration.y = 0; } //if this is negative then the pilot's desired direction of travel must be OPPOSITE the current acceleration vector. This check prevents the ship from accelerating briefly in the wrong direction as it corrects its course.
+	    double required_fuel = acceleration_magnitude*getFuelConsumption()*dt;
+	    if(required_fuel <= fuel){ //fuel is measured in kilolitres
+	    	fuel -= required_fuel;
+
+	    	if(abs(velocity.x + (acceleration.x*dt)) <= getMaxSpeed()){
+	    		velocity.x = velocity.x + (acceleration.x*dt);
+	    	}
+	    	if(velocity.y > 0 || abs(velocity.y + (acceleration.y*dt)) < getMaxSpeed()){
+	    		velocity.y = velocity.y + (acceleration.y*dt);
+	    	}
+	    }
+    }
+    else{
+    	velocity.x = velocity.x - (velocity.x*(1.0/getHandling())*dt); //if the ship is braking, reduce the x velocity to 0 over a duration equal to the handling time.
+    	if(velocity.y < 0){ //if the ship is braking and has an upwards velocity, reduce the y velocity to 0 over a duration equal to the handling time. This only applies to upwards velocities so as to not interfere with gravity.
+    		velocity.y = velocity.y - (velocity.y*(1.0/getHandling())*dt); 
     	}
     }
+    
 
     double gravity_magnitude = 3000; //constant throughout game, should define this as such later
     double antigrav_required_fuel = gravity_magnitude*getFuelConsumption()*dt;

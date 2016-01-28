@@ -17,6 +17,8 @@ Terrain::Terrain(Vector2f bottom_left_origin, double c_tile_size, int terrain_ti
     max_y = terrain_tiles_up;
     tile_size = c_tile_size;
 
+    looping = false;
+    
     tiles = VertexArray(Quads,4);
     tiles.resize(max_x*max_y*4); //resize to buildable grid (needs to be equal to total area in tiles, not pixels, and then multiplied by 4 to have 4 vertexes per tile)
 }

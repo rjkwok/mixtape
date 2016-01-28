@@ -56,6 +56,8 @@ Structure::Structure(string c_id, string c_type_name, Vector2f position){
 void Structure::drawInterior(RenderWindow &window){
 
 	window.draw(backdrop);
+	door.setPosition(0,0); //the door is always drawn at the origin when inside a Structure
+	window.draw(door);
 	for(map<string, Sprite>::iterator i = decorations.begin(); i != decorations.end(); i++){
 		window.draw(i->second);
 	}
@@ -65,5 +67,6 @@ void Structure::drawInterior(RenderWindow &window){
 void Structure::drawExterior(RenderWindow &window){
 	
 	window.draw(exterior_sprite);
+	door.setPosition(exterior_position); //the door marks the exterior position when outdoors
 	window.draw(door);
 }

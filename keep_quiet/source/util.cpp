@@ -431,8 +431,8 @@ void loadConfigs(){
         if(parser->Attribute("y") != NULL){
             new_properties.relative_position.y = strtod(parser->Attribute("y"),NULL);
         }
-        if(parser->FirstChildElement("max_gear") != NULL){
-            new_properties.max_gear = static_cast<int>(strtod(parser->FirstChildElement("max_gear")->GetText(),NULL));
+        if(parser->FirstChildElement("gear") != NULL){
+            new_properties.gear = static_cast<int>(strtod(parser->FirstChildElement("gear")->GetText(),NULL));
         }
         if(parser->FirstChildElement("max_fuel") != NULL){
             new_properties.max_fuel = strtod(parser->FirstChildElement("max_fuel")->GetText(),NULL);

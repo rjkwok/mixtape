@@ -11,15 +11,15 @@ double distanceFromGround(FloatRect rect, Terrain &terrain){
 
 	//subdivide the texture rect into enough sample points to get an accurate check against this grid resolution
     int checkpoints_across = ceil(rect.width/terrain.tile_size);
-    double smallest_height_gap = 0;
+    double smallest_height_gap = 999999999999;
     for(int index = 0; index < checkpoints_across; index++){
 
     	int terrain_index_x = floor((rect.left + (index*(rect.width/checkpoints_across)) - terrain.grid_ref.x)/terrain.tile_size);
         int terrain_index_y = floor((bottom-terrain.grid_ref.y)/-terrain.tile_size);
 
         int faked_terrain_index_x = terrain_index_x;
-        if(faked_terrain_index_x >= terrain.max_x){ faked_terrain_index_x -= terrain.max_x; }
-        if(faked_terrain_index_x < 0){ faked_terrain_index_x += terrain.max_x; }
+        if(terrain.looping && faked_terrain_index_x >= terrain.max_x){ faked_terrain_index_x -= terrain.max_x; }
+        if(terrain.looping && faked_terrain_index_x < 0){ faked_terrain_index_x += terrain.max_x; }
 
         while(terrain_index_y > terrain.max_y || collidable_terrain_types.count(terrain.grid[faked_terrain_index_x][terrain_index_y]) == 0){
         	//if there's no collidable block in this grid tile
@@ -74,8 +74,8 @@ bool isIntersectingTerrain(Sprite a, Terrain &terrain){
         if(terrain_index_y > terrain.max_y){ continue; } // won't be a collision possible if this point is not in the terrain layer
 
         int faked_terrain_index_x = terrain_index_x;
-        if(faked_terrain_index_x > terrain.max_x){ faked_terrain_index_x -= terrain.max_x; }
-        if(faked_terrain_index_x < 0){ faked_terrain_index_x += terrain.max_x; }
+        if(terrain.looping && faked_terrain_index_x >= terrain.max_x){ faked_terrain_index_x -= terrain.max_x; }
+        if(terrain.looping && faked_terrain_index_x < 0){ faked_terrain_index_x += terrain.max_x; }
 
         if(collidable_terrain_types.count(terrain.grid[faked_terrain_index_x][terrain_index_y]) !=0){ return true; } //if this terrain block is collidable then the sprite is colliding
     }
@@ -788,8 +788,8 @@ void keepSpriteOutOfTerrain(Sprite &sprite, Terrain &terrain){
 		if(terrain_index_y > terrain.max_y){ continue; } // won't be a collision possible if this point is not in the terrain layer
 
         int faked_terrain_index_x = terrain_index_x;
-        if(faked_terrain_index_x > terrain.max_x){ faked_terrain_index_x -= terrain.max_x; }
-        if(faked_terrain_index_x < 0){ faked_terrain_index_x += terrain.max_x; }
+        if(terrain.looping && faked_terrain_index_x >= terrain.max_x){ faked_terrain_index_x -= terrain.max_x; }
+        if(terrain.looping && faked_terrain_index_x < 0){ faked_terrain_index_x += terrain.max_x; }
 
 		if(collidable_terrain_types.count(terrain.grid[faked_terrain_index_x][terrain_index_y])==0){ continue; } //if this terrain block is not collidable don't continue
 
@@ -845,8 +845,8 @@ void keepShipOutOfTerrain(Ship &ship, Terrain &terrain, double dt){
             if(terrain_index_y > terrain.max_y){ continue; } // won't be a collision possible if this point is not in the terrain layer
 
             int faked_terrain_index_x = terrain_index_x;
-            if(faked_terrain_index_x > terrain.max_x){ faked_terrain_index_x -= terrain.max_x; }
-            if(faked_terrain_index_x < 0){ faked_terrain_index_x += terrain.max_x; }
+            if(terrain.looping && faked_terrain_index_x >= terrain.max_x){ faked_terrain_index_x -= terrain.max_x; }
+            if(terrain.looping && faked_terrain_index_x < 0){ faked_terrain_index_x += terrain.max_x; }
 
             if(collidable_terrain_types.count(terrain.grid[faked_terrain_index_x][terrain_index_y])==0){ continue; } //if this terrain block is not collidable don't continue
 

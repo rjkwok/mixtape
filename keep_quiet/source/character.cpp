@@ -67,9 +67,11 @@ void Character::update(double dt, Terrain &terrain){
         sprite.move(0, dy*dt); //apply y velocity
 	}
     
-    //if the sprite has crossed either edge of the map, teleport it to the other side accordingly
-	if(ceil(sprite.getPosition().x) > (terrain.max_x*terrain.tile_size)){ sprite.setPosition(0,sprite.getPosition().y); }
-	if(floor(sprite.getPosition().x) < 0){ sprite.setPosition((terrain.max_x*terrain.tile_size),sprite.getPosition().y); }
+    //if the sprite is outdoors and has crossed either edge of the map, teleport it to the other side accordingly
+    if(structure_id == ""){
+    	if(ceil(sprite.getPosition().x) > (terrain.max_x*terrain.tile_size)){ sprite.setPosition(0,sprite.getPosition().y); }
+		if(floor(sprite.getPosition().x) < 0){ sprite.setPosition((terrain.max_x*terrain.tile_size),sprite.getPosition().y); }
+    }
 	//
 }
 
