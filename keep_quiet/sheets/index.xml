@@ -3,7 +3,7 @@
 <Tx id="tree" width="500" height="738" tiled="no" file_path="tree.png"/>
 <Tx id="tree_2" width="465" height="646" tiled="no" file_path="tree_2.png"/>
 <Tx id="fern" width="37" height="50" tiled="no" file_path="fern.png"/>
-<Tx id="terrain" width="256" height="64" tiled="no" file_path="terrain.png"/>
+<Tx id="terrain" width="224" height="224" tiled="no" file_path="terrain.png"/>
 <Tx id="toolbench" width="119" height="96" tiled="no" file_path="toolbench.png"/>
 <Tx id="toolbench_camo" width="130" height="60" tiled="no" file_path="toolbench_camo.png"/>
 <Tx id="toolshed" width="300" height="173" tiled="no" file_path="toolshed.png"/>

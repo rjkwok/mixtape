@@ -4,7 +4,7 @@
 
 	<max_fuel>10000</max_fuel>
 	<gear>3</gear>
-	<max_speed>6000</max_speed>
+	<max_speed>18000</max_speed>
 	<fuel_consumption>1</fuel_consumption>
 	<handling>0.5</handling>
 

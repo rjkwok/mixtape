@@ -267,6 +267,9 @@ void Ship::update(double dt, Terrain &terrain){
 
     position = position + (velocity*dt);
     
+    if(ceil(position.x) > (terrain.max_x*terrain.tile_size)){ position.x = 0; }
+	if(floor(position.x) < 0){ position.x = terrain.max_x*terrain.tile_size; }
+
     //update bounds position
     bounds.top = position.y - bounds.height;
     bounds.left = position.x - (bounds.width/2.0);

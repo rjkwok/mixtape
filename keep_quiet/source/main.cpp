@@ -101,14 +101,14 @@ int main(){
 
     //star generation
     int stars_height = 40000; //generation configuration property //upper bound that stars will be generated to
-    int total_constellations = 8000; //generation configuration property //total groups of stars that will be randomly generated
+    int total_constellations = 1000; //generation configuration property //total groups of stars that will be randomly generated
     int max_stars_per_constellation = 16; //generation configuration property
     int max_star_spread = 1024; //generation configuration property //radius of each constellation 
 
     for(int index = 0; index < total_constellations; index++){
 
         int total_stars = randInt(max_stars_per_constellation);
-        Vector2f constellation_origin = Vector2f(randInt(terrain.max_x)*terrain.tile_size,-randInt(1000)*(stars_height/1000.0));
+        Vector2f constellation_origin = Vector2f((randInt(terrain.max_x-64)+32)*terrain.tile_size*stars_speed,-randInt(1000)*(stars_height/1000.0));
 
         for(int star_index = 0; star_index < total_stars; star_index++){
             Vector2f star_position = constellation_origin + Vector2f(randSign()*randInt(max_star_spread),randSign()*randInt(max_star_spread));
@@ -123,7 +123,7 @@ int main(){
 
     for(int index = 0; index < total_clouds; index++){
 
-        clouds.push_back(createSprite("cloud", Vector2f(randInt(terrain.max_x)*terrain.tile_size,-1000-randInt(clouds_height-1000)),"middle"));
+        clouds.push_back(createSprite("cloud", Vector2f((randInt(terrain.max_x-50)+25)*terrain.tile_size*clouds_speed,-1000-randInt(clouds_height-1000)),"middle"));
         clouds[clouds.size()-1].setScale(4.0,4.0);
     }
     //
@@ -173,7 +173,7 @@ int main(){
     }
     for(int index = 0; index < total_trees; index++){
 
-        int tile_x = randInt(terrain.max_x-20)+10;
+        int tile_x = (randInt(terrain.max_x-20)+10)*background_speed;
 
         Vector2f tree_position = Vector2f(terrain.grid_ref.x + (tile_x*terrain.tile_size),400);
         if(randInt(2) == 2){
@@ -183,7 +183,6 @@ int main(){
             background.push_back(createSprite("tree_2", tree_position, "bottom middle"));
         }
     }
-    //TREES ON MULTIPLE PARALLAX LAYERS WOULD GIVE THE FOREST DEPTH
     //
 
     //spawn a base
@@ -363,21 +362,18 @@ int main(){
             //
 
             //draw layers
-            double window_left = view.getCenter().x - (view.getSize().x/2.0);
-            double window_right = window_left + view.getSize().x;
-
-            if(window_left < 0){
-                stars_view.move(terrain.max_x*terrain.tile_size,0);
+            if(stars_view.getCenter().x - (stars_view.getSize().x/2.0) < 0){
+                stars_view.move(terrain.max_x*terrain.tile_size*stars_speed,0);
                 window.setView(stars_view);
                 window.draw(stars);
-                stars_view.move(terrain.max_x*-terrain.tile_size,0);
+                stars_view.move(terrain.max_x*-terrain.tile_size*stars_speed,0);
                 window.setView(stars_view);
             }
-            if(window_right > terrain.max_x*terrain.tile_size){
-                stars_view.move(terrain.max_x*-terrain.tile_size,0);
+            if(stars_view.getCenter().x + (stars_view.getSize().x/2.0) > terrain.max_x*terrain.tile_size*stars_speed){
+                stars_view.move(terrain.max_x*-terrain.tile_size*stars_speed,0);
                 window.setView(stars_view);
                 window.draw(stars);
-                stars_view.move(terrain.max_x*terrain.tile_size,0);
+                stars_view.move(terrain.max_x*terrain.tile_size*stars_speed,0);
                 window.setView(stars_view);
             }
             window.setView(stars_view);
@@ -388,22 +384,23 @@ int main(){
                 window.draw(*i);
             }
 
-            if(window_left < 0){ //if the view is past the left end of the map, jump the camera to the far right end of the map, take a picture and then jump back so that the right end of the map fills in the blank space past the left end.
-                clouds_view.move(terrain.max_x*terrain.tile_size,0);
+            if(clouds_view.getCenter().x - (clouds_view.getSize().x/2.0) < 0){ //if the view is past the left end of the map, jump the camera to the far right end of the map, take a picture and then jump back so that the right end of the map fills in the blank space past the left end.
+                clouds_view.move(terrain.max_x*terrain.tile_size*clouds_speed,0);
                 window.setView(clouds_view);
                 for(vector<Sprite>::iterator i = clouds.begin(); i != clouds.end(); i++){
                     window.draw(*i);
                 }
-                clouds_view.move(terrain.max_x*-terrain.tile_size,0);
+                
+                clouds_view.move(terrain.max_x*-terrain.tile_size*clouds_speed,0);
                 window.setView(clouds_view);
             }
-            if(window_right > terrain.max_x*terrain.tile_size){ //same as just above, but this fills in the blank space past the far right end of the map with the stuff at the left end
-                clouds_view.move(terrain.max_x*-terrain.tile_size,0);
+            if(clouds_view.getCenter().x + (clouds_view.getSize().x/2.0) > terrain.max_x*terrain.tile_size*clouds_speed){ //same as just above, but this fills in the blank space past the far right end of the map with the stuff at the left end
+                clouds_view.move(terrain.max_x*-terrain.tile_size*clouds_speed,0);
                 window.setView(clouds_view);
                 for(vector<Sprite>::iterator i = clouds.begin(); i != clouds.end(); i++){
                     window.draw(*i);
                 }
-                clouds_view.move(terrain.max_x*terrain.tile_size,0);
+                clouds_view.move(terrain.max_x*terrain.tile_size*clouds_speed,0);
                 window.setView(clouds_view);
             }
             window.setView(clouds_view);
@@ -411,22 +408,22 @@ int main(){
                 window.draw(*i);
             }
 
-            if(window_left < 0){
-                view.move(terrain.max_x*terrain.tile_size,0);
+            if(background_view.getCenter().x - (background_view.getSize().x/2.0) < 0){
+                background_view.move(terrain.max_x*terrain.tile_size*background_speed,0);
                 window.setView(background_view);
                  for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
                     window.draw(*i);
                 }
-                view.move(terrain.max_x*-terrain.tile_size,0);
+                background_view.move(terrain.max_x*-terrain.tile_size*background_speed,0);
                 window.setView(background_view);
             }
-            if(window_right > terrain.max_x*terrain.tile_size){
-                view.move(terrain.max_x*-terrain.tile_size,0);
+            if(background_view.getCenter().x + (background_view.getSize().x/2.0) > terrain.max_x*terrain.tile_size*background_speed){
+                background_view.move(terrain.max_x*-terrain.tile_size*background_speed,0);
                 window.setView(background_view);
                  for(vector<Sprite>::iterator i = background.begin(); i != background.end(); i++){
                     window.draw(*i);
                 }
-                view.move(terrain.max_x*terrain.tile_size,0);
+                background_view.move(terrain.max_x*terrain.tile_size*background_speed,0);
                 window.setView(background_view);
             }
             window.setView(background_view);
@@ -434,7 +431,7 @@ int main(){
                 window.draw(*i);
             }
 
-            if(window_left < 0){
+            if(view.getCenter().x - (view.getSize().x/2.0) < 0){
                 view.move(terrain.max_x*terrain.tile_size,0);
                 window.setView(view);
                  for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
@@ -443,7 +440,7 @@ int main(){
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
             }
-            if(window_right > terrain.max_x*terrain.tile_size){
+            if(view.getCenter().x + (view.getSize().x/2.0) > terrain.max_x*terrain.tile_size){
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
                  for(vector<Sprite>::iterator i = foreground.begin(); i != foreground.end(); i++){
@@ -457,14 +454,14 @@ int main(){
                 window.draw(*i);
             }
             
-            if(window_left < 0){
+            if(view.getCenter().x - (view.getSize().x/2.0) < 0){
                 view.move(terrain.max_x*terrain.tile_size,0);
                 window.setView(view);
                 terrain.draw(window);
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
             }
-            if(window_right > terrain.max_x*terrain.tile_size){
+            if(view.getCenter().x + (view.getSize().x/2.0) > terrain.max_x*terrain.tile_size){
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
                 terrain.draw(window);
@@ -474,7 +471,7 @@ int main(){
             window.setView(view);
             terrain.draw(window); 
 
-            if(window_left < 0){
+            if(view.getCenter().x - (view.getSize().x/2.0) < 0){
                 view.move(terrain.max_x*terrain.tile_size,0);
                 window.setView(view);
                 for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
@@ -483,7 +480,7 @@ int main(){
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
             }
-            if(window_right > terrain.max_x*terrain.tile_size){
+            if(view.getCenter().x + (view.getSize().x/2.0) > terrain.max_x*terrain.tile_size){
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
                 for(map<string, Structure*>::iterator i = structures.begin(); i != structures.end(); i++){
@@ -497,7 +494,7 @@ int main(){
                 i->second->drawExterior(window);
             }
             
-            if(window_left < 0){
+            if(view.getCenter().x - (view.getSize().x/2.0) < 0){
                 view.move(terrain.max_x*terrain.tile_size,0);
                 window.setView(view);
                 for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
@@ -506,7 +503,7 @@ int main(){
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
             }
-            if(window_right > terrain.max_x*terrain.tile_size){
+            if(view.getCenter().x + (view.getSize().x/2.0) > terrain.max_x*terrain.tile_size){
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
                 for(map<string, Ship*>::iterator i = ships.begin(); i != ships.end(); i++){
@@ -520,7 +517,7 @@ int main(){
                 i->second->draw(window);
             }
 
-            if(window_left < 0){
+            if(view.getCenter().x - (view.getSize().x/2.0) < 0){
                 view.move(terrain.max_x*terrain.tile_size,0);
                 window.setView(view);
                 for(map<string,Character*>::iterator i = characters.begin(); i != characters.end(); i++){
@@ -531,7 +528,7 @@ int main(){
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
             }
-            if(window_right > terrain.max_x*terrain.tile_size){
+            if(view.getCenter().x + (view.getSize().x/2.0) > terrain.max_x*terrain.tile_size){
                 view.move(terrain.max_x*-terrain.tile_size,0);
                 window.setView(view);
                 for(map<string,Character*>::iterator i = characters.begin(); i != characters.end(); i++){
